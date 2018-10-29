@@ -1,13 +1,6 @@
-# Testing
-Jon is testing
+# Team Aloha's Shop
+Stuff goes here
 
-Sophie is testing
-Sophie is still testing
-
-
-Paul here
-
-Testing issues
 # Boilermaker
 
 _Good things come in pairs_
