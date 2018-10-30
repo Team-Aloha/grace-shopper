@@ -2,7 +2,7 @@ import React from 'react'
 import {withRouter, Link} from 'react-router-dom'
 import {connect} from 'react-redux'
 
-class EditProductForm extends React.Component {
+class AddProductForm extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -33,7 +33,7 @@ class EditProductForm extends React.Component {
             <div className="card">
               <div className="card-content">
                 <span className="card-title">
-                  <h3>Update Product</h3>
+                  <h3>Add Product</h3>
                 </span>
                 <form className="s12 l6" onSubmit={this.handleSubmit}>
                   <div className="row">
@@ -120,7 +120,7 @@ class EditProductForm extends React.Component {
                   <div className="row">
                     <div className="input-field">
                       <button className="btn waves-effect waves-light btn-large blue lighten-2">
-                        Update Product
+                        Add Product
                       </button>
                     </div>
                   </div>
@@ -143,5 +143,5 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 }
 
 export default withRouter(
-  connect(mapStateToProps, mapDispatchToProps)(EditProductForm)
+  connect(mapStateToProps, mapDispatchToProps)(AddProductForm)
 )
