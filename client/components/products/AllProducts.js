@@ -1,6 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {setVisibilityFilter} from '../../store'
+import {withRouter, Link} from 'react-router-dom'
 
 const mapStateToProps = state => {
   return {
@@ -38,14 +39,17 @@ class AllProducts extends React.Component {
             {category.name}
           </button>
         ))}
-        <ul>
-          {this.props.prods.map(product => (
-            <li key={product.id}>
-              {' '}
-              {product.title} {product.category}
-            </li>
-          ))}
-        </ul>
+        {this.props.prods.map(product => (
+          <div className="card" key={product.id}>
+            <div className="card-content">
+              <Link to={`/products/${product.id}`}>
+                <span className="card-title">{product.title}</span>
+              </Link>
+              <img src={product.imageUrl} />
+              {product.category} {product.price}
+            </div>
+          </div>
+        ))}
       </div>
     )
   }
