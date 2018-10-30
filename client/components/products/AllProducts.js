@@ -3,8 +3,8 @@ import {connect} from 'react-redux'
 import {setVisibilityFilter} from '../../store'
 
 const mapStateToProps = state => ({
-  products: state.products.filter(product => {
-    switch (state.visibilityFilter) {
+  prods: state.products.filter(product => {
+    switch (state.filter.visibilityFilter) {
       case 'ALL':
         return true
       case 'SILK':
@@ -18,12 +18,11 @@ const mapStateToProps = state => ({
   })
 })
 const mapDispatchToProps = dispatch => ({
-  setVisibilityFilter: newFilter => dispatch(setVisibilityFilter(newFilter)),
-});
+  setVisibilityFilter: newFilter => dispatch(setVisibilityFilter(newFilter))
+})
 
 class AllProducts extends React.Component {
   render() {
-    console.log(this.state);
     return (
       <div>
         <h1>hello</h1>
@@ -37,11 +36,8 @@ class AllProducts extends React.Component {
         <button onClick={() => this.props.setVisibilityFilter('COTTON')}>
           Cotton
         </button>
-
-
-
         <ul>
-          {this.props.products.map(product => (
+          {this.props.prods.map(product => (
             <li>
               {' '}
               {product.title} {product.category}

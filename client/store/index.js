@@ -7,6 +7,7 @@ import products from './products'
 import filter from './filter'
 
 const reducer = combineReducers({user, products, filter})
+
 const middleware = composeWithDevTools(
   applyMiddleware(thunkMiddleware, createLogger({collapsed: true}))
 )
