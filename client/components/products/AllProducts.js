@@ -1,31 +1,20 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {setVisibilityFilter} from '../../store'
+import {withRouter, Link} from 'react-router-dom'
 
-const categoryTypes = [
-  {
-    id: 1,
-    type: 'silk'
-  },
-  {
-    id: 2,
-    type: 'cotton'
-  },
-  {
-    id: 3,
-    type: 'polyester'
+const mapStateToProps = state => {
+  return {
+    categories: state.categories,
+    prods: state.products.filter(product => {
+      if (state.filter.visibilityFilter === -1) {
+        return true
+      } else {
+        return product.categories.includes(state.filter.visibilityFilter)
+      }
+    })
   }
-]
-
-const mapStateToProps = state => ({
-  prods: state.products.filter(product => {
-    if (state.filter.visibilityFilter === 'ALL') {
-      return true
-    } else {
-      return product.category.includes(state.filter.visibilityFilter)
-    }
-  })
-})
+}
 const mapDispatchToProps = dispatch => ({
   setVisibilityFilter: newFilter => dispatch(setVisibilityFilter(newFilter))
 })
@@ -37,29 +26,30 @@ class AllProducts extends React.Component {
         Show:
         <button
           type="button"
-          onClick={() => this.props.setVisibilityFilter('ALL')}
+          onClick={() => this.props.setVisibilityFilter(-1)}
         >
           All
         </button>
-
-        {categoryTypes.map(category => (
+        {this.props.categories.map(category => (
           <button
-          type="button"
-          onClick={() => this.props.setVisibilityFilter(category.type)}
+            key={category.id}
+            type="button"
+            onClick={() => this.props.setVisibilityFilter(category.id)}
           >
-          {category.type}
+            {category.name}
           </button>
         ))}
-
-
-        <ul>
-          {this.props.prods.map(product => (
-            <li>
-              {' '}
-              {product.title} {product.category}
-            </li>
-          ))}
-        </ul>
+        {this.props.prods.map(product => (
+          <div className="card" key={product.id}>
+            <div className="card-content">
+              <Link to={`/products/${product.id}`}>
+                <span className="card-title">{product.title}</span>
+              </Link>
+              <img src={product.imageUrl} />
+              {product.category} {product.price}
+            </div>
+          </div>
+        ))}
       </div>
     )
   }

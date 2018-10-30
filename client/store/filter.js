@@ -9,22 +9,20 @@ const SET_VISIBILITY_FILTER = 'SET_VISIBILITY_FILTER'
  * INITIAL STATE
  */
 const initialState = {
-  visibilityFilter: 'ALL'
-
+  visibilityFilter: -1
 }
 
 /**
  * ACTION CREATORS
  */
-export const setVisibilityFilter = (newFilterType) => ({
+export const setVisibilityFilter = newFilterType => ({
   type: SET_VISIBILITY_FILTER,
   visibilityFilter: newFilterType
-});
+})
 
 /**
  * THUNK CREATORS
  */
-
 
 /**
  * REDUCER
@@ -32,7 +30,7 @@ export const setVisibilityFilter = (newFilterType) => ({
 export default function(state = initialState, action) {
   switch (action.type) {
     case SET_VISIBILITY_FILTER:
-      return { visibilityFilter: action.visibilityFilter};
+      return {visibilityFilter: action.visibilityFilter}
     default:
       return state
   }

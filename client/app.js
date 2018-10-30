@@ -1,23 +1,31 @@
 import React from 'react'
-import { Route, withRouter, Link } from 'react-router-dom';
+import {Route, withRouter, Link} from 'react-router-dom'
+import {connect} from 'react-redux'
 import {Navbar} from './components'
 import Routes from './routes'
 import AllProducts from './components/products/AllProducts'
-import UserHome from './components/user-home'
+import {fetchProducts, fetchCategories} from './store'
 
-
-
-
-const App = () => {
-  return (
-    <div>
-      {/* <AllProducts /> */}
-      <Navbar />
-      <Routes />
-
-
-    </div>
-  )
+class App extends React.Component {
+  componentDidMount() {
+    this.props.fetchProducts()
+    this.props.fetchCategories()
+  }
+  render() {
+    return (
+      <div>
+        <Navbar />
+        <Routes />
+      </div>
+    )
+  }
 }
 
-export default App
+const mapDispatchToProps = dispatch => {
+  return {
+    fetchProducts: () => dispatch(fetchProducts()),
+    fetchCategories: () => dispatch(fetchCategories())
+  }
+}
+
+export default withRouter(connect(null, mapDispatchToProps)(App))
