@@ -30,7 +30,7 @@ const mapDispatchToProps = dispatch => ({
   setVisibilityFilter: newFilter => dispatch(setVisibilityFilter(newFilter))
 })
 
-class AllProducts extends React.Component {
+export class AllProducts extends React.Component {
   render() {
     return (
       <div>
@@ -41,17 +41,14 @@ class AllProducts extends React.Component {
         >
           All
         </button>
-
         {categoryTypes.map(category => (
           <button
-          type="button"
-          onClick={() => this.props.setVisibilityFilter(category.type)}
+            type="button"
+            onClick={() => this.props.setVisibilityFilter(category.type)}
           >
-          {category.type}
+            {category.type}
           </button>
         ))}
-
-
         <ul>
           {this.props.prods.map(product => (
             <li>
