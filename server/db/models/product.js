@@ -29,7 +29,7 @@ const Product = db.define('product', {
     defaultValue: './defaultshirt.png'
   },
   categories: {
-    type: Sequelize.ARRAY(Sequelize.STRING),
+    type: Sequelize.ARRAY(Sequelize.INTEGER),
     allowNull: false,
 
     validate: {
