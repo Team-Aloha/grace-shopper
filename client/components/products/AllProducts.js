@@ -1,5 +1,5 @@
 import React from 'react'
-import { connect } from 'react-redux'
+import {connect} from 'react-redux'
 
 const mapStateToProps = state => ({
   // products: state.products.filter(product => {
@@ -12,25 +12,17 @@ const mapStateToProps = state => ({
   //             return true;
   //     }
   // })
-});
+  products: state.products
+})
 
 class AllProducts extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-
-    }
-  }
-
   render() {
     return (
       <div>
         <h1>hello</h1>
-        {/* <ul>
-          {props.products.map(product => (
-            <ProductDetail key={product.id} {...product} onClick={() => } />
-          ))}
-        </ul> */}
+        <ul>
+          {this.props.products.map(product => <li> {product.title} </li>)}
+        </ul>
       </div>
     )
   }
