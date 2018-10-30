@@ -5,27 +5,31 @@ import {setVisibilityFilter} from '../../store'
 const categoryTypes = [
   {
     id: 1,
-    type: 'silk'
+    type: 'Blue'
   },
   {
     id: 2,
-    type: 'cotton'
+    type: 'Shirt'
   },
   {
     id: 3,
-    type: 'polyester'
+    type: 'Green'
   }
 ]
 
-const mapStateToProps = state => ({
-  prods: state.products.filter(product => {
-    if (state.filter.visibilityFilter === 'ALL') {
-      return true
-    } else {
-      return product.category.includes(state.filter.visibilityFilter)
-    }
-  })
-})
+const mapStateToProps = state => {
+  console.log('the state>>>>', state)
+
+  return {
+    prods: state.products.filter(product => {
+      if (state.filter.visibilityFilter === -1) {
+        return true
+      } else {
+        return product.categories.includes(state.filter.visibilityFilter)
+      }
+    })
+  }
+}
 const mapDispatchToProps = dispatch => ({
   setVisibilityFilter: newFilter => dispatch(setVisibilityFilter(newFilter))
 })
@@ -37,7 +41,7 @@ class AllProducts extends React.Component {
         Show:
         <button
           type="button"
-          onClick={() => this.props.setVisibilityFilter('ALL')}
+          onClick={() => this.props.setVisibilityFilter(-1)}
         >
           All
         </button>
@@ -45,7 +49,7 @@ class AllProducts extends React.Component {
           <button
             key={category.id}
             type="button"
-            onClick={() => this.props.setVisibilityFilter(category.type)}
+            onClick={() => this.props.setVisibilityFilter(category.id)}
           >
             {category.type}
           </button>
