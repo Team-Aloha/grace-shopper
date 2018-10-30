@@ -39,7 +39,7 @@ const User = db.define('user', {
   },
   profileUrl: {
     type: Sequelize.STRING,
-    defaultValue: './defaultUser.png'
+    defaultValue: 'defaultUser.png'
   },
   address: {
     type: Sequelize.STRING

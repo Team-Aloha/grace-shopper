@@ -26,7 +26,7 @@ const Product = db.define('product', {
   },
   imageUrl: {
     type: Sequelize.STRING,
-    defaultValue: './defaultshirt.png'
+    defaultValue: 'defaultshirt.png'
   },
   categories: {
     type: Sequelize.ARRAY(Sequelize.INTEGER),
