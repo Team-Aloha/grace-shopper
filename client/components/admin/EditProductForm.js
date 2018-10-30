@@ -33,21 +33,86 @@ class EditProductForm extends React.Component {
             <div className="card">
               <div className="card-content">
                 <span className="card-title">
-                  <h3>Update Campus</h3>
+                  <h3>Update Product</h3>
                 </span>
                 <form className="s12 l6" onSubmit={this.handleSubmit}>
                   <div className="row">
                     <div className="input-field">
                       <input
-                        name="name"
-                        id="campusName"
+                        name="title"
+                        id="title"
                         type="text"
                         className="validate"
                         // value={this.state.campus.name}
                         // onChange={this.handleChange}
                       />
-                      <label className="active" htmlFor="campusName">
+                      <label className="active" htmlFor="title">
                         Product Name
+                      </label>
+                    </div>
+                    <div className="input-field">
+                      <input
+                        name="description"
+                        id="description"
+                        type="text"
+                        className="validate"
+                        // value={this.state.campus.name}
+                        // onChange={this.handleChange}
+                      />
+                      <label className="active" htmlFor="description">
+                        Description
+                      </label>
+                    </div>
+                    <div className="input-field">
+                      <input
+                        name="price"
+                        id="price"
+                        type="number"
+                        className="validate"
+                        // value={this.state.campus.name}
+                        // onChange={this.handleChange}
+                      />
+                      <label className="active" htmlFor="price">
+                        Price
+                      </label>
+                    </div>
+                    <div className="input-field">
+                      <input
+                        name="quantity"
+                        id="quantity"
+                        type="number"
+                        className="validate"
+                        // value={this.state.campus.name}
+                        // onChange={this.handleChange}
+                      />
+                      <label className="active" htmlFor="quantity">
+                        Quantity
+                      </label>
+                    </div>
+                    <div className="input-field">
+                      <input
+                        name="imageUrl"
+                        id="imageUrl"
+                        type="text"
+                        className="validate"
+                        // value={this.state.campus.name}
+                        // onChange={this.handleChange}
+                      />
+                      <label className="active" htmlFor="imageUrl">
+                        ImageURL
+                      </label>
+                    </div>
+                    <div className="input-field">
+                      <input
+                        name="categories"
+                        id="categories"
+                        type="text"
+                        className="validate"
+                        // value={this.state.campus.name}
+                        // onChange={this.handleChange}
+                      />
+                      <label className="active" htmlFor="categories">
+                        Categories
                       </label>
                     </div>
                   </div>
