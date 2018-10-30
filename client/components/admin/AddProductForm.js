@@ -1,6 +1,7 @@
 import React from 'react'
 import {withRouter, Link} from 'react-router-dom'
 import {connect} from 'react-redux'
+import {postProduct} from '../../store'
 
 class AddProductForm extends React.Component {
   constructor(props) {
@@ -25,7 +26,7 @@ class AddProductForm extends React.Component {
   }
   handleSubmit = evt => {
     evt.preventDefault()
-    //   this.props.amendCampus(this.state)
+    this.props.createProduct(this.state)
   }
   render() {
     console.log('the product id', this.props.match.params.productId)
@@ -144,7 +145,12 @@ const mapStateToProps = state => {
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => {
-  return {}
+  return {
+    createProduct: state => {
+      dispatch(postProduct(state))
+      ownProps.history.push('/admin/products')
+    }
+  }
 }
 
 export default withRouter(

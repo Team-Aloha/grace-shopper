@@ -45,7 +45,7 @@ export const fetchProducts = () => async dispatch => {
   dispatch(setProducts(products))
 }
 
-export const postProduct = campus => {
+export const postProduct = product => {
   return async dispatch => {
     const response = await axios.post('/api/products', product)
     const newProduct = response.data
