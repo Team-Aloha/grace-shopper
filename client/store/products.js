@@ -4,7 +4,7 @@ import history from '../history'
 /**
  * ACTION TYPES
  */
-const GET_ALL_PRODUCTS = 'GET_ALL_PRODUCTS'
+//const GET_ALL_PRODUCTS = 'GET_ALL_PRODUCTS'
 const ADD_PRODUCT = 'ADD_PRODUCT'
 const SET_PRODUCTS = 'SET_PRODUCTS'
 const REMOVE_PRODUCT = 'REMOVE_PRODUCT'

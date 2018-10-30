@@ -4,16 +4,16 @@ import {connect} from 'react-redux'
 import {Navbar} from './components'
 import Routes from './routes'
 import AllProducts from './components/products/AllProducts'
-import {fetchProducts} from './store'
+import {fetchProducts, fetchCategories} from './store'
 
 class App extends React.Component {
   componentDidMount() {
     this.props.fetchProducts()
+    this.props.fetchCategories()
   }
   render() {
     return (
       <div>
-        {/* <AllProducts /> */}
         <Navbar />
         <Routes />
       </div>
@@ -23,7 +23,8 @@ class App extends React.Component {
 
 const mapDispatchToProps = dispatch => {
   return {
-    fetchProducts: () => dispatch(fetchProducts())
+    fetchProducts: () => dispatch(fetchProducts()),
+    fetchCategories: () => dispatch(fetchCategories())
   }
 }
 

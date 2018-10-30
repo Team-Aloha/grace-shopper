@@ -2,25 +2,9 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {setVisibilityFilter} from '../../store'
 
-const categoryTypes = [
-  {
-    id: 1,
-    type: 'Blue'
-  },
-  {
-    id: 2,
-    type: 'Shirt'
-  },
-  {
-    id: 3,
-    type: 'Green'
-  }
-]
-
 const mapStateToProps = state => {
-  console.log('the state>>>>', state)
-
   return {
+    categories: state.categories,
     prods: state.products.filter(product => {
       if (state.filter.visibilityFilter === -1) {
         return true
@@ -45,13 +29,13 @@ class AllProducts extends React.Component {
         >
           All
         </button>
-        {categoryTypes.map(category => (
+        {this.props.categories.map(category => (
           <button
             key={category.id}
             type="button"
             onClick={() => this.props.setVisibilityFilter(category.id)}
           >
-            {category.type}
+            {category.name}
           </button>
         ))}
         <ul>
