@@ -7,7 +7,7 @@ const Product = db.define('product', {
     allowNull: false
   },
   description: {
-    type: Sequelize.STRING,
+    type: Sequelize.TEXT,
     allowNull: false
   },
   price: {
@@ -20,7 +20,9 @@ const Product = db.define('product', {
   quantity: {
     type: Sequelize.INTEGER,
     allowNull: false,
-    defaultValue: 0
+    validate: {
+      min: 0
+    }
   },
   imageUrl: {
     type: Sequelize.STRING,
@@ -28,6 +30,8 @@ const Product = db.define('product', {
   },
   categories: {
     type: Sequelize.ARRAY(Sequelize.STRING),
+    allowNull: false,
+
     validate: {
       isNotEmpty(categoryArray) {
         if (categoryArray.length === 0) {
