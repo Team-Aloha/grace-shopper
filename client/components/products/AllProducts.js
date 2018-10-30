@@ -27,13 +27,13 @@ class AllProducts extends React.Component {
       <div>
         <h1>hello</h1>
         Show:
-        <button onClick={() => this.props.setVisibilityFilter('ALL')}>
+        <button type="button" onClick={() => this.props.setVisibilityFilter('ALL')}>
           All
         </button>
-        <button onClick={() => this.props.setVisibilityFilter('SILK')}>
+        <button type="button" onClick={() => this.props.setVisibilityFilter('SILK')}>
           Silk
         </button>
-        <button onClick={() => this.props.setVisibilityFilter('COTTON')}>
+        <button type="button" onClick={() => this.props.setVisibilityFilter('COTTON')}>
           Cotton
         </button>
         <ul>
