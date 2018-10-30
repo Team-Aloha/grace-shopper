@@ -13,20 +13,22 @@ const AMEND_PRODUCT = 'AMEND_PRODUCT'
 /**
  * INITIAL STATE
  */
-const defaultProducts = [
-  {
-    title: 'Shirt 1',
-    desc: 'foo',
-    price: 9.99,
-    category: ['silk']
-  },
-  {
-    title: 'Shirt 2',
-    desc: 'bar',
-    price: 9.99,
-    category: ['cotton']
-  }
-]
+// const defaultProducts = [
+//   {
+//     title: 'Shirt 1',
+//     desc: 'foo',
+//     price: 9.99,
+//     category: ['silk']
+//   },
+//   {
+//     title: 'Shirt 2',
+//     desc: 'bar',
+//     price: 9.99,
+//     category: ['cotton']
+//   }
+// ]
+
+const defaultProducts = []
 
 /**
  * ACTION CREATORS
@@ -48,7 +50,7 @@ export const fetchProducts = () => async dispatch => {
 export default function(state = defaultProducts, action) {
   switch (action.type) {
     case SET_PRODUCTS:
-      return state
+      return action.products
     case ADD_PRODUCT:
       return state
     case REMOVE_PRODUCT:
