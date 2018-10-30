@@ -1,11 +1,15 @@
 import React from 'react'
 import {Route, withRouter, Link} from 'react-router-dom'
+import {connect} from 'react-redux'
 import {Navbar} from './components'
 import Routes from './routes'
 import AllProducts from './components/products/AllProducts'
-import UserHome from './components/user-home'
+import {fetchProducts} from './store'
 
 class App extends React.Component {
+  componentDidMount() {
+    this.props.fetchProducts()
+  }
   render() {
     return (
       <div>
@@ -17,4 +21,10 @@ class App extends React.Component {
   }
 }
 
-export default App
+const mapDispatchToProps = dispatch => {
+  return {
+    fetchProducts: () => dispatch(fetchProducts())
+  }
+}
+
+export default withRouter(connect(null, mapDispatchToProps)(App))

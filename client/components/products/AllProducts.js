@@ -41,20 +41,18 @@ class AllProducts extends React.Component {
         >
           All
         </button>
-
         {categoryTypes.map(category => (
           <button
-          type="button"
-          onClick={() => this.props.setVisibilityFilter(category.type)}
+            key={category.id}
+            type="button"
+            onClick={() => this.props.setVisibilityFilter(category.type)}
           >
-          {category.type}
+            {category.type}
           </button>
         ))}
-
-
         <ul>
           {this.props.prods.map(product => (
-            <li>
+            <li key={product.id}>
               {' '}
               {product.title} {product.category}
             </li>
