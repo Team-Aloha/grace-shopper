@@ -18,13 +18,13 @@ const defaultProducts = [
     title: 'Shirt 1',
     desc: 'foo',
     price: 9.99,
-    category: 'silk'
+    category: ['silk']
   },
   {
     title: 'Shirt 2',
     desc: 'bar',
     price: 9.99,
-    category: 'cotton'
+    category: ['cotton']
   }
 ]
 

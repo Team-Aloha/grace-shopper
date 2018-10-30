@@ -2,18 +2,27 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {setVisibilityFilter} from '../../store'
 
+const categoryTypes = [
+  {
+    id: 1,
+    type: 'silk'
+  },
+  {
+    id: 2,
+    type: 'cotton'
+  },
+  {
+    id: 3,
+    type: 'polyester'
+  }
+]
+
 const mapStateToProps = state => ({
   prods: state.products.filter(product => {
-    switch (state.filter.visibilityFilter) {
-      case 'ALL':
-        return true
-      case 'SILK':
-        return product.category === 'silk'
-      case 'COTTON':
-        return product.category === 'cotton'
-      //filter cases for selected category by user
-      default:
-        return true
+    if (state.filter.visibilityFilter === 'ALL') {
+      return true
+    } else {
+      return product.category.includes(state.filter.visibilityFilter)
     }
   })
 })
@@ -25,17 +34,24 @@ class AllProducts extends React.Component {
   render() {
     return (
       <div>
-        <h1>hello</h1>
         Show:
-        <button type="button" onClick={() => this.props.setVisibilityFilter('ALL')}>
+        <button
+          type="button"
+          onClick={() => this.props.setVisibilityFilter('ALL')}
+        >
           All
         </button>
-        <button type="button" onClick={() => this.props.setVisibilityFilter('SILK')}>
-          Silk
-        </button>
-        <button type="button" onClick={() => this.props.setVisibilityFilter('COTTON')}>
-          Cotton
-        </button>
+
+        {categoryTypes.map(category => (
+          <button
+          type="button"
+          onClick={() => this.props.setVisibilityFilter(category.type)}
+          >
+          {category.type}
+          </button>
+        ))}
+
+
         <ul>
           {this.props.prods.map(product => (
             <li>
