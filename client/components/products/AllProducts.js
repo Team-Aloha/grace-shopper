@@ -82,9 +82,11 @@ class AllProducts extends React.Component {
                   </div>
                   <div className="card-content">
                     <Link to={`/products/${product.id}`}>
-                      <span className="card-title">{product.title}</span>
+                      <span className="card-title center-align">
+                        {product.title}
+                      </span>
                     </Link>
-                    {product.category} {product.price}
+                    <div className="center-align">${product.price}</div>
                   </div>
                 </div>
               </div>
