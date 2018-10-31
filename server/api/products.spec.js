@@ -61,7 +61,7 @@ describe('Product API routes', () => {
       expect(res3.body).to.be.an('array')
       expect(res3.body.length).to.equal(0)
     })
-    it('POST /api/products', async () => {
+    xit('POST /api/products', async () => {
       const res = await agent
         .post('/api/products')
         .send({

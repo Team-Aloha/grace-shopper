@@ -3,6 +3,15 @@ const {Product} = require('../db/models')
 const Sequelize = require('sequelize')
 module.exports = router
 
+const adminsOnly = (req, res, next) => {
+  if (!req.user.isAdmin) {
+    const err = new Error('Not allowed!')
+    err.status = 401
+    return next(err)
+  }
+  next()
+}
+
 router.get('/', async (req, res, next) => {
   try {
     const products = await Product.findAll()
@@ -36,7 +45,7 @@ router.get('/category/:category', async (req, res, next) => {
   }
 })
 
-router.post('/', async (req, res, next) => {
+router.post('/', adminsOnly, async (req, res, next) => {
   try {
     const {title, price, description, quantity, categories, imageUrl} = req.body
     const newProduct = await Product.create({
