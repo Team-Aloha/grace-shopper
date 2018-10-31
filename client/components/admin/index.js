@@ -4,4 +4,4 @@
  * having to figure out which file they belong to!
  */
 export {default as EditProductForm} from './EditProductForm'
-// export {default as AddProductForm} from './AddProductForm'
+export {default as AddProductForm} from './AddProductForm'

@@ -10,23 +10,7 @@ const SET_PRODUCTS = 'SET_PRODUCTS'
 const REMOVE_PRODUCT = 'REMOVE_PRODUCT'
 const AMEND_PRODUCT = 'AMEND_PRODUCT'
 
-/**
- * INITIAL STATE
- */
-// const defaultProducts = [
-//   {
-//     title: 'Shirt 1',
-//     desc: 'foo',
-//     price: 9.99,
-//     categories: [2, 1]
-//   },
-//   {
-//     title: 'Shirt 2',
-//     desc: 'bar',
-//     price: 9.99,
-//     categories: [2, 4]
-//   }
-// ]
+const SET_ONE_PRODUCT = 'SET_ONE_PRODUCT'
 
 const defaultProducts = []
 
@@ -35,6 +19,8 @@ const defaultProducts = []
  */
 export const setProducts = products => ({type: SET_PRODUCTS, products})
 export const addProduct = product => ({type: ADD_PRODUCT, product})
+export const setOneProduct = product => ({type: SET_ONE_PRODUCT, product})
+export const amendProduct = product => ({type: AMEND_PRODUCT, product})
 
 /**
  * THUNK CREATORS
@@ -53,6 +39,26 @@ export const postProduct = product => {
   }
 }
 
+export const fetchOneProduct = productId => async dispatch => {
+  const response = await axios.get(`/api/products/${productId}`)
+  const product = response.data
+  dispatch(setOneProduct(product))
+}
+
+export const updateProduct = product => {
+  return async dispatch => {
+    const response = await axios.put(`/api/products/${product.id}`, product)
+    if (response.status === 200) {
+      const updatedProduct = response.data
+      console.log('updated product', updatedProduct)
+
+      dispatch(amendProduct(updatedProduct))
+    } else {
+      throw new Error('Failed to update product')
+    }
+  }
+}
+
 /**
  * REDUCER
  */
@@ -66,6 +72,15 @@ export default function(state = defaultProducts, action) {
       return state
     case AMEND_PRODUCT:
       return state
+    default:
+      return state
+  }
+}
+
+export function singleProduct(state = {}, action) {
+  switch (action.type) {
+    case SET_ONE_PRODUCT:
+      return action.product
     default:
       return state
   }
