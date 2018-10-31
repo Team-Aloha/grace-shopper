@@ -7,19 +7,30 @@ class EditProductForm extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      title: '',
-      description: '',
-      price: 0,
-      quantity: 0,
-      imageUrl: '',
-      categories: [1]
+      product: {
+        title: '',
+        description: '',
+        price: 0,
+        quantity: 0,
+        imageUrl: '',
+        categories: [1]
+      }
     }
     // store.dispatch(fetchOneCampus(campusId))
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
-  componentDidUpdate(prevProps, prevState) {}
+  componentDidUpdate(prevProps, prevState) {
+    // After fetching redux has passed in the student as
+    // props, now we want to set those values to our local state
+    if (prevProps.product !== this.props.product) {
+      //   console.log('the current student', this.props.student)
+      this.setState({
+        product: this.props.product
+      })
+    }
+  }
 
   componentDidMount() {
     const productId = this.props.match.params.productId
@@ -28,7 +39,8 @@ class EditProductForm extends React.Component {
 
   handleChange(evt) {
     evt.preventDefault()
-    this.setState({[evt.target.name]: evt.target.value})
+    const product = {[evt.target.name]: evt.target.value}
+    this.setState({product})
   }
 
   handleSubmit = evt => {
@@ -39,6 +51,10 @@ class EditProductForm extends React.Component {
   render() {
     console.log('the product id', this.props.match.params.productId)
     console.log('the state', this.props.product)
+
+    if (Object.keys(this.props.product).length < 1) {
+      return <div>Loading...</div>
+    }
 
     return (
       <React.Fragment>
@@ -58,7 +74,7 @@ class EditProductForm extends React.Component {
                         id="title"
                         type="text"
                         className="validate"
-                        value={this.state.title}
+                        value={this.state.product.title}
                         onChange={this.handleChange}
                       />
                       <label className="active" htmlFor="title">
@@ -71,7 +87,7 @@ class EditProductForm extends React.Component {
                         id="description"
                         type="text"
                         className="validate"
-                        value={this.state.description}
+                        value={this.state.product.description}
                         onChange={this.handleChange}
                       />
                       <label className="active" htmlFor="description">
@@ -84,7 +100,7 @@ class EditProductForm extends React.Component {
                         id="price"
                         type="number"
                         className="validate"
-                        value={this.state.price}
+                        value={this.state.product.price}
                         onChange={this.handleChange}
                       />
                       <label className="active" htmlFor="price">
@@ -97,7 +113,7 @@ class EditProductForm extends React.Component {
                         id="quantity"
                         type="number"
                         className="validate"
-                        value={this.state.quantity}
+                        value={this.state.product.quantity}
                         onChange={this.handleChange}
                       />
                       <label className="active" htmlFor="quantity">
@@ -110,7 +126,7 @@ class EditProductForm extends React.Component {
                         id="imageUrl"
                         type="text"
                         className="validate"
-                        value={this.state.imageUrl}
+                        value={this.state.product.imageUrl}
                         onChange={this.handleChange}
                       />
                       <label className="active" htmlFor="imageUrl">
@@ -123,7 +139,7 @@ class EditProductForm extends React.Component {
                         id="categories"
                         type="text"
                         className="validate"
-                        value={this.state.categories}
+                        value={this.state.product.categories}
                         onChange={this.handleChange}
                       />
                       <label className="active" htmlFor="categories">
