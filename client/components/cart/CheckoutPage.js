@@ -3,7 +3,7 @@ import {withRouter, Link} from 'react-router-dom'
 import {connect} from 'react-redux'
 import store from '../../store'
 import CheckoutForm from './CheckoutForm'
-import Cart from './Cart'
+// import Cart from './Cart'
 
 class CheckoutPage extends React.Component {
   componentDidMount() {}
@@ -15,7 +15,14 @@ class CheckoutPage extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <CheckoutForm />
+        <div className="container">
+          <div className="row">
+            <div className="col s12 xl8">
+              <CheckoutForm />
+            </div>
+          </div>
+          {/* <Cart /> */}
+        </div>
       </React.Fragment>
     )
   }
