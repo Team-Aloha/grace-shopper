@@ -2,7 +2,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {setVisibilityFilter} from '../../store'
 import {withRouter, Link} from 'react-router-dom'
-
+import {default as ProductCard} from './ProductCard'
 const mapStateToProps = state => {
   return {
     categories: state.categories,
@@ -57,9 +57,8 @@ class AllProducts extends React.Component {
                     </button>
                   </li>
                   {this.props.categories.map(category => (
-                    <li>
+                    <li key={category.id}>
                       <button
-                        key={category.id}
                         type="button"
                         onClick={() =>
                           this.props.setVisibilityFilter(category.id)
@@ -75,21 +74,7 @@ class AllProducts extends React.Component {
           </div>
           <div className="row">
             {this.props.prods.map(product => (
-              <div className="col s12 m6 l4 xl3">
-                <div className="card" key={product.id}>
-                  <div className="card-image">
-                    <img src={product.imageUrl} />
-                  </div>
-                  <div className="card-content">
-                    <Link to={`/products/${product.id}`}>
-                      <span className="card-title center-align">
-                        {product.title}
-                      </span>
-                    </Link>
-                    <div className="center-align">${product.price}</div>
-                  </div>
-                </div>
-              </div>
+              <ProductCard product={product} key={product.id} />
             ))}
           </div>
         </div>
