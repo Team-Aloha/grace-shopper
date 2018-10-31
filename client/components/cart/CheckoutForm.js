@@ -73,7 +73,7 @@ class CheckoutForm extends React.Component {
                     type="text"
                     className="validate"
                     value={this.state.user.name}
-                    readonly
+                    onChange={this.handleChange}
                   />
                   <label className="active" htmlFor="name">
                     Full Name
@@ -86,7 +86,7 @@ class CheckoutForm extends React.Component {
                     type="email"
                     className="validate"
                     value={this.state.user.email}
-                    readonly
+                    onChange={this.handleChange}
                   />
                   <label className="active" htmlFor="email">
                     Email
@@ -99,7 +99,7 @@ class CheckoutForm extends React.Component {
                     type="text"
                     className="validate"
                     value={this.state.user.address}
-                    readonly
+                    onChange={this.handleChange}
                   />
                   <label className="active" htmlFor="address">
                     Address
@@ -112,7 +112,7 @@ class CheckoutForm extends React.Component {
                     type="text"
                     className="validate"
                     value={this.state.user.city}
-                    readonly
+                    onChange={this.handleChange}
                   />
                   <label className="active" htmlFor="city">
                     City
@@ -125,7 +125,7 @@ class CheckoutForm extends React.Component {
                     type="text"
                     className="validate"
                     value={this.state.user.state}
-                    readonly
+                    onChange={this.handleChange}
                   />
                   <label className="active" htmlFor="state">
                     State
@@ -139,7 +139,7 @@ class CheckoutForm extends React.Component {
                     pattern="[0-9]{5}"
                     className="zip"
                     value={this.state.user.zip}
-                    readonly
+                    onChange={this.handleChange}
                   />
                   <label className="active" htmlFor="zip">
                     Zip
