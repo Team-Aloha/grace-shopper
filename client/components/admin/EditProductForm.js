@@ -1,7 +1,7 @@
 import React from 'react'
 import {withRouter, Link} from 'react-router-dom'
 import {connect} from 'react-redux'
-import {postProduct} from '../../store'
+import {fetchOneProduct, updateProduct} from '../../store'
 
 class EditProductForm extends React.Component {
   constructor(props) {
@@ -20,16 +20,25 @@ class EditProductForm extends React.Component {
   }
 
   componentDidUpdate(prevProps, prevState) {}
+
+  componentDidMount() {
+    const productId = this.props.match.params.productId
+    this.props.dispatch(fetchOneProduct(productId))
+  }
+
   handleChange(evt) {
     evt.preventDefault()
     this.setState({[evt.target.name]: evt.target.value})
   }
+
   handleSubmit = evt => {
     evt.preventDefault()
     //   this.props.amendCampus(this.state)
   }
+
   render() {
     console.log('the product id', this.props.match.params.productId)
+    console.log('the state', this.props.product)
 
     return (
       <React.Fragment>
@@ -141,11 +150,15 @@ class EditProductForm extends React.Component {
 }
 
 const mapStateToProps = state => {
-  return {}
+  return {
+    product: state.product
+  }
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => {
-  return {}
+  return {
+    dispatch: dispatch
+  }
 }
 
 export default withRouter(

@@ -38,6 +38,7 @@ const defaultProducts = []
 export const setProducts = products => ({type: SET_PRODUCTS, products})
 export const addProduct = product => ({type: ADD_PRODUCT, product})
 export const setOneProduct = product => ({type: SET_ONE_PRODUCT, product})
+export const amendProduct = product => ({type: AMEND_PRODUCT, product})
 
 /**
  * THUNK CREATORS
@@ -60,6 +61,20 @@ export const fetchOneProduct = productId => async dispatch => {
   const response = await axios.get(`/api/products/${productId}`)
   const product = response.data
   dispatch(setOneProduct(product))
+}
+
+export const updateProduct = product => {
+  return async dispatch => {
+    const response = await axios.put(`/api/products/${product.id}`, product)
+    if (response.status === 200) {
+      const updatedProduct = response.data
+      console.log('updated product', updatedProduct)
+
+      dispatch(amendProduct(updatedProduct))
+    } else {
+      throw new Error('Failed to update product')
+    }
+  }
 }
 
 /**
