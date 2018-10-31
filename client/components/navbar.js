@@ -13,16 +13,22 @@ const Navbar = ({handleClick, isLoggedIn}) => (
         </a>
         <ul id="nav-mobile" class="right hide-on-med-and-down">
           <li>
-            <a href="sass.html">Login</a>
+            <Link to="/login">Login</Link>
           </li>
           <li>
-            <a href="badges.html">Sign Up</a>
+            <Link to="/signup">Sign Up</Link>
           </li>
           <li>
-            <a href="collapsible.html">Products</a>
+            <Link to="/products">Products</Link>
           </li>
           <li>
-            <a href="collapsible.html">Categories</a>
+            <Link to="/categories">Categories</Link>
+          </li>
+          <li>
+            <Link to="/home">Home</Link>
+          </li>
+          <li>
+            <Link to="/logout">Logout</Link>
           </li>
         </ul>
       </div>
