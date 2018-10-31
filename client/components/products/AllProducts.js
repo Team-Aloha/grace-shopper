@@ -41,39 +41,40 @@ class AllProducts extends React.Component {
         </div>
 
         <div className="container">
-          <nav>
-            <div class="nav-wrapper">
-              <ul class="left hide-on-med-and-down">
-                <li>
-                  <a href="">Categories:</a>
-                </li>
-                <li>
-                  <button
-                    type="button"
-                    onClick={() => this.props.setVisibilityFilter(-1)}
-                  >
-                    All
-                  </button>
-                </li>
-                {this.props.categories.map(category => (
+          <div className="row">
+            <nav>
+              <div class="nav-wrapper">
+                <ul class="left hide-on-med-and-down">
+                  <li>
+                    <a href="">Categories:</a>
+                  </li>
                   <li>
                     <button
-                      key={category.id}
                       type="button"
-                      onClick={() =>
-                        this.props.setVisibilityFilter(category.id)
-                      }
+                      onClick={() => this.props.setVisibilityFilter(-1)}
                     >
-                      {category.name}
+                      All
                     </button>
                   </li>
-                ))}
-              </ul>
-            </div>
-          </nav>
+                  {this.props.categories.map(category => (
+                    <li>
+                      <button
+                        key={category.id}
+                        type="button"
+                        onClick={() =>
+                          this.props.setVisibilityFilter(category.id)
+                        }
+                      >
+                        {category.name}
+                      </button>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </nav>
+          </div>
         </div>
         <div>
-          Show:
           {this.props.prods.map(product => (
             <div className="card" key={product.id}>
               <div className="card-content">
