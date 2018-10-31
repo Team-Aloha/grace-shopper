@@ -36,7 +36,7 @@ class CheckoutForm extends React.Component {
 
   componentDidMount() {
     const userId = this.props.match.params.userId
-    this.props.dispatch(fetchOneUser(userId))
+    // this.props.dispatch(fetchOneUser(userId))
     // this.props.dispatch(fetchCategories())
   }
 
@@ -62,8 +62,8 @@ class CheckoutForm extends React.Component {
     return (
       <React.Fragment>
         {' '}
-        <div className="row center-align">
-          <div className="col">
+        <div className="row">
+          <div className="col s12">
             <div className="card">
               <div className="card-content">
                 <span className="card-title">
