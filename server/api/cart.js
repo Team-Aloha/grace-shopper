@@ -5,7 +5,9 @@ router.get('/', async (req, res, next) => {
   console.log(req.user.id)
   try {
 
-    const cart = await Cart.findAll()
+    const cart = await Cart.findOne({
+      where: {userId: req.user.id}
+    })
     res.json(cart)
 
   } catch (err) {
