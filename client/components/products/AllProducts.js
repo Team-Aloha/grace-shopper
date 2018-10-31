@@ -19,7 +19,8 @@ const mapDispatchToProps = dispatch => ({
   setVisibilityFilter: newFilter => dispatch(setVisibilityFilter(newFilter))
 })
 
-class AllProducts extends React.Component {
+// Export the unconnected component and test it with dummy props.
+export class AllProducts extends React.Component {
   render() {
     return (
       <React.Fragment>
