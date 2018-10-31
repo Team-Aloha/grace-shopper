@@ -60,11 +60,19 @@ class Cart extends React.Component {
                       )
                     }
                   })}
+                  <tr>
+                    <td />
+                    <td />
+                    <td>
+                      <b>Cart Subtotal:</b>
+                    </td>
+                    <td>{totalAmount}</td>
+                    <td />
+                  </tr>
                 </tbody>
               </table>
             </div>
           </div>
-          Cart Subtotal: {totalAmount}
         </React.Fragment>
       )
     }
