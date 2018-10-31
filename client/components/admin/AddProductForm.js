@@ -73,6 +73,16 @@ class AddProductForm extends React.Component {
                 </span>
                 <form className="s12 l6" onSubmit={this.handleSubmit}>
                   <div className="row">
+                    <div className="row">
+                      <div className="input-field">
+                        <button
+                          type="submit"
+                          className="btn waves-effect waves-light btn-large blue lighten-2"
+                        >
+                          Add Product
+                        </button>
+                      </div>
+                    </div>
                     <div className="input-field">
                       <input
                         name="title"
@@ -153,17 +163,6 @@ class AddProductForm extends React.Component {
                           return {value: category.id, label: category.name}
                         })}
                       />
-                    </div>
-                  </div>
-
-                  <div className="row">
-                    <div className="input-field">
-                      <button
-                        type="submit"
-                        className="btn waves-effect waves-light btn-large blue lighten-2"
-                      >
-                        Add Product
-                      </button>
                     </div>
                   </div>
                 </form>
