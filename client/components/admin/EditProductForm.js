@@ -2,6 +2,7 @@ import React from 'react'
 import {withRouter, Link} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {fetchOneProduct, updateProduct} from '../../store'
+import {fetchCategories} from '../../store'
 import store from '../../store'
 
 class EditProductForm extends React.Component {
@@ -36,6 +37,7 @@ class EditProductForm extends React.Component {
   componentDidMount() {
     const productId = this.props.match.params.productId
     this.props.dispatch(fetchOneProduct(productId))
+    this.props.dispatch(fetchCategories())
   }
 
   handleChange(evt) {
