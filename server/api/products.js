@@ -63,7 +63,7 @@ router.post('/', adminsOnly, async (req, res, next) => {
   }
 })
 
-router.put('/:productId', async (req, res, next) => {
+router.put('/:productId', adminsOnly, async (req, res, next) => {
   try {
     const {title, price, description, quantity, categories, imageUrl} = req.body
     const updatedProduct = await Product.update(req.body, {

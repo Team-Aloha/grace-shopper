@@ -22,35 +22,72 @@ const mapDispatchToProps = dispatch => ({
 class AllProducts extends React.Component {
   render() {
     return (
-      <div>
-        Show:
-        <button
-          type="button"
-          onClick={() => this.props.setVisibilityFilter(-1)}
-        >
-          All
-        </button>
-        {this.props.categories.map(category => (
-          <button
-            key={category.id}
-            type="button"
-            onClick={() => this.props.setVisibilityFilter(category.id)}
-          >
-            {category.name}
-          </button>
-        ))}
-        {this.props.prods.map(product => (
-          <div className="card" key={product.id}>
-            <div className="card-content">
-              <Link to={`/products/${product.id}`}>
-                <span className="card-title">{product.title}</span>
-              </Link>
-              <img src={product.imageUrl} />
-              {product.category} {product.price}
+      <React.Fragment>
+        <div className="parallax-container valign-wrapper">
+          <div className="section no-pad-bot">
+            <div className="container">
+              <div className="row center">
+                <h3 className="header col s12 l12 light">Aloha!</h3>
+              </div>
             </div>
           </div>
-        ))}
-      </div>
+          <div className="parallax">
+            <img
+              src="http://jkreativ.jegtheme.com/wp-content/uploads/2014/05/geometric.png"
+              alt="Unsplashed background img 2"
+              style={{opacity: 1}}
+            />
+          </div>
+        </div>
+
+        <div className="container">
+          <div className="row">
+            <nav>
+              <div class="nav-wrapper">
+                <ul class="left hide-on-med-and-down">
+                  <li>
+                    <a href="">Categories:</a>
+                  </li>
+                  <li>
+                    <button
+                      type="button"
+                      onClick={() => this.props.setVisibilityFilter(-1)}
+                    >
+                      All
+                    </button>
+                  </li>
+                  {this.props.categories.map(category => (
+                    <li>
+                      <button
+                        key={category.id}
+                        type="button"
+                        onClick={() =>
+                          this.props.setVisibilityFilter(category.id)
+                        }
+                      >
+                        {category.name}
+                      </button>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </nav>
+          </div>
+        </div>
+        <div>
+          {this.props.prods.map(product => (
+            <div className="card" key={product.id}>
+              <div className="card-content">
+                <Link to={`/products/${product.id}`}>
+                  <span className="card-title">{product.title}</span>
+                </Link>
+                <img src={product.imageUrl} />
+                {product.category} {product.price}
+              </div>
+            </div>
+          ))}
+        </div>
+      </React.Fragment>
     )
   }
 }

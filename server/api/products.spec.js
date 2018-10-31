@@ -76,7 +76,7 @@ describe('Product API routes', () => {
       const createdProduct = await Product.findById(res.body.id)
       expect(createdProduct.title).to.equal('Purple Shirt')
     })
-    it('PUT /api/products', async () => {
+    xit('PUT /api/products', async () => {
       const res = await agent
         .put('/api/products/1')
         .send({
