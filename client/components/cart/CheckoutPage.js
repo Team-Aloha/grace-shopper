@@ -22,10 +22,10 @@ class CheckoutPage extends React.Component {
             </div>
           </div>
           <div className="row">
-            <div className="col s12 xl8">
+            <div className="col s12 xl5">
               <CheckoutForm />
             </div>
-            <div className="col s12 xl4">
+            <div className="col s12 xl7">
               <Cart />
             </div>
           </div>
