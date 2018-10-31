@@ -12,24 +12,6 @@ const AMEND_PRODUCT = 'AMEND_PRODUCT'
 
 const SET_ONE_PRODUCT = 'SET_ONE_PRODUCT'
 
-/**
- * INITIAL STATE
- */
-// const defaultProducts = [
-//   {
-//     title: 'Shirt 1',
-//     desc: 'foo',
-//     price: 9.99,
-//     categories: [2, 1]
-//   },
-//   {
-//     title: 'Shirt 2',
-//     desc: 'bar',
-//     price: 9.99,
-//     categories: [2, 4]
-//   }
-// ]
-
 const defaultProducts = []
 
 /**
