@@ -10,6 +10,8 @@ const SET_PRODUCTS = 'SET_PRODUCTS'
 const REMOVE_PRODUCT = 'REMOVE_PRODUCT'
 const AMEND_PRODUCT = 'AMEND_PRODUCT'
 
+const SET_ONE_PRODUCT = 'SET_ONE_PRODUCT'
+
 /**
  * INITIAL STATE
  */
@@ -35,6 +37,7 @@ const defaultProducts = []
  */
 export const setProducts = products => ({type: SET_PRODUCTS, products})
 export const addProduct = product => ({type: ADD_PRODUCT, product})
+export const setOneProduct = product => ({type: SET_ONE_PRODUCT, product})
 
 /**
  * THUNK CREATORS
@@ -53,6 +56,12 @@ export const postProduct = product => {
   }
 }
 
+export const fetchOneProduct = productId => async dispatch => {
+  const response = await axios.get(`/api/products/${productId}`)
+  const product = response.data
+  dispatch(setOneProduct(product))
+}
+
 /**
  * REDUCER
  */
@@ -66,6 +75,15 @@ export default function(state = defaultProducts, action) {
       return state
     case AMEND_PRODUCT:
       return state
+    default:
+      return state
+  }
+}
+
+export function singleProduct(state = {}, action) {
+  switch (action.type) {
+    case SET_ONE_PRODUCT:
+      return action.product
     default:
       return state
   }

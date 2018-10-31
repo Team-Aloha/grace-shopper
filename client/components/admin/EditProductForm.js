@@ -1,12 +1,18 @@
 import React from 'react'
 import {withRouter, Link} from 'react-router-dom'
 import {connect} from 'react-redux'
+import {postProduct} from '../../store'
 
 class EditProductForm extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      name: ''
+      title: '',
+      description: '',
+      price: 0,
+      quantity: 0,
+      imageUrl: '',
+      categories: [1]
     }
     // store.dispatch(fetchOneCampus(campusId))
     this.handleChange = this.handleChange.bind(this)
@@ -16,7 +22,7 @@ class EditProductForm extends React.Component {
   componentDidUpdate(prevProps, prevState) {}
   handleChange(evt) {
     evt.preventDefault()
-    const campus = {[evt.target.name]: evt.target.value}
+    this.setState({[evt.target.name]: evt.target.value})
   }
   handleSubmit = evt => {
     evt.preventDefault()
@@ -43,8 +49,8 @@ class EditProductForm extends React.Component {
                         id="title"
                         type="text"
                         className="validate"
-                        // value={this.state.campus.name}
-                        // onChange={this.handleChange}
+                        value={this.state.title}
+                        onChange={this.handleChange}
                       />
                       <label className="active" htmlFor="title">
                         Product Name
@@ -56,8 +62,8 @@ class EditProductForm extends React.Component {
                         id="description"
                         type="text"
                         className="validate"
-                        // value={this.state.campus.name}
-                        // onChange={this.handleChange}
+                        value={this.state.description}
+                        onChange={this.handleChange}
                       />
                       <label className="active" htmlFor="description">
                         Description
@@ -69,8 +75,8 @@ class EditProductForm extends React.Component {
                         id="price"
                         type="number"
                         className="validate"
-                        // value={this.state.campus.name}
-                        // onChange={this.handleChange}
+                        value={this.state.price}
+                        onChange={this.handleChange}
                       />
                       <label className="active" htmlFor="price">
                         Price
@@ -82,8 +88,8 @@ class EditProductForm extends React.Component {
                         id="quantity"
                         type="number"
                         className="validate"
-                        // value={this.state.campus.name}
-                        // onChange={this.handleChange}
+                        value={this.state.quantity}
+                        onChange={this.handleChange}
                       />
                       <label className="active" htmlFor="quantity">
                         Quantity
@@ -95,8 +101,8 @@ class EditProductForm extends React.Component {
                         id="imageUrl"
                         type="text"
                         className="validate"
-                        // value={this.state.campus.name}
-                        // onChange={this.handleChange}
+                        value={this.state.imageUrl}
+                        onChange={this.handleChange}
                       />
                       <label className="active" htmlFor="imageUrl">
                         ImageURL
@@ -108,8 +114,8 @@ class EditProductForm extends React.Component {
                         id="categories"
                         type="text"
                         className="validate"
-                        // value={this.state.campus.name}
-                        // onChange={this.handleChange}
+                        value={this.state.categories}
+                        onChange={this.handleChange}
                       />
                       <label className="active" htmlFor="categories">
                         Categories
@@ -120,7 +126,7 @@ class EditProductForm extends React.Component {
                   <div className="row">
                     <div className="input-field">
                       <button className="btn waves-effect waves-light btn-large blue lighten-2">
-                        Update Product
+                        Add Product
                       </button>
                     </div>
                   </div>
