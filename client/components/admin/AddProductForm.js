@@ -1,8 +1,8 @@
 import React from 'react'
 import {withRouter, Link} from 'react-router-dom'
 import {connect} from 'react-redux'
-import {postProduct} from '../../store'
-
+import {postProduct, fetchCategories} from '../../store'
+import Select from 'react-select'
 class AddProductForm extends React.Component {
   constructor(props) {
     super(props)
@@ -12,28 +12,58 @@ class AddProductForm extends React.Component {
       price: 0,
       quantity: 0,
       imageUrl: '',
-      categories: [1]
+      categories: []
     }
     // store.dispatch(fetchOneCampus(campusId))
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
   }
-
-  componentDidUpdate(prevProps, prevState) {}
+  componentDidMount() {
+    this.props.getCategories()
+  }
+  componentDidUpdate(prevProps, prevState) {
+    // if (this.state.categoryOptions.length === 0) {
+    //   const tempArray = []
+    //   console.log('attempting to add category vals')
+    //   this.props.categories.map(category => {
+    //     tempArray.push({
+    //       value: category.id,
+    //       label: category.name
+    //     })
+    //   })
+    //   console.log('our data', tempArray)
+    //   console.log(this.state)
+    //   this.setState({categoryOptions: [...tempArray]})
+    //   console.log(this.state)
+    //   console.log('i need categories')
+    //   console.log(this.state.categoryOptions)
+    // }
+  }
   handleChange(evt) {
-    evt.preventDefault()
-    this.setState({[evt.target.name]: evt.target.value})
+    //for React Select components, there is no evt.target
+    //so normal components are inside the if statement
+    //categories handled in else
+    //TODO: look into a more elegant way to do this in the future
+
+    if (evt.target) {
+      this.setState({[evt.target.name]: evt.target.value})
+    } else {
+      this.setState({categories: evt})
+      console.log(evt)
+    }
   }
   handleSubmit = evt => {
+    console.log('test')
     evt.preventDefault()
-    this.props.createProduct(this.state)
+    const categories = this.state.categories.map(category => {
+      return category.value
+    })
+
+    this.props.createProduct({...this.state, categories})
   }
   render() {
-    console.log('the product id', this.props.match.params.productId)
-
     return (
       <React.Fragment>
-        {' '}
         <div className="row center-align">
           <div className="col s12 l6 offset-l3">
             <div className="card">
@@ -109,23 +139,29 @@ class AddProductForm extends React.Component {
                       </label>
                     </div>
                     <div className="input-field">
-                      <input
-                        name="categories"
-                        id="categories"
-                        type="text"
-                        className="validate"
-                        value={this.state.categories}
-                        onChange={this.handleChange}
-                      />
                       <label className="active" htmlFor="categories">
                         Categories
                       </label>
+                      <Select
+                        isMulti
+                        name="categories"
+                        id="categories"
+                        className="validate"
+                        onChange={this.handleChange}
+                        value={this.state.categories}
+                        options={this.props.categories.map(category => {
+                          return {value: category.id, label: category.name}
+                        })}
+                      />
                     </div>
                   </div>
 
                   <div className="row">
                     <div className="input-field">
-                      <button className="btn waves-effect waves-light btn-large blue lighten-2">
+                      <button
+                        type="submit"
+                        className="btn waves-effect waves-light btn-large blue lighten-2"
+                      >
                         Add Product
                       </button>
                     </div>
@@ -141,7 +177,9 @@ class AddProductForm extends React.Component {
 }
 
 const mapStateToProps = state => {
-  return {}
+  return {
+    categories: state.categories
+  }
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => {
@@ -149,6 +187,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     createProduct: state => {
       dispatch(postProduct(state))
       ownProps.history.push('/admin/products')
+    },
+    getCategories: () => {
+      dispatch(fetchCategories())
     }
   }
 }
