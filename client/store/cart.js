@@ -8,7 +8,7 @@ const GET_CART = 'GET_CART'
 /**
  * INITIAL STATE
  */
-const initialState = {}
+const initialState = []
 
 /**
  * ACTION CREATORS
@@ -26,7 +26,7 @@ export const getCart = () => dispatch => {
     console.log('in think creator for getCart')
     //uncomment when implemented
     //const {data} = await axios.get('/api/cart/')
-    const data = [1, 3, 2]
+    const data = [{id: 1, quantity: 2}, {id: 2, quantity: 3}]
     //const data = []
     dispatch(gotCart(data))
   } catch (err) {

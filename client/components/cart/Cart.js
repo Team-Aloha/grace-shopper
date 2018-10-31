@@ -1,6 +1,5 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {withRouter, Link} from 'react-router-dom'
 import {getCart} from '../../store'
 import SingleCartItem from './SingleCartItem'
 
@@ -25,21 +24,45 @@ class Cart extends React.Component {
     } else {
       //we have a cart time to load it
       const productsInCart = []
+      let totalAmount = 0
       this.props.cart.forEach(product => {
         productsInCart.push(
-          this.props.products.filter(prod => prod.id === product)
+          this.props.products.filter(prod => prod.id === product.id)
         )
       })
-      console.log('my cart is ', productsInCart)
       return (
         <React.Fragment>
-          {productsInCart.map(item => {
-            if (item[0]) {
-              //here to prevent render errors
-              const displayItem = item[0]
-              return <SingleCartItem key={displayItem.id} />
-            }
-          })}
+          Cart
+          <table>
+            <thead>
+              <tr>
+                <th>Product Name</th>
+                <th>Quantity</th>
+                <th>Unit Price</th>
+                <th>Total Price</th>
+                <th />
+              </tr>
+            </thead>
+            <tbody>
+              {productsInCart.map((item, i) => {
+                if (item[0]) {
+                  //here to prevent render errors
+                  const displayItem = item[0]
+                  console.log('send a singlecart')
+                  console.log(this.props.cart[i].quantity)
+                  totalAmount += displayItem.price * this.props.cart[i].quantity
+                  return (
+                    <SingleCartItem
+                      key={displayItem.id}
+                      item={displayItem}
+                      quantity={this.props.cart[i].quantity}
+                    />
+                  )
+                }
+              })}
+            </tbody>
+          </table>
+          Cart Subtotal: {totalAmount}
         </React.Fragment>
       )
     }
