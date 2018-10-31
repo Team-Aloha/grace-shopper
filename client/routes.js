@@ -31,10 +31,7 @@ class Routes extends Component {
           path="/admin/products/:productId/edit"
           component={EditProductForm}
         />
-        <Route
-          path="/admin/products/:productId/add"
-          component={AddProductForm}
-        />
+        <Route path="/admin/products/add" component={AddProductForm} />
 
         {isLoggedIn && (
           <Switch>
