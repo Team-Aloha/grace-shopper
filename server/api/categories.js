@@ -1,6 +1,6 @@
 const router = require('express').Router()
 const {Category} = require('../db/models')
-const Sequelize = require('sequelize')
+
 module.exports = router
 
 router.get('/', async (req, res, next) => {
