@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
-import {Link} from 'react-router-dom'
+import {Link, withRouter} from 'react-router-dom'
 import {logout} from '../store'
 
 const Navbar = ({handleClick, isLoggedIn}) => (
@@ -19,7 +19,9 @@ const Navbar = ({handleClick, isLoggedIn}) => (
                 <Link to="/home">Home</Link>
               </li>
               <li>
-                <Link to="/logout">Logout</Link>
+                <a href="#" onClick={handleClick}>
+                  Logout
+                </a>
               </li>
             </React.Fragment>
           ) : (
@@ -61,7 +63,7 @@ const mapDispatch = dispatch => {
   }
 }
 
-export default connect(mapState, mapDispatch)(Navbar)
+export default withRouter(connect(mapState, mapDispatch)(Navbar))
 
 /**
  * PROP TYPES

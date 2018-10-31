@@ -73,22 +73,30 @@ class AllProducts extends React.Component {
               </div>
             </nav>
           </div>
-        </div>
-        <div>
-          {this.props.prods.map(product => (
-            <div className="card" key={product.id}>
-              <div className="card-content">
-                <Link to={`/products/${product.id}`}>
-                  <span className="card-title">{product.title}</span>
-                </Link>
-                <img src={product.imageUrl} />
-                {product.category} {product.price}
+          <div className="row">
+            {this.props.prods.map(product => (
+              <div className="col s12 m6 l4 xl3">
+                <div className="card" key={product.id}>
+                  <div className="card-image">
+                    <img src={product.imageUrl} />
+                  </div>
+                  <div className="card-content">
+                    <Link to={`/products/${product.id}`}>
+                      <span className="card-title center-align">
+                        {product.title}
+                      </span>
+                    </Link>
+                    <div className="center-align">${product.price}</div>
+                  </div>
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </React.Fragment>
     )
   }
 }
-export default connect(mapStateToProps, mapDispatchToProps)(AllProducts)
+export default withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(AllProducts)
+)
