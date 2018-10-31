@@ -3,7 +3,7 @@ const db = require('../db')
 
 const Cart = db.define('cart', {
   products: {
-    type: Sequelize.ARRAY(Sequelize.INTEGER)
+    type: Sequelize.ARRAY(Sequelize.JSONB)
   },
   total: {
     type: Sequelize.INTEGER

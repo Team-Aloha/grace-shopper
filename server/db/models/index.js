@@ -2,6 +2,7 @@ const User = require('./user')
 const Product = require('./product')
 const Category = require('./categories')
 const Cart = require('./Cart')
+const Order = require('./order')
 /**
  * If we had any associations to make, this would be a great place to put them!
  * ex. if we had another model called BlogPost, we might say:
@@ -10,6 +11,7 @@ const Cart = require('./Cart')
  */
 
  User.hasOne(Cart)
+ User.hasMany(Order)
 
 /**
  * We'll export all of our models here, so that any time a module needs a model,
@@ -21,5 +23,6 @@ module.exports = {
   User,
   Product,
   Category,
-  Cart
+  Cart,
+  Order
 }
