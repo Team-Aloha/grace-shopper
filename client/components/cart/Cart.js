@@ -48,8 +48,6 @@ class Cart extends React.Component {
                 if (item[0]) {
                   //here to prevent render errors
                   const displayItem = item[0]
-                  console.log('send a singlecart')
-                  console.log(this.props.cart[i].quantity)
                   totalAmount += displayItem.price * this.props.cart[i].quantity
                   return (
                     <SingleCartItem
