@@ -21,14 +21,15 @@ export const gotCart = cart => ({
 /**
  * THUNK CREATORS
  */
-export const getCart = () => dispatch => {
+export const getCart = () => async dispatch => {
   try {
-    console.log('in think creator for getCart')
     //uncomment when implemented
-    //const {data} = await axios.get('/api/cart/')
-    const data = [{id: 1, quantity: 2}, {id: 2, quantity: 3}]
+    const test = await axios.get('/api/cart/')
+    const {data} = await axios.get('/api/cart/')
+    // console.log(test.data.products)
+    // const data = [{id: 1, quantity: 2}, {id: 2, quantity: 3}]
     //const data = []
-    dispatch(gotCart(data))
+    dispatch(gotCart(data.products))
   } catch (err) {
     console.error(err)
   }

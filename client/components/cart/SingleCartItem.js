@@ -2,7 +2,6 @@ import React from 'react'
 
 const SingleCartItem = props => {
   const {item, quantity} = props
-  console.log('in here ', props)
   return (
     <React.Fragment>
       <tr>

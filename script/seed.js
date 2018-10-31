@@ -38,35 +38,35 @@ async function seed() {
     })
   ])
 
+  await Category.create({
+    name: 'Blue'
+  })
 
-   await Category.create({
-      name: 'Blue'
-    })
+  await Category.create({
+    name: 'Shirt'
+  })
 
-   await Category.create({
-      name: 'Shirt'
-    })
+  await Category.create({
+    name: 'Green'
+  })
 
-    await Category.create({
-      name: 'Green'
-    })
+  await Category.create({
+    name: 'Red'
+  })
+  await Category.create({
+    name: 'Accessories'
+  })
 
-   await Category.create({
-      name: 'Red'
-    })
-   await Category.create({
-      name: 'Accessories'
-    })
+  await Cart.create({
+    products: [{id: 2, quantity: 2}],
+    total: 300,
+    userId: 1
+  })
 
-    await Cart.create({
-      products: [{ id: 2, quantity: 2 }],
-      total: 300
-    })
-
-    await Order.create({
-      status: 'shipped',
-      products: [{ id: 1, price: 1000 }]
-    })
+  await Order.create({
+    status: 'shipped',
+    products: [{id: 1, quantity: 2, price: 1000}]
+  })
 
   console.log(`seeded ${products.length} products`)
 
