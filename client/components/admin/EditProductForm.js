@@ -2,6 +2,7 @@ import React from 'react'
 import {withRouter, Link} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {fetchOneProduct, updateProduct} from '../../store'
+import store from '../../store'
 
 class EditProductForm extends React.Component {
   constructor(props) {
@@ -45,7 +46,7 @@ class EditProductForm extends React.Component {
 
   handleSubmit = evt => {
     evt.preventDefault()
-    //   this.props.amendCampus(this.state)
+    this.props.amendProduct(this.state)
   }
 
   render() {
@@ -151,7 +152,7 @@ class EditProductForm extends React.Component {
                   <div className="row">
                     <div className="input-field">
                       <button className="btn waves-effect waves-light btn-large blue lighten-2">
-                        Add Product
+                        Save Product
                       </button>
                     </div>
                   </div>
@@ -173,7 +174,15 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
-    dispatch: dispatch
+    dispatch: dispatch,
+    amendProduct: state => {
+      const fetchedProduct = store.getState().product
+      const updatedProductInfo = state.product
+      const newProduct = {...fetchedProduct, ...updatedProductInfo}
+
+      dispatch(updateProduct(newProduct))
+      ownProps.history.push('/admin/products')
+    }
   }
 }
 
