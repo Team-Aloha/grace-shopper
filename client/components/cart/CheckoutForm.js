@@ -64,9 +64,6 @@ class CheckoutForm extends React.Component {
         {' '}
         <div className="card">
           <div className="card-content">
-            <span className="card-title">
-              <h3>Checkout Form</h3>
-            </span>
             <form className="s12 l6" onSubmit={this.handleSubmit}>
               <div className="row">
                 <div className="input-field">
