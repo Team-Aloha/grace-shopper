@@ -40,23 +40,40 @@ class AllProducts extends React.Component {
           </div>
         </div>
 
+        <div className="container">
+          <nav>
+            <div class="nav-wrapper">
+              <ul class="left hide-on-med-and-down">
+                <li>
+                  <a href="">Categories:</a>
+                </li>
+                <li>
+                  <button
+                    type="button"
+                    onClick={() => this.props.setVisibilityFilter(-1)}
+                  >
+                    All
+                  </button>
+                </li>
+                {this.props.categories.map(category => (
+                  <li>
+                    <button
+                      key={category.id}
+                      type="button"
+                      onClick={() =>
+                        this.props.setVisibilityFilter(category.id)
+                      }
+                    >
+                      {category.name}
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </nav>
+        </div>
         <div>
           Show:
-          <button
-            type="button"
-            onClick={() => this.props.setVisibilityFilter(-1)}
-          >
-            All
-          </button>
-          {this.props.categories.map(category => (
-            <button
-              key={category.id}
-              type="button"
-              onClick={() => this.props.setVisibilityFilter(category.id)}
-            >
-              {category.name}
-            </button>
-          ))}
           {this.props.prods.map(product => (
             <div className="card" key={product.id}>
               <div className="card-content">
