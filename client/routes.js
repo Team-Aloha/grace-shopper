@@ -5,8 +5,8 @@ import PropTypes from 'prop-types'
 import {Login, Signup, UserHome} from './components'
 import {me} from './store'
 import AllProducts from './components/products/AllProducts'
-import EditProductForm from './components/admin/EditProductForm'
-import AddProductForm from './components/admin/AddProductForm'
+import {EditProductForm} from './components/admin'
+import {AddProductForm} from './components/admin'
 
 /**
  * COMPONENT
