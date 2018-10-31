@@ -32,35 +32,47 @@ class Cart extends React.Component {
       })
       return (
         <React.Fragment>
-          Cart
-          <table>
-            <thead>
-              <tr>
-                <th>Product Name</th>
-                <th>Quantity</th>
-                <th>Unit Price</th>
-                <th>Total Price</th>
-                <th />
-              </tr>
-            </thead>
-            <tbody>
-              {productsInCart.map((item, i) => {
-                if (item[0]) {
-                  //here to prevent render errors
-                  const displayItem = item[0]
-                  totalAmount += displayItem.price * this.props.cart[i].quantity
-                  return (
-                    <SingleCartItem
-                      key={displayItem.id}
-                      item={displayItem}
-                      quantity={this.props.cart[i].quantity}
-                    />
-                  )
-                }
-              })}
-            </tbody>
-          </table>
-          Cart Subtotal: {totalAmount}
+          <div className="card">
+            <div className="card-content">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Product Name</th>
+                    <th>Quantity</th>
+                    <th>Unit Price</th>
+                    <th>Total Price</th>
+                    <th />
+                  </tr>
+                </thead>
+                <tbody>
+                  {productsInCart.map((item, i) => {
+                    if (item[0]) {
+                      //here to prevent render errors
+                      const displayItem = item[0]
+                      totalAmount +=
+                        displayItem.price * this.props.cart[i].quantity
+                      return (
+                        <SingleCartItem
+                          key={displayItem.id}
+                          item={displayItem}
+                          quantity={this.props.cart[i].quantity}
+                        />
+                      )
+                    }
+                  })}
+                  <tr>
+                    <td />
+                    <td />
+                    <td>
+                      <b>Cart Subtotal:</b>
+                    </td>
+                    <td>{totalAmount}</td>
+                    <td />
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
         </React.Fragment>
       )
     }
