@@ -34,6 +34,7 @@ const defaultProducts = []
  * ACTION CREATORS
  */
 export const setProducts = products => ({type: SET_PRODUCTS, products})
+export const addProduct = product => ({type: ADD_PRODUCT, product})
 
 /**
  * THUNK CREATORS
@@ -44,6 +45,14 @@ export const fetchProducts = () => async dispatch => {
   dispatch(setProducts(products))
 }
 
+export const postProduct = product => {
+  return async dispatch => {
+    const response = await axios.post('/api/products', product)
+    const newProduct = response.data
+    dispatch(addProduct(newProduct))
+  }
+}
+
 /**
  * REDUCER
  */
@@ -52,7 +61,7 @@ export default function(state = defaultProducts, action) {
     case SET_PRODUCTS:
       return action.products
     case ADD_PRODUCT:
-      return state
+      return [...state, action.product]
     case REMOVE_PRODUCT:
       return state
     case AMEND_PRODUCT:
