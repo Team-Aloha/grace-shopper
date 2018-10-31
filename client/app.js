@@ -3,7 +3,7 @@ import {Route, withRouter, Link} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {Navbar} from './components'
 import Routes from './routes'
-import AllProducts from './components/products/AllProducts'
+import {AllProducts} from './components/products'
 import {fetchProducts, fetchCategories} from './store'
 
 class App extends React.Component {

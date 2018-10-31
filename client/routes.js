@@ -4,7 +4,7 @@ import {withRouter, Route, Switch} from 'react-router-dom'
 import PropTypes from 'prop-types'
 import {Login, Signup, UserHome} from './components'
 import {me} from './store'
-import AllProducts from './components/products/AllProducts'
+import {AllProducts} from './components/products'
 import {EditProductForm} from './components/admin'
 import {AddProductForm} from './components/admin'
 
