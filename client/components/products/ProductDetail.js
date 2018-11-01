@@ -9,7 +9,8 @@ class ProductDetail extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      quantity: 1
+      quantity: 1,
+      guestCart: []
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleClick = this.handleClick.bind(this)
@@ -66,13 +67,7 @@ class ProductDetail extends React.Component {
                 <div className="col">
                   <h5>{product.title}</h5>
                   <h6>{product.price}</h6>
-                  <p>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Amet aliquid eligendi sit consectetur aspernatur sequi et,
-                    ex porro obcaecati cupiditate saepe molestias labore
-                    voluptas excepturi doloribus magnam praesentium ducimus
-                    libero!
-                  </p>
+                  <p>{product.description}</p>
                 </div>
               </div>
               <div className="row">
@@ -91,7 +86,11 @@ class ProductDetail extends React.Component {
                 </div>
 
                 <div className="col xl6 center">
-                  <button onClick={this.handleClick} className="btn">
+                  <button
+                    type="button"
+                    onClick={this.handleClick}
+                    className="btn"
+                  >
                     <i class="material-icons left">shopping_cart</i>Add To Cart
                   </button>
                 </div>
@@ -106,7 +105,8 @@ class ProductDetail extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    product: state.product
+    product: state.product,
+    user: state.user
   }
 }
 
