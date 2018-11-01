@@ -24,13 +24,37 @@ class ProductDetail extends React.Component {
           <div className="col xl6">
               <img className="responsive-img" src="/defaultShirt.png" />
             </div>
-          </div>
+          
 
           <div className="col xl6">
+            <div className="row">
+                  <div className="col">
+                  <h5>Description</h5>
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet aliquid eligendi sit consectetur aspernatur sequi et, ex porro obcaecati cupiditate saepe molestias labore voluptas excepturi doloribus magnam praesentium ducimus libero!</p>
+                <form onSubmit={this.handleSubmit}>
+                <div className="input-field">
+                      <input
+                        name="quantity"
+                        id="quantity"
+                        type="number"
+                        className="validate"
+                        // value={this.state.quantity}
+                        onChange={this.handleChange}
+                      />
+                      <label className="active" htmlFor="quantity">
+                        Quantity
+                      </label>
+                    </div>
+                    <button className="btn"><i class="material-icons left">shopping_cart</i>Add To Cart</button>
+                  </form>
+                  </div>
+
+              </div>
           </div>
 
 
+
+        </div>
 
         </div>
         
