@@ -8,7 +8,8 @@ class ProductDetail extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      quantity: 1
+      quantity: 1,
+      guestCart: []
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleClick = this.handleClick.bind(this)
@@ -34,13 +35,22 @@ class ProductDetail extends React.Component {
 
   handleClick(evt) {
     evt.preventDefault()
-    this.props.addProduct({
+
+    let productToAdd = {
       id: this.props.product.id,
       quantity: this.state.quantity
-    })
+    }
+
+    if (!this.props.user.id) {
+      this.state.guestCart.push(productToAdd)
+      localStorage.setItem('cart', this.state.guestCart)
+    } else {
+      this.props.addProduct(productToAdd)
+    }
   }
 
   render() {
+    console.log('props>>>>>', this.props.user)
     console.log('the product', this.props.product)
 
     const {product} = this.props
@@ -97,7 +107,8 @@ class ProductDetail extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    product: state.product
+    product: state.product,
+    user: state.user
   }
 }
 
