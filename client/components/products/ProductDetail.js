@@ -37,6 +37,11 @@ class ProductDetail extends React.Component {
                   <div className="col">
                   <h5>Description</h5>
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet aliquid eligendi sit consectetur aspernatur sequi et, ex porro obcaecati cupiditate saepe molestias labore voluptas excepturi doloribus magnam praesentium ducimus libero!</p>
+                  </div>
+
+              </div>
+              <div className="row">
+                <div className="col">
                 <form onSubmit={this.handleSubmit}>
                 <div className="input-field">
                       <input
@@ -53,7 +58,7 @@ class ProductDetail extends React.Component {
                     </div>
                     <button className="btn"><i class="material-icons left">shopping_cart</i>Add To Cart</button>
                   </form>
-                  </div>
+                </div>
 
               </div>
           </div>
