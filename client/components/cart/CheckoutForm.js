@@ -148,10 +148,12 @@ class CheckoutForm extends React.Component {
               </div>
 
               <div className="row">
-                <div className="input-field">
-                  <button className="btn waves-effect waves-light btn-large blue lighten-2">
-                    Continue to Checkout
-                  </button>
+                <div className="col s12 m12 l12 xl12 center-align">
+                  <div className="input-field">
+                    <button className="btn waves-effect waves-light btn-large blue lighten-2">
+                      Continue to Checkout
+                    </button>
+                  </div>
                 </div>
               </div>
             </form>
