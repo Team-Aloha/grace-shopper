@@ -16,7 +16,19 @@ const Navbar = ({handleClick, isLoggedIn}) => (
           {isLoggedIn ? (
             <React.Fragment>
               <li>
+                <Link to="/cart">
+                  {' '}
+                  <i class="material-icons left">shopping_cart</i> Cart
+                </Link>
+              </li>
+              <li>
                 <Link to="/home">Home</Link>
+              </li>
+              <li>
+                <Link to="/products">Products</Link>
+              </li>
+              <li>
+                <Link to="/categories">Categories</Link>
               </li>
               <li>
                 <a href="#" onClick={handleClick}>
@@ -26,6 +38,12 @@ const Navbar = ({handleClick, isLoggedIn}) => (
             </React.Fragment>
           ) : (
             <React.Fragment>
+              <li>
+                <Link to="/cart">
+                  {' '}
+                  <i class="material-icons left">shopping_cart</i> Cart
+                </Link>
+              </li>
               <li>
                 <Link to="/login">Login</Link>
               </li>
