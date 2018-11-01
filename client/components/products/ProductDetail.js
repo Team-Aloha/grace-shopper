@@ -73,6 +73,7 @@ class ProductDetail extends React.Component {
                       name="quantity"
                       id="quantity"
                       type="number"
+                      min="1"
                       className="validate"
                       value={this.state.quantity}
                       onChange={this.handleChange}
