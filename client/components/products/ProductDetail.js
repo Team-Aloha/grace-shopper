@@ -1,7 +1,7 @@
 import React from 'react'
 import {withRouter, Link} from 'react-router-dom'
 import {connect} from 'react-redux'
-import {fetchOneProduct, postProductToCart} from '../../store'
+import {fetchOneProduct, putCart} from '../../store'
 import store from '../../store'
 
 class ProductDetail extends React.Component {
@@ -13,8 +13,7 @@ class ProductDetail extends React.Component {
 
   handleSubmit(evt) {
     evt.preventDefault()
-    const productId = this.props.match.params.productId
-    this.props.addProduct(productId)
+    this.props.addProduct(this.props.product)
   }
 
   render() {
@@ -42,7 +41,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = (dispatch) => ({
   getAProduct: (productId) => dispatch(fetchOneProduct(productId)),
-  addProduct: (productId) => dispatch(postProductToCart(productId))
+  addProduct: (product) => dispatch(putCart(product))
 })
 
 export default withRouter(
