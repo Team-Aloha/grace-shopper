@@ -5,7 +5,6 @@ import {fetchOneProduct, putCart} from '../../store'
 import store from '../../store'
 
 class ProductDetail extends React.Component {
-
   componentDidMount() {
     const productId = this.props.match.params.productId
     this.props.getAProduct(productId)
@@ -17,20 +16,29 @@ class ProductDetail extends React.Component {
   }
 
   render() {
-  const {product} = this.props
-  return (
-    <React.Fragment>
-      <tr>
-        <td>{product.title}</td>
+    const {product} = this.props
+    return (
+      <React.Fragment>
+        <div className="container">
+        <div className="row">
+          <div className="col xl6">
+              <img className="responsive-img" src="/defaultShirt.png" />
+            </div>
+          </div>
 
-        <td>{product.quantity}</td>
-        <td>{product.price}</td>
-        <td onSubmit={this.handleSubmit}>Add to Cart</td>
-      </tr>
-    </React.Fragment>
-  )
+          <div className="col xl6">
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet aliquid eligendi sit consectetur aspernatur sequi et, ex porro obcaecati cupiditate saepe molestias labore voluptas excepturi doloribus magnam praesentium ducimus libero!</p>
+          </div>
+
+
+
+        </div>
+        
+          
+     
+      </React.Fragment>
+    )
   }
-
 }
 
 const mapStateToProps = state => {
@@ -39,9 +47,9 @@ const mapStateToProps = state => {
   }
 }
 
-const mapDispatchToProps = (dispatch) => ({
-  getAProduct: (productId) => dispatch(fetchOneProduct(productId)),
-  addProduct: (product) => dispatch(putCart(product))
+const mapDispatchToProps = dispatch => ({
+  getAProduct: productId => dispatch(fetchOneProduct(productId)),
+  addProduct: product => dispatch(putCart(product))
 })
 
 export default withRouter(
