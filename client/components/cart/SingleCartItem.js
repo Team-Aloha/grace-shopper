@@ -10,7 +10,11 @@ const SingleCartItem = props => {
         <td>{quantity}</td>
         <td>{item.price}</td>
         <td>{quantity * item.price}</td>
-        <td>Remove Button Here</td>
+        <td>
+          <button className="btn btn-small waves-effect waves-light red lighten-2">
+            Remove
+          </button>
+        </td>
       </tr>
     </React.Fragment>
   )
