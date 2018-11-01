@@ -47,7 +47,6 @@ router.get('/category/:category', async (req, res, next) => {
 
 router.post('/', adminsOnly, async (req, res, next) => {
   try {
-    console.log(req.user)
     const {title, price, description, quantity, categories, imageUrl} = req.body
     const newProduct = await Product.create({
       title,

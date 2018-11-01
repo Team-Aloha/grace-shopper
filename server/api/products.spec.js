@@ -4,8 +4,10 @@ const db = require('../db')
 
 const app = require('../index')
 const Product = db.model('product')
-const agent = require('supertest')(app)
+const request = require('supertest')
+const agent = request(app)
 
+const {createAuthUser} = require('../utils/authUser')
 describe('Product API routes', () => {
   beforeEach(() => {
     return db.sync({force: true})
@@ -61,8 +63,9 @@ describe('Product API routes', () => {
       expect(res3.body).to.be.an('array')
       expect(res3.body.length).to.equal(0)
     })
-    xit('POST /api/products', async () => {
-      const res = await agent
+    it('POST /api/products', async () => {
+      const authUser = await createAuthUser()
+      const res = await authUser
         .post('/api/products')
         .send({
           title: 'Purple Shirt',
@@ -76,8 +79,9 @@ describe('Product API routes', () => {
       const createdProduct = await Product.findById(res.body.id)
       expect(createdProduct.title).to.equal('Purple Shirt')
     })
-    xit('PUT /api/products', async () => {
-      const res = await agent
+    it('PUT /api/products', async () => {
+      const authUser = await createAuthUser()
+      const res = await authUser
         .put('/api/products/1')
         .send({
           title: 'Super Blue Shirt'
