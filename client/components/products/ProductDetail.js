@@ -10,18 +10,38 @@ class ProductDetail extends React.Component {
     this.state = {
       quantity: 1
     }
+    this.handleChange = this.handleChange.bind(this)
+    this.handleClick = this.handleClick.bind(this)
   }
   componentDidMount() {
     const productId = this.props.match.params.productId
     this.props.getAProduct(productId)
   }
 
-  handleSubmit(evt) {
+  componentDidUpdate(prevProps, prevState) {
+    // After fetching redux has passed in the student as
+    // props, now we want to set those values to our local state
+    if (prevProps.product !== this.props.product) {
+      this.setState({
+        product: this.props.product
+      })
+    }
+  }
+  handleChange(evt) {
     evt.preventDefault()
+    this.setState({[evt.target.name]: evt.target.value})
+  }
+
+  handleClick(evt) {
+    evt.preventDefault()
+    console.log('clicked button')
+
     this.props.addProduct(this.props.product)
   }
 
   render() {
+    console.log('the product', this.props.product)
+
     const {product} = this.props
     return (
       <React.Fragment>
@@ -60,7 +80,7 @@ class ProductDetail extends React.Component {
                 </div>
 
                 <div className="col xl6 center">
-                  <button className="btn">
+                  <button onClick={this.handleClick} className="btn">
                     <i class="material-icons left">shopping_cart</i>Add To Cart
                   </button>
                 </div>
