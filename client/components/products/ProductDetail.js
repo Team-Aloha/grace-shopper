@@ -26,55 +26,48 @@ class ProductDetail extends React.Component {
     return (
       <React.Fragment>
         <div className="container">
-        <div className="row">
-          <div className="col xl6">
+          <div className="row">
+            <div className="col xl6">
               <img className="responsive-img" src="/defaultShirt.png" />
             </div>
-          
 
-          <div className="col xl6">
-            <div className="row">
-                  <div className="col">
+            <div className="col xl6">
+              <div className="row">
+                <div className="col">
                   <h5>{product.title}</h5>
                   <h6>{product.price}</h6>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet aliquid eligendi sit consectetur aspernatur sequi et, ex porro obcaecati cupiditate saepe molestias labore voluptas excepturi doloribus magnam praesentium ducimus libero!</p>
-                  </div>
-
+                  <p>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                    Amet aliquid eligendi sit consectetur aspernatur sequi et,
+                    ex porro obcaecati cupiditate saepe molestias labore
+                    voluptas excepturi doloribus magnam praesentium ducimus
+                    libero!
+                  </p>
+                </div>
               </div>
               <div className="row">
-                
                 <div className="col xl6">
-                <div className="input-field">
-                      <input
-                        name="quantity"
-                        id="quantity"
-                        type="number"
-                        className="validate"
-                        value={this.state.quantity}
-                        onChange={this.handleChange}
-                      />
-                    </div>
+                  <div className="input-field">
+                    <input
+                      name="quantity"
+                      id="quantity"
+                      type="number"
+                      className="validate"
+                      value={this.state.quantity}
+                      onChange={this.handleChange}
+                    />
+                  </div>
                 </div>
-               
-               <div className="col xl6 center">
-                    <button className="btn"><i class="material-icons left">shopping_cart</i>Add To Cart</button>
-               </div>
-      
-              
-                  
-           
 
+                <div className="col xl6 center">
+                  <button className="btn">
+                    <i class="material-icons left">shopping_cart</i>Add To Cart
+                  </button>
+                </div>
               </div>
+            </div>
           </div>
-
-
-
         </div>
-
-        </div>
-        
-          
-     
       </React.Fragment>
     )
   }
