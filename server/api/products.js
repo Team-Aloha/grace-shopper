@@ -4,6 +4,7 @@ const Sequelize = require('sequelize')
 module.exports = router
 
 const adminsOnly = (req, res, next) => {
+  console.log('testing!!!', req.user.isAdmin)
   if (!req.user.isAdmin) {
     const err = new Error('Not allowed!')
     err.status = 401

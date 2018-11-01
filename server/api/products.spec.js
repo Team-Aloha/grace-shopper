@@ -7,7 +7,7 @@ const Product = db.model('product')
 const request = require('supertest')
 const agent = request(app)
 
-const {createAuthUser} = require('../utils/authUser')
+const {createAuthUser, createNoAuthUser} = require('../utils/createUsers')
 describe('Product API routes', () => {
   beforeEach(() => {
     return db.sync({force: true})
@@ -64,23 +64,41 @@ describe('Product API routes', () => {
       expect(res3.body.length).to.equal(0)
     })
     it('POST /api/products', async () => {
-      const authUser = await createAuthUser()
-      const res = await authUser
-        .post('/api/products')
-        .send({
-          title: 'Purple Shirt',
-          description: 'This is purple',
-          price: 20,
-          quantity: 10,
-          categories: [6, 1]
-        })
-        .expect(200)
-      expect(res.body).to.be.an('object')
-      const createdProduct = await Product.findById(res.body.id)
-      expect(createdProduct.title).to.equal('Purple Shirt')
+      //Check if admin can post
+      try {
+        const authUser = await createAuthUser('admin@admin.com')
+        const res = await authUser
+          .post('/api/products')
+          .send({
+            title: 'Purple Shirt',
+            description: 'This is purple',
+            price: 20,
+            quantity: 10,
+            categories: [6, 1]
+          })
+          .expect(200)
+        expect(res.body).to.be.an('object')
+        const createdProduct = await Product.findById(res.body.id)
+        expect(createdProduct.title).to.equal('Purple Shirt')
+
+        //check if !admin cannot post (expect 401 not allowed)
+        const notAdmin = await createNoAuthUser('notadmin@notadmin.com')
+        await notAdmin
+          .post('/api/products')
+          .send({
+            title: 'Purple Shirt',
+            description: 'This is purple',
+            price: 20,
+            quantity: 10,
+            categories: [6, 1]
+          })
+          .expect(401)
+      } catch (err) {
+        console.log('ERROR')
+      }
     })
     it('PUT /api/products', async () => {
-      const authUser = await createAuthUser()
+      const authUser = await createAuthUser('admin@admin.com')
       const res = await authUser
         .put('/api/products/1')
         .send({

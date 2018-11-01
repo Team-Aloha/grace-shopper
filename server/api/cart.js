@@ -4,17 +4,13 @@ const {Cart} = require('../db/models')
 router.get('/', async (req, res, next) => {
   console.log(req.user.id)
   try {
-
-    const cart = await Cart.findOne({
+    const cart = await Cart.findOrCreate({
       where: {userId: req.user.id}
     })
-    res.json(cart)
-
+    res.json(cart[0])
   } catch (err) {
     next(err)
   }
-
 })
-
 
 module.exports = router
