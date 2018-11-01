@@ -25,12 +25,11 @@ describe('Category API routes', () => {
       expect(res.body.products).to.be.an('array')
       expect(res.body.products.length).to.be.greaterThan(0)
     })
-    // it.only('GET /api/cart for no cart creates and returns an empty cart', async () => {
-    //   const user = await createUserWithNoCart('nocart@cart.com')
-    //   const res = await user.get('/api/cart').expect(200)
-    //   console.log(res.body)
-    //   expect(res.body.products).to.be.an('array')
-    //   expect(res.body.products.length).to.be.equal(0)
-    // })
+    it.only('GET /api/cart for no cart creates and returns an empty cart', async () => {
+      const user = await createUserWithNoCart('nocart@cart.com')
+      const res = await user.get('/api/cart').expect(200)
+      expect(res.body.products).to.be.an('array')
+      expect(res.body.products.length).to.be.equal(0)
+    })
   }) // end describe('/api/users')
 }) // end describe('User routes')
