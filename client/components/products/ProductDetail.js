@@ -5,6 +5,12 @@ import {fetchOneProduct, putCart} from '../../store'
 import store from '../../store'
 
 class ProductDetail extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      quantity: 1
+    }
+  }
   componentDidMount() {
     const productId = this.props.match.params.productId
     this.props.getAProduct(productId)
@@ -38,7 +44,7 @@ class ProductDetail extends React.Component {
                         id="quantity"
                         type="number"
                         className="validate"
-                        // value={this.state.quantity}
+                        value={this.state.quantity}
                         onChange={this.handleChange}
                       />
                       <label className="active" htmlFor="quantity">
