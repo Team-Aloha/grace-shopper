@@ -7,12 +7,12 @@ import {logout} from '../store'
 const Navbar = ({handleClick, isLoggedIn}) => (
   <div>
     <nav>
-      <div class="nav-wrapper">
-        <a href="#" class="brand-logo">
+      <div className="nav-wrapper">
+        <a href="#" className="brand-logo">
           Logo
         </a>
 
-        <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <ul id="nav-mobile" className="right hide-on-med-and-down">
           {isLoggedIn ? (
             <React.Fragment>
               <li>

@@ -4,6 +4,7 @@ import {connect} from 'react-redux'
 import {fetchOneProduct, updateProduct} from '../../store'
 import {fetchCategories} from '../../store'
 import store from '../../store'
+import StripeCheckoutButton from './StripeCheckoutButton'
 
 class CheckoutForm extends React.Component {
   constructor(props) {
@@ -150,9 +151,7 @@ class CheckoutForm extends React.Component {
               <div className="row">
                 <div className="col s12 m12 l12 xl12 center-align">
                   <div className="input-field">
-                    <button className="btn waves-effect waves-light btn-large blue lighten-2">
-                      Continue to Checkout
-                    </button>
+                    <StripeCheckoutButton />
                   </div>
                 </div>
               </div>
