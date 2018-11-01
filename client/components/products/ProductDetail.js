@@ -34,9 +34,10 @@ class ProductDetail extends React.Component {
 
   handleClick(evt) {
     evt.preventDefault()
-    console.log('clicked button')
-
-    this.props.addProduct(this.props.product)
+    this.props.addProduct({
+      id: this.props.product.id,
+      quantity: this.state.quantity
+    })
   }
 
   render() {
@@ -101,6 +102,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => ({
   getAProduct: productId => dispatch(fetchOneProduct(productId)),
+  //{id: 1, quantity: 2}
   addProduct: product => dispatch(putCart(product))
 })
 
