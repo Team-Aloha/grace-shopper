@@ -24,7 +24,7 @@ router.put('/add', async (req, res, next) => {
     let found = false
     newProducts.map(product => {
       if (product.id === req.body.id) {
-        product.quantity += req.body.quantity
+        product.quantity = +product.quantity + +req.body.quantity
         found = true
       }
       return product
