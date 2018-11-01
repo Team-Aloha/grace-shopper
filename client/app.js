@@ -10,6 +10,13 @@ class App extends React.Component {
   componentDidMount() {
     this.props.fetchProducts()
     this.props.fetchCategories()
+
+    if (!this.props.user.id) {
+
+     if (!localStorage.cart) {
+       localStorage.setItem('cart', [])
+     }
+    }
   }
   render() {
     return (
@@ -27,5 +34,10 @@ const mapDispatchToProps = dispatch => {
     fetchCategories: () => dispatch(fetchCategories())
   }
 }
+const mapStateToProps = state => {
+  return {
+    user: state.user
+  }
+}
 
-export default withRouter(connect(null, mapDispatchToProps)(App))
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App))

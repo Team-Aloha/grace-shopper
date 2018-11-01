@@ -36,10 +36,12 @@ class ProductDetail extends React.Component {
 
   handleClick(evt) {
     evt.preventDefault()
+
     let productToAdd = {
       id: this.props.product.id,
       quantity: this.state.quantity
     }
+
     if (!this.props.user.id) {
       this.state.guestCart.push(productToAdd)
       localStorage.setItem('cart', this.state.guestCart)
@@ -51,6 +53,7 @@ class ProductDetail extends React.Component {
   }
 
   render() {
+    console.log('props>>>>>', this.props.user)
     console.log('the product', this.props.product)
 
     const {product} = this.props
