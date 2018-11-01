@@ -1,8 +1,9 @@
 import React from 'react'
 import {withRouter, Link} from 'react-router-dom'
 import {connect} from 'react-redux'
-import {fetchOneProduct, putCart} from '../../store'
+import {fetchOneProduct, putProductToCart} from '../../store'
 import store from '../../store'
+import history from '../../history'
 
 class ProductDetail extends React.Component {
   constructor(props) {
@@ -38,6 +39,7 @@ class ProductDetail extends React.Component {
       id: this.props.product.id,
       quantity: this.state.quantity
     })
+    history.push('/products')
   }
 
   render() {
@@ -104,7 +106,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => ({
   getAProduct: productId => dispatch(fetchOneProduct(productId)),
   //{id: 1, quantity: 2}
-  addProduct: product => dispatch(putCart(product))
+  addProduct: product => dispatch(putProductToCart(product))
 })
 
 export default withRouter(

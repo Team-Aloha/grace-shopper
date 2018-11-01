@@ -17,6 +17,7 @@ router.put('/add', async (req, res, next) => {
     const cart = await Cart.findOne({
       where: {userId: req.user.id}
     })
+    const {id, quantity} = req.body
     const newProducts = cart.products
     //now check if it is already in cart...add quantity if so
 
@@ -28,7 +29,7 @@ router.put('/add', async (req, res, next) => {
       }
       return product
     })
-    if (!found) newProducts.push(req.body)
+    if (!found) newProducts.push({id, quantity})
     const [numRows, affectedRows] = await Cart.update(
       {products: newProducts},
       {
