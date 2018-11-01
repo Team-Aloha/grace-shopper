@@ -35,7 +35,8 @@ class ProductDetail extends React.Component {
           <div className="col xl6">
             <div className="row">
                   <div className="col">
-                  <h5>Description</h5>
+                  <h5>{product.title}</h5>
+                  <h6>{product.price}</h6>
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet aliquid eligendi sit consectetur aspernatur sequi et, ex porro obcaecati cupiditate saepe molestias labore voluptas excepturi doloribus magnam praesentium ducimus libero!</p>
                   </div>
 
@@ -52,16 +53,11 @@ class ProductDetail extends React.Component {
                         value={this.state.quantity}
                         onChange={this.handleChange}
                       />
-                      <label className="active" htmlFor="quantity">
-                        Quantity
-                      </label>
                     </div>
                 </div>
                
-               <div className="col xl6">
-              
+               <div className="col xl6 center">
                     <button className="btn"><i class="material-icons left">shopping_cart</i>Add To Cart</button>
- 
                </div>
       
               
