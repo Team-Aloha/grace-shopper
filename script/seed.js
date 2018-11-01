@@ -59,7 +59,6 @@ async function seed() {
 
   await Cart.create({
     products: [{id: 2, quantity: 2}],
-    total: 300,
     userId: 1
   })
 
