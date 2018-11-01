@@ -1,21 +1,31 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {getCart, deleteProduct} from '../../store'
-import SingleCartItem from './SingleCartItem'
+import {default as SingleCartItem} from './SingleCartItem'
 
 class Cart extends React.Component {
   constructor() {
     super()
     this.state = {
-      loaded: false
+      loaded: false,
+      cart: []
     }
   }
+
+  r
   handleRemove = id => {
     console.log('trying to remove id ', id)
+    console.log(this.state)
     this.props.deleteProduct(id)
+  }
+
+  handleUpdate = () => {
+    console.log('trying to update  ')
   }
   componentDidMount() {
     this.props.getCart()
+    console.log('mount')
+
     this.setState({loaded: true})
   }
   render() {
@@ -34,6 +44,7 @@ class Cart extends React.Component {
           this.props.products.filter(prod => prod.id === product.id)
         )
       })
+
       return (
         <React.Fragment>
           <div className="card">
@@ -61,6 +72,7 @@ class Cart extends React.Component {
                           item={displayItem}
                           quantity={this.props.cart[i].quantity}
                           handleRemove={this.handleRemove}
+                          sendQuantityBack={this.receiveStateFromChild}
                         />
                       )
                     }

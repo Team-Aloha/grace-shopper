@@ -3,6 +3,7 @@ import {withRouter, Link} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {fetchOneProduct, putProductToCart} from '../../store'
 import store from '../../store'
+import history from '../../history'
 
 class ProductDetail extends React.Component {
   constructor(props) {
@@ -47,6 +48,8 @@ class ProductDetail extends React.Component {
     } else {
       this.props.addProduct(productToAdd)
     }
+
+    history.push('/products')
   }
 
   render() {
@@ -67,13 +70,7 @@ class ProductDetail extends React.Component {
                 <div className="col">
                   <h5>{product.title}</h5>
                   <h6>{product.price}</h6>
-                  <p>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Amet aliquid eligendi sit consectetur aspernatur sequi et,
-                    ex porro obcaecati cupiditate saepe molestias labore
-                    voluptas excepturi doloribus magnam praesentium ducimus
-                    libero!
-                  </p>
+                  <p>{product.description}</p>
                 </div>
               </div>
               <div className="row">
@@ -92,7 +89,11 @@ class ProductDetail extends React.Component {
                 </div>
 
                 <div className="col xl6 center">
-                  <button onClick={this.handleClick} className="btn">
+                  <button
+                    type="button"
+                    onClick={this.handleClick}
+                    className="btn"
+                  >
                     <i class="material-icons left">shopping_cart</i>Add To Cart
                   </button>
                 </div>
