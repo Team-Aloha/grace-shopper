@@ -5,7 +5,7 @@ import PropTypes from 'prop-types'
 import {Login, Signup, UserHome, Cart} from './components'
 import {CheckoutForm, CheckoutPage} from './components/cart'
 import {me} from './store'
-import {AllProducts} from './components/products'
+import {AllProducts, ProductDetail} from './components/products'
 import {EditProductForm} from './components/admin'
 import {AddProductForm} from './components/admin'
 
@@ -30,9 +30,9 @@ class Routes extends Component {
         <Route path="/checkoutPage" component={CheckoutPage} />
 
         {/* Products */}
+        <Route exact path="/products/product/:productId" component={ProductDetail} />
         <Route path="/products" component={AllProducts} />
-        <Route
-          path="/admin/products/:productId/edit"
+        <Route exact path="/admin/products/:productId/edit"
           component={EditProductForm}
         />
         <Route path="/admin/products/add" component={AddProductForm} />

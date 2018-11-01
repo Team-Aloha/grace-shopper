@@ -1,18 +1,109 @@
 import React from 'react'
+import {withRouter, Link} from 'react-router-dom'
+import {connect} from 'react-redux'
+import {fetchOneProduct, putCart} from '../../store'
+import store from '../../store'
 
-const SingleProductDetail = props => {
-  const {item} = props
-  return (
-    <React.Fragment>
-      <tr>
-        <td>{item.title}</td>
+class ProductDetail extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      quantity: 1
+    }
+    this.handleChange = this.handleChange.bind(this)
+    this.handleClick = this.handleClick.bind(this)
+  }
+  componentDidMount() {
+    const productId = this.props.match.params.productId
+    this.props.getAProduct(productId)
+  }
 
-        <td>{quantity}</td>
-        <td>{item.price}</td>
-        <td>Add Button Here</td>
-      </tr>
-    </React.Fragment>
-  )
+  componentDidUpdate(prevProps, prevState) {
+    // After fetching redux has passed in the student as
+    // props, now we want to set those values to our local state
+    if (prevProps.product !== this.props.product) {
+      this.setState({
+        product: this.props.product
+      })
+    }
+  }
+  handleChange(evt) {
+    evt.preventDefault()
+    this.setState({[evt.target.name]: evt.target.value})
+  }
+
+  handleClick(evt) {
+    evt.preventDefault()
+    console.log('clicked button')
+
+    this.props.addProduct(this.props.product)
+  }
+
+  render() {
+    console.log('the product', this.props.product)
+
+    const {product} = this.props
+    return (
+      <React.Fragment>
+        <div className="container">
+          <div className="row">
+            <div className="col xl6">
+              <img className="responsive-img" src="/defaultShirt.png" />
+            </div>
+
+            <div className="col xl6">
+              <div className="row">
+                <div className="col">
+                  <h5>{product.title}</h5>
+                  <h6>{product.price}</h6>
+                  <p>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                    Amet aliquid eligendi sit consectetur aspernatur sequi et,
+                    ex porro obcaecati cupiditate saepe molestias labore
+                    voluptas excepturi doloribus magnam praesentium ducimus
+                    libero!
+                  </p>
+                </div>
+              </div>
+              <div className="row">
+                <div className="col xl6">
+                  <div className="input-field">
+                    <input
+                      name="quantity"
+                      id="quantity"
+                      type="number"
+                      className="validate"
+                      value={this.state.quantity}
+                      onChange={this.handleChange}
+                    />
+                  </div>
+                </div>
+
+                <div className="col xl6 center">
+                  <button onClick={this.handleClick} className="btn">
+                    <i class="material-icons left">shopping_cart</i>Add To Cart
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </React.Fragment>
+    )
+  }
 }
 
-export default SingleProductDetail
+const mapStateToProps = state => {
+  return {
+    product: state.product
+  }
+}
+
+const mapDispatchToProps = dispatch => ({
+  getAProduct: productId => dispatch(fetchOneProduct(productId)),
+  addProduct: product => dispatch(putCart(product))
+})
+
+export default withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(ProductDetail)
+)

@@ -75,6 +75,8 @@ class AllProducts extends React.Component {
           <div className="row">
             {this.props.prods.map(product => (
               <ProductCard product={product} key={product.id} />
+             
+
             ))}
           </div>
         </div>
