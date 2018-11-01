@@ -3,6 +3,7 @@ import {withRouter, Link} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {fetchOneProduct, putProductToCart} from '../../store'
 import store from '../../store'
+import history from '../../history'
 
 class ProductDetail extends React.Component {
   constructor(props) {
@@ -34,10 +35,18 @@ class ProductDetail extends React.Component {
 
   handleClick(evt) {
     evt.preventDefault()
-    this.props.addProduct({
+    let productToAdd = {
       id: this.props.product.id,
       quantity: this.state.quantity
-    })
+    }
+    if (!this.props.user.id) {
+      this.state.guestCart.push(productToAdd)
+      localStorage.setItem('cart', this.state.guestCart)
+    } else {
+      this.props.addProduct(productToAdd)
+    }
+
+    history.push('/products')
   }
 
   render() {
