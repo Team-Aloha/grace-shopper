@@ -60,7 +60,7 @@ export const deleteProduct = product => async dispatch => {
 //change quantity
 export const updateQuantity = product => async dispatch => {
   try {
-    const {data} = await axios.put('/api/cart/quatity', product)
+    const {data} = await axios.put('/api/cart/quantity', product)
     dispatch(getCart(data.products))
   } catch (err) {
     console.log(err)

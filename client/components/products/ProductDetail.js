@@ -3,6 +3,7 @@ import {withRouter, Link} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {fetchOneProduct, putProductToCart} from '../../store'
 import store from '../../store'
+import history from '../../history'
 
 class ProductDetail extends React.Component {
   constructor(props) {
@@ -38,6 +39,7 @@ class ProductDetail extends React.Component {
       id: this.props.product.id,
       quantity: this.state.quantity
     })
+    history.push('/products')
   }
 
   render() {
