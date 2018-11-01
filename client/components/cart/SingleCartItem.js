@@ -11,7 +11,11 @@ const SingleCartItem = props => {
         <td>{item.price}</td>
         <td>{quantity * item.price}</td>
         <td>
-          <button className="btn btn-small waves-effect waves-light red lighten-2">
+          <button
+            type="button"
+            className="btn btn-small waves-effect waves-light red lighten-2"
+            onClick={() => props.handleRemove(item.id)}
+          >
             Remove
           </button>
         </td>

@@ -1,6 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {getCart} from '../../store'
+import {getCart, deleteProduct} from '../../store'
 import SingleCartItem from './SingleCartItem'
 
 class Cart extends React.Component {
@@ -9,6 +9,10 @@ class Cart extends React.Component {
     this.state = {
       loaded: false
     }
+  }
+  handleRemove = id => {
+    console.log('trying to remove id ', id)
+    this.props.deleteProduct(id)
   }
   componentDidMount() {
     this.props.getCart()
@@ -56,6 +60,7 @@ class Cart extends React.Component {
                           key={displayItem.id}
                           item={displayItem}
                           quantity={this.props.cart[i].quantity}
+                          handleRemove={this.handleRemove}
                         />
                       )
                     }
@@ -90,6 +95,9 @@ const mapDispatch = dispatch => {
   return {
     getCart: () => {
       dispatch(getCart())
+    },
+    deleteProduct: id => {
+      dispatch(deleteProduct({id}))
     }
   }
 }

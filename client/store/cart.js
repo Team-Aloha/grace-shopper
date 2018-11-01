@@ -42,8 +42,8 @@ export const getCart = () => async dispatch => {
 //add product
 export const putProductToCart = product => async dispatch => {
   try {
-    const {data: products} = await axios.put('/api/cart/add', product)
-    dispatch(getCart(products))
+    const {data} = await axios.put('/api/cart/add', product)
+    dispatch(getCart(data.products))
   } catch (err) {
     console.log(err)
   }
@@ -51,8 +51,8 @@ export const putProductToCart = product => async dispatch => {
 //delete item
 export const deleteProduct = product => async dispatch => {
   try {
-    const {data: products} = await axios.put('/api/cart/remove', product)
-    dispatch(getCart(products))
+    const {data} = await axios.put('/api/cart/remove', product)
+    dispatch(getCart(data.products))
   } catch (err) {
     console.log(err)
   }
@@ -60,8 +60,8 @@ export const deleteProduct = product => async dispatch => {
 //change quantity
 export const updateQuantity = product => async dispatch => {
   try {
-    const {data: products} = await axios.put('/api/cart/quatity', product)
-    dispatch(getCart(products))
+    const {data} = await axios.put('/api/cart/quatity', product)
+    dispatch(getCart(data.products))
   } catch (err) {
     console.log(err)
   }
@@ -75,12 +75,7 @@ export default function(state = initialState, action) {
   switch (action.type) {
     case GET_CART:
       return action.cart
-    // case ADD_PRODUCT:
-    //   return action.products
-    // case REMOVE_PRODUCT:
-    //   return action.products
-    // case CHANGE_QUANTITY:
-    //   return action.products
+
     default:
       return state
   }
