@@ -34,9 +34,10 @@ class ProductDetail extends React.Component {
 
   handleClick(evt) {
     evt.preventDefault()
-    console.log('clicked button')
-
-    this.props.addProduct(this.props.product)
+    this.props.addProduct({
+      id: this.props.product.id,
+      quantity: this.state.quantity
+    })
   }
 
   render() {
@@ -72,6 +73,7 @@ class ProductDetail extends React.Component {
                       name="quantity"
                       id="quantity"
                       type="number"
+                      min="1"
                       className="validate"
                       value={this.state.quantity}
                       onChange={this.handleChange}
@@ -101,6 +103,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => ({
   getAProduct: productId => dispatch(fetchOneProduct(productId)),
+  //{id: 1, quantity: 2}
   addProduct: product => dispatch(putCart(product))
 })
 
