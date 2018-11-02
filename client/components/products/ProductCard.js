@@ -3,7 +3,6 @@ import {withRouter, Link} from 'react-router-dom'
 
 const ProductCard = props => {
   const {product} = props
-  console.log(product.imageUrl)
 
   return (
     <React.Fragment>

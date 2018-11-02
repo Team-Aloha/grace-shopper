@@ -2,7 +2,6 @@ import React from 'react'
 import {withRouter, Link} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {fetchOneProduct, putProductToCart} from '../../store'
-import store from '../../store'
 import history from '../../history'
 
 class ProductDetail extends React.Component {
@@ -94,7 +93,8 @@ class ProductDetail extends React.Component {
                     onClick={this.handleClick}
                     className="btn"
                   >
-                    <i class="material-icons left">shopping_cart</i>Add To Cart
+                    <i className="material-icons left">shopping_cart</i>Add To
+                    Cart
                   </button>
                 </div>
               </div>

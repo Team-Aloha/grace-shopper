@@ -1,6 +1,9 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {updateQuantity} from '../../store'
+import {updateQuantity, deleteProduct} from '../../store'
+
+//this needs to be a stateful component so we can link the
+//quantity to a variable
 class SingleCartItem extends React.Component {
   constructor() {
     super()
