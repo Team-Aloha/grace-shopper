@@ -8,7 +8,7 @@ import {me} from './store'
 import {AllProducts, ProductDetail} from './components/products'
 import {EditProductForm} from './components/admin'
 import {AddProductForm} from './components/admin'
-import {Profile, ProfilePage, OrderList} from './components/user'
+import {Profile, ProfilePage, OrderList, OrderDetail} from './components/user'
 
 /**
  * COMPONENT
@@ -34,6 +34,9 @@ class Routes extends Component {
         {/* Products */}
         <Route exact path="/products" component={AllProducts} />
         <Route path="/products/:productId" component={ProductDetail} />
+
+        {/* Orders */}
+        <Route path="/orders/:orderId" component={OrderDetail} />
         <Route
           path="/admin/products/:productId/edit"
           component={EditProductForm}

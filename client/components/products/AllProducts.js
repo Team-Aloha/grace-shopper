@@ -43,8 +43,8 @@ class AllProducts extends React.Component {
         <div className="container">
           <div className="row">
             <nav>
-              <div class="nav-wrapper">
-                <ul class="left hide-on-med-and-down">
+              <div className="nav-wrapper">
+                <ul className="left hide-on-med-and-down">
                   <li>
                     <a href="">Categories:</a>
                   </li>
