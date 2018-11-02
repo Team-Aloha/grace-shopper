@@ -1,6 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {getCart, deleteProduct} from '../../store'
+import {getCart, deleteProduct, setCart} from '../../store'
 import {default as SingleCartItem} from './SingleCartItem'
 
 class Cart extends React.Component {
@@ -23,10 +23,19 @@ class Cart extends React.Component {
     console.log('trying to update  ')
   }
   componentDidMount() {
-    this.props.getCart()
-    console.log('mount')
+    //ask if theres a user
 
-    this.setState({loaded: true})
+    if (!this.props.user.id) {
+      let guestCart = JSON.parse(localStorage.getItem('cart'))
+
+      this.props.setCart(guestCart)
+      this.setState({loaded: true})
+    } else {
+      this.props.getCart()
+      console.log('mount')
+
+      this.setState({loaded: true})
+    }
   }
   render() {
     if (!this.state.loaded) {
@@ -97,14 +106,18 @@ class Cart extends React.Component {
 }
 
 const mapState = state => {
-  const {cart, products} = state
+  const {cart, products, user} = state
   return {
     cart,
-    products
+    products,
+    user
   }
 }
 const mapDispatch = dispatch => {
   return {
+    setCart: cart => {
+      dispatch(setCart(cart))
+    },
     getCart: () => {
       dispatch(getCart())
     },

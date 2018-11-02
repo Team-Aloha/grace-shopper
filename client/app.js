@@ -14,7 +14,11 @@ class App extends React.Component {
     if (!this.props.user.id) {
 
      if (!localStorage.cart) {
-       localStorage.setItem('cart', [])
+      let guestCart = JSON.stringify([{id: 1, quantity: 2}])
+
+       localStorage.setItem('cart', [guestCart])
+
+       console.log('localstorage', localStorage);
      }
     }
   }
