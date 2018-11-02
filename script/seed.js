@@ -35,6 +35,214 @@ async function seed() {
       price: 1500,
       quantity: 15,
       categories: [2, 3]
+    }),
+    Product.create({
+      title: 'Black Floral',
+      description: 'Insert Description',
+      price: 1500,
+      quantity: 15,
+      categories: [2],
+      imageUrl: 'shirt1.jpg'
+    }),
+    Product.create({
+      title: 'Shirt',
+      description: 'Insert Desc',
+      price: 1500,
+      quantity: 15,
+      categories: [2],
+      imageUrl: 'shirt2.jpg'
+    }),
+    Product.create({
+      title: 'Shirt',
+      description: 'Insert Desc',
+      price: 1500,
+      quantity: 15,
+      categories: [2],
+      imageUrl: 'shirt3.jpg'
+    }),
+    Product.create({
+      title: 'Shirt',
+      description: 'Insert Desc',
+      price: 1500,
+      quantity: 15,
+      categories: [2],
+      imageUrl: 'shirt4.jpg'
+    }),
+    Product.create({
+      title: 'Shirt',
+      description: 'Insert Desc',
+      price: 1500,
+      quantity: 15,
+      categories: [2],
+      imageUrl: 'shirt25.jpg'
+    }),
+    Product.create({
+      title: 'Shirt',
+      description: 'Insert Desc',
+      price: 1500,
+      quantity: 15,
+      categories: [2],
+      imageUrl: 'shirt6.jpg'
+    }),
+    Product.create({
+      title: 'Shirt',
+      description: 'Insert Desc',
+      price: 1500,
+      quantity: 15,
+      categories: [2],
+      imageUrl: 'shirt7.jpg'
+    }),
+    Product.create({
+      title: 'Shirt',
+      description: 'Insert Desc',
+      price: 1500,
+      quantity: 15,
+      categories: [2],
+      imageUrl: 'shirt8.jpg'
+    }),
+    Product.create({
+      title: 'Shirt',
+      description: 'Insert Desc',
+      price: 1500,
+      quantity: 15,
+      categories: [2],
+      imageUrl: 'shirt9.jpg'
+    }),
+    Product.create({
+      title: 'Shirt',
+      description: 'Insert Desc',
+      price: 1500,
+      quantity: 15,
+      categories: [2],
+      imageUrl: 'shirt10.jpg'
+    }),
+    Product.create({
+      title: 'Shirt',
+      description: 'Insert Desc',
+      price: 1500,
+      quantity: 15,
+      categories: [2],
+      imageUrl: 'shirt11.jpg'
+    }),
+    Product.create({
+      title: 'Shirt',
+      description: 'Insert Desc',
+      price: 1500,
+      quantity: 15,
+      categories: [2],
+      imageUrl: 'shirt12.jpg'
+    }),
+    Product.create({
+      title: 'Shirt',
+      description: 'Insert Desc',
+      price: 1500,
+      quantity: 15,
+      categories: [2],
+      imageUrl: 'shirt13.jpg'
+    }),
+    Product.create({
+      title: 'Shirt',
+      description: 'Insert Desc',
+      price: 1500,
+      quantity: 15,
+      categories: [2],
+      imageUrl: 'shirt14.jpg'
+    }),
+    Product.create({
+      title: 'Shirt',
+      description: 'Insert Desc',
+      price: 1500,
+      quantity: 15,
+      categories: [2],
+      imageUrl: 'shirt15.jpg'
+    }),
+    Product.create({
+      title: 'Shirt',
+      description: 'Insert Desc',
+      price: 1500,
+      quantity: 15,
+      categories: [2],
+      imageUrl: 'shirt16.jpg'
+    }),
+    Product.create({
+      title: 'Shirt',
+      description: 'Insert Desc',
+      price: 1500,
+      quantity: 15,
+      categories: [2],
+      imageUrl: 'shirt17.jpg'
+    }),
+    Product.create({
+      title: 'Shirt',
+      description: 'Insert Desc',
+      price: 1500,
+      quantity: 15,
+      categories: [2],
+      imageUrl: 'shirt18.jpg'
+    }),
+    Product.create({
+      title: 'Shirt',
+      description: 'Insert Desc',
+      price: 1500,
+      quantity: 15,
+      categories: [2],
+      imageUrl: 'shirt19.jpg'
+    }),
+    Product.create({
+      title: 'Shirt',
+      description: 'Insert Desc',
+      price: 1500,
+      quantity: 15,
+      categories: [2],
+      imageUrl: 'shirt20.jpg'
+    }),
+    Product.create({
+      title: 'Shirt',
+      description: 'Insert Desc',
+      price: 1500,
+      quantity: 15,
+      categories: [2],
+      imageUrl: 'shirt21.jpg'
+    }),
+    Product.create({
+      title: 'Shirt',
+      description: 'Insert Desc',
+      price: 1500,
+      quantity: 15,
+      categories: [2],
+      imageUrl: 'shirt22.jpg'
+    }),
+    Product.create({
+      title: 'Shirt',
+      description: 'Insert Desc',
+      price: 1500,
+      quantity: 15,
+      categories: [2],
+      imageUrl: 'shirt23.jpg'
+    }),
+    Product.create({
+      title: 'Shirt',
+      description: 'Insert Desc',
+      price: 1500,
+      quantity: 15,
+      categories: [2],
+      imageUrl: 'shirt24.jpg'
+    }),
+    Product.create({
+      title: 'Shirt',
+      description: 'Insert Desc',
+      price: 1500,
+      quantity: 15,
+      categories: [2],
+      imageUrl: 'shirt25.jpg'
+    }),
+    Product.create({
+      title: 'Shirt',
+      description: 'Insert Desc',
+      price: 1500,
+      quantity: 15,
+      categories: [2],
+      imageUrl: 'shirt26.jpg'
     })
   ])
 
