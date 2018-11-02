@@ -34,7 +34,7 @@ const Navbar = ({handleClick, isLoggedIn, cartItemCount}) => (
                 <Link to="/products">Products</Link>
               </li>
               <li>
-                <Link to="/categories">Profile</Link>
+                <Link to="/profile">Profile</Link>
               </li>
               <li>
                 <a href="#" onClick={handleClick}>
