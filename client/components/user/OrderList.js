@@ -140,7 +140,7 @@ class OrderList extends React.Component {
                             {getTotalAmount(order.products)}
                             </td>
                             <td>
-                                {order.status}
+                                <Link to={`/order/${order.id}`}>{order.status}</Link>
                             </td>
                 </tr>
                 )    
