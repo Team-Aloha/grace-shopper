@@ -20,39 +20,43 @@ const getTotalAmount = products => {
 const DUMMY_ORDERS = [
  {  
      id: 1,
-     date: '1/1/2018',
+     createdAt: '1/1/2018',
      status: 'shipped',
      products: [
         [{
             id:1,
             title: 'blue shirt',
             price: 100,
-            quantity: 1
+            quantity: 1,
+            imageUrl: 'defaultShirt.png'
         }],
         [{
             id:2,
             title: 'red shirt',
             price:  200,
-            quantity:1
+            quantity:1,
+            imageUrl: 'defaultShirt.png'
         }]
      ]
  },
  {  
      id: 2,
-     date: '1/1/2018',
+     createdAt: '1/1/2018',
      status: 'pending',
      products: [
         [{
             id:1,
             title: 'pink shirt',
             price: 500,
-            quantity: 1
+            quantity: 1,
+            imageUrl: 'defaultShirt.png'
         }],
         [{
             id:2,
             title: 'yellow shirt',
             price:  500,
-            quantity:2
+            quantity:2,
+            imageUrl: 'defaultShirt.png'
         }]
      ]
  }
@@ -131,7 +135,7 @@ class OrderList extends React.Component {
                 return (
                     <tr>
                         <td>
-                       {order.date}
+                       {order.createdAt}
                        </td>
                        <td>
                            {order.products.map(product=>(<p>{product[0].title}</p>)) }
