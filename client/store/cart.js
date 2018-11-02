@@ -3,7 +3,7 @@ import axios from 'axios'
 /**
  * ACTION TYPES
  */
-const GET_CART = 'GET_CART'
+const SET_CART = 'SET_CART'
 // const ADD_PRODUCT = 'ADD_PRODUCT'
 // const REMOVE_PRODUCT = 'REMOVE_PRODUCT'
 // const CHANGE_QUANTITY = 'CHANGE_QUANTITY'
@@ -16,8 +16,8 @@ const initialState = []
 /**
  * ACTION CREATORS
  */
-export const gotCart = cart => ({
-  type: GET_CART,
+export const setCart = cart => ({
+  type: SET_CART,
   cart
 })
 
@@ -34,7 +34,7 @@ export const getCart = () => async dispatch => {
     // console.log(test.data.products)
     // const data = [{id: 1, quantity: 2}, {id: 2, quantity: 3}]
     //const data = []
-    dispatch(gotCart(data.products))
+    dispatch(setCart(data.products))
   } catch (err) {
     console.error(err)
   }
@@ -43,7 +43,7 @@ export const getCart = () => async dispatch => {
 export const putProductToCart = product => async dispatch => {
   try {
     const {data} = await axios.put('/api/cart/add', product)
-    dispatch(gotCart(data.products))
+    dispatch(setCart(data.products))
   } catch (err) {
     console.log(err)
   }
@@ -52,7 +52,7 @@ export const putProductToCart = product => async dispatch => {
 export const deleteProduct = product => async dispatch => {
   try {
     const {data} = await axios.put('/api/cart/remove', product)
-    dispatch(gotCart(data.products))
+    dispatch(setCart(data.products))
   } catch (err) {
     console.log(err)
   }
@@ -61,7 +61,7 @@ export const deleteProduct = product => async dispatch => {
 export const updateQuantity = product => async dispatch => {
   try {
     const {data} = await axios.put('/api/cart/quantity', product)
-    dispatch(gotCart(data.products))
+    dispatch(setCart(data.products))
   } catch (err) {
     console.log(err)
   }
@@ -73,7 +73,7 @@ export const updateQuantity = product => async dispatch => {
 export default function(state = initialState, action) {
   console.log(action)
   switch (action.type) {
-    case GET_CART:
+    case SET_CART:
       return action.cart
 
     default:
