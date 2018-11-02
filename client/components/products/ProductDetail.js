@@ -1,7 +1,7 @@
 import React from 'react'
 import {withRouter, Link} from 'react-router-dom'
 import {connect} from 'react-redux'
-import {fetchOneProduct, putProductToCart} from '../../store'
+import {fetchOneProduct, putProductToCart, setCart} from '../../store'
 import history from '../../history'
 
 class ProductDetail extends React.Component {
@@ -42,8 +42,16 @@ class ProductDetail extends React.Component {
     }
 
     if (!this.props.user.id) {
-      this.state.guestCart.push(productToAdd)
-      localStorage.setItem('cart', this.state.guestCart)
+      let guestCart = JSON.parse(localStorage.getItem('cart'))
+      guestCart.push(productToAdd)
+      let guestCartToAdd = JSON.stringify(guestCart)
+
+      localStorage.setItem('cart', [guestCartToAdd])
+
+      //this.props.addProduct(guestCartToAdd)
+      this.props.addProduct(productToAdd)
+      // this.state.guestCart.push(productToAdd)
+      // localStorage.setItem('cart', this.state.guestCart)
     } else {
       this.props.addProduct(productToAdd)
     }
@@ -116,7 +124,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => ({
   getAProduct: productId => dispatch(fetchOneProduct(productId)),
   //{id: 1, quantity: 2}
-  addProduct: product => dispatch(putProductToCart(product))
+  addProduct: product => dispatch(putProductToCart(product)),
+  setCart: cart => dispatch(setCart(cart))
 })
 
 export default withRouter(

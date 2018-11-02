@@ -12,10 +12,17 @@ class Cart extends React.Component {
     }
   }
 
-  r
+
   handleRemove = id => {
+    // if (!this.props.user.id) {
+    //   this.props.products = this.props.products.filter(product => {
+    //    return product.id !== id
+    //   })
+
+
+    // }
     console.log('trying to remove id ', id)
-    console.log(this.state)
+    console.log(this.props, 'this.props')
     this.props.deleteProduct(id)
   }
 
