@@ -49,7 +49,7 @@ class ProductDetail extends React.Component {
       localStorage.setItem('cart', [guestCartToAdd])
 
       //this.props.addProduct(guestCartToAdd)
-      this.props.addProduct(productToAdd)
+     // this.props.addProduct(productToAdd)
       // this.state.guestCart.push(productToAdd)
       // localStorage.setItem('cart', this.state.guestCart)
     } else {
