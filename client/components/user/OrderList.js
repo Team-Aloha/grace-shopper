@@ -60,29 +60,16 @@ class OrderList extends React.Component {
       <React.Fragment>
         {' '}
         <div className="card">
-          <div className="card-content">
-            <div className="s12 l6">
-              <ul class="collection with-header">
-                <li class="collection-header">
-                  <h4>Orders</h4>
-                </li>
-                <li class="collection-item">Alvin</li>
-                <li class="collection-item">Alvin</li>
-                <li class="collection-item">Alvin</li>
-                <li class="collection-item">Alvin</li>
-              </ul>
-
-              <div className="row">
-                <div className="col s12 m12 l12 xl12 center-align">
-                  <button
-                    onClick={this.toggleEditProfile}
-                    className="btn waves-effect waves-light btn-large blue lighten-2"
-                  >
-                    {this.state.readOnly ? 'Edit' : 'Save'}
-                  </button>
-                </div>
-              </div>
-            </div>
+          <div className="card-content" style={{padding: 0}}>
+            <ul class="collection with-header" id="order" style={{margin: 0}}>
+              <li class="collection-header">
+                <h4>Orders</h4>
+              </li>
+              <li class="collection-item">Alvin</li>
+              <li class="collection-item">Alvin</li>
+              <li class="collection-item">Alvin</li>
+              <li class="collection-item">Alvin</li>
+            </ul>
           </div>
         </div>
       </React.Fragment>
