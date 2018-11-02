@@ -6,6 +6,12 @@ import {fetchOneProduct, updateProduct} from '../../store'
 import {fetchCategories} from '../../store'
 import store from '../../store'
 
+const DUMMY_USER = {
+  address: '13 elm',
+  city: 'chicago',
+  state: 'il',
+  zip: 60651
+}
 const DUMMY_PRODUCTS = [
   [
     {
@@ -77,7 +83,7 @@ class OrderDetail extends React.Component {
               {DUMMY_PRODUCTS.map(product => (
                 <li className="collection-item avatar">
                   {/* <i className="material-icons circle red">play_arrow</i> */}
-                  <Link to={`/products/${product.id}`}>
+                  <Link to={`/products/${product[0].id}`}>
                     <img
                       className="order-image left"
                       src="/defaultShirt.png"
@@ -99,6 +105,68 @@ class OrderDetail extends React.Component {
             </ul>
           </div>
         </div>
+        <h3 className="center-align">Shipped To</h3>
+        <div className="card">
+          <div className="card-content" id="order-card">
+            <div className="input-field">
+              <input
+                name="address"
+                id="address"
+                type="text"
+                className="validate"
+                value={this.props.user.address}
+                onChange={this.handleChange}
+                readOnly={true}
+              />
+              <label className="active" htmlFor="address">
+                Address
+              </label>
+            </div>
+            <div className="input-field">
+              <input
+                name="city"
+                id="city"
+                type="text"
+                className="validate"
+                value={this.props.user.city}
+                onChange={this.handleChange}
+                readOnly={true}
+              />
+              <label className="active" htmlFor="city">
+                City
+              </label>
+            </div>
+            <div className="input-field">
+              <input
+                name="state"
+                id="state"
+                type="text"
+                className="validate"
+                value={this.props.user.state}
+                onChange={this.handleChange}
+                readOnly={true}
+              />
+              <label className="active" htmlFor="state">
+                State
+              </label>
+            </div>
+            <div className="input-field">
+              <input
+                name="zip"
+                id="zip"
+                type="text"
+                pattern="[0-9]{5}"
+                className="zip"
+                value={this.props.user.zip}
+                onChange={this.handleChange}
+                readOnly={true}
+              />
+              <label className="active" htmlFor="zip">
+                Zip
+              </label>
+            </div>
+          </div>
+        </div>
       </div>
     )
   }
@@ -106,7 +174,7 @@ class OrderDetail extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    user: state.user
+    user: DUMMY_USER
   }
 }
 
