@@ -8,3 +8,9 @@ nav .nav-wrapper {
     height: 300px;
 	overflow: hidden;
 }
+
+nav ul a span.badge {
+    background: green;
+    color: white;
+    margin-right: -1.5rem;
+}
