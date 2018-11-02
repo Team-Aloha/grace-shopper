@@ -70,6 +70,7 @@ class OrderDetail extends React.Component {
 
     return (
       <div className="container">
+        <h3 className="center-align">Order</h3>
         <div className="card">
           <div className="card-content" id="order-card">
             <ul className="collection">
