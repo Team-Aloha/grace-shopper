@@ -8,6 +8,7 @@ import {me} from './store'
 import {AllProducts, ProductDetail} from './components/products'
 import {EditProductForm} from './components/admin'
 import {AddProductForm} from './components/admin'
+import {Profile, ProfilePage, OrderList} from './components/user'
 
 /**
  * COMPONENT
@@ -28,6 +29,7 @@ class Routes extends Component {
         <Route path="/cart" component={Cart} />
         <Route path="/checkout" component={CheckoutForm} />
         <Route path="/checkoutPage" component={CheckoutPage} />
+        <Route path="/profile" component={ProfilePage} />
 
         {/* Products */}
         <Route exact path="/products" component={AllProducts} />
