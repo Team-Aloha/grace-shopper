@@ -5,14 +5,58 @@ import {fetchOneProduct, updateProduct} from '../../store'
 import {fetchCategories} from '../../store'
 import store from '../../store'
 
+
+const getTotalAmount = products => {
+ let totalAmount = products.map((item, i) => {
+    if (item[0]) {
+      const displayItem = item[0]
+      return displayItem.price * displayItem.quantity
+    }
+  })
+  .reduce((a, b) => a + b, 0)
+  return `${totalAmount}`
+} 
+
 const DUMMY_ORDERS = [
  {  
+     id: 1,
+     date: '1/1/2018',
+     status: 'shipped',
      products: [
-        {
-        
-        }
+        [{
+            id:1,
+            title: 'blue shirt',
+            price: 100,
+            quantity: 1
+        }],
+        [{
+            id:2,
+            title: 'red shirt',
+            price:  200,
+            quantity:1
+        }]
+     ]
+ },
+ {  
+     id: 2,
+     date: '1/1/2018',
+     status: 'pending',
+     products: [
+        [{
+            id:1,
+            title: 'pink shirt',
+            price: 500,
+            quantity: 1
+        }],
+        [{
+            id:2,
+            title: 'yellow shirt',
+            price:  500,
+            quantity:2
+        }]
      ]
  }
+
 
 ]
 
@@ -75,28 +119,36 @@ class OrderList extends React.Component {
           <table>
         <thead>
           <tr>
-              <th>Name</th>
-              <th>Item Name</th>
-              <th>Item Price</th>
+              <th>Date</th>
+              <th>Products</th>
+              <th>Total</th>
+              <th>Status</th>
           </tr>
         </thead>
 
         <tbody>
-          <tr>
-            <td>Alvin</td>
-            <td>Eclair</td>
-            <td>$0.87</td>
-          </tr>
-          <tr>
-            <td>Alan</td>
-            <td>Jellybean</td>
-            <td>$3.76</td>
-          </tr>
-          <tr>
-            <td>Jonathan</td>
-            <td>Lollipop</td>
-            <td>$7.00</td>
-          </tr>
+            {DUMMY_ORDERS.map(order=>{
+                return (
+                    <tr>
+                        <td>
+                       {order.date}
+                       </td>
+                       <td>
+                           {order.products.map(product=>(<p>{product[0].title}</p>)) }
+                        </td>
+                        <td>
+                            {getTotalAmount(order.products)}
+                            </td>
+                            <td>
+                                {order.status}
+                            </td>
+                </tr>
+                )    
+            })
+
+            }
+
+
         </tbody>
       </table>
             
