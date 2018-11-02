@@ -47,7 +47,7 @@ const Navbar = ({handleClick, isLoggedIn, cartItemCount}) => (
           ) : (
             <React.Fragment>
               <li>
-                <Link to="/cart">
+                <Link to="/checkoutPage">
                   {' '}
                   <i class="material-icons left">shopping_cart</i> Cart
                 </Link>
