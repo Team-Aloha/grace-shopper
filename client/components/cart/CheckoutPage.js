@@ -18,7 +18,7 @@ class CheckoutPage extends React.Component {
         <div className="container">
           <div className="row">
             <div className="center-align">
-              <h3>Checkout Form</h3>
+              <h3>Review your order</h3>
             </div>
           </div>
           <div className="row">
