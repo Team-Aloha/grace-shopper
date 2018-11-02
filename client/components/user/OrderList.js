@@ -5,6 +5,17 @@ import {fetchOneProduct, updateProduct} from '../../store'
 import {fetchCategories} from '../../store'
 import store from '../../store'
 
+const DUMMY_ORDERS = [
+ {  
+     products: [
+        {
+        
+        }
+     ]
+ }
+
+]
+
 class OrderList extends React.Component {
   constructor(props) {
     super(props)
@@ -60,16 +71,35 @@ class OrderList extends React.Component {
       <React.Fragment>
         {' '}
         <div className="card">
-          <div className="card-content" style={{padding: 0}}>
-            <ul class="collection with-header" id="order" style={{margin: 0}}>
-              <li class="collection-header">
-                <h4>Orders</h4>
-              </li>
-              <li class="collection-item">Alvin</li>
-              <li class="collection-item">Alvin</li>
-              <li class="collection-item">Alvin</li>
-              <li class="collection-item">Alvin</li>
-            </ul>
+          <div className="card-content" id="order-card" >
+          <table>
+        <thead>
+          <tr>
+              <th>Name</th>
+              <th>Item Name</th>
+              <th>Item Price</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr>
+            <td>Alvin</td>
+            <td>Eclair</td>
+            <td>$0.87</td>
+          </tr>
+          <tr>
+            <td>Alan</td>
+            <td>Jellybean</td>
+            <td>$3.76</td>
+          </tr>
+          <tr>
+            <td>Jonathan</td>
+            <td>Lollipop</td>
+            <td>$7.00</td>
+          </tr>
+        </tbody>
+      </table>
+            
           </div>
         </div>
       </React.Fragment>

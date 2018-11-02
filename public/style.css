@@ -8,3 +8,7 @@ nav .nav-wrapper {
 #order {
     border: 0;
 }
+
+.order-card {
+    padding: 0;
+}
