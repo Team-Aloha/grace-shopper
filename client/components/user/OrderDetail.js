@@ -42,7 +42,7 @@ class OrderDetail extends React.Component {
     // props, now we want to set those values to our local state
     if (prevProps.user !== this.props.user) {
       this.setState({
-        user: this.props.user
+        order: this.props.user
       })
     }
   }
@@ -74,50 +74,28 @@ class OrderDetail extends React.Component {
         <div className="card">
           <div className="card-content" id="order-card">
             <ul className="collection">
-              <li className="collection-item avatar">
-                <img src="images/yuna.jpg" alt="" className="circle" />
-                <span className="title">Title</span>
-                <p>
-                  First Line <br />
-                  Second Line
-                </p>
-                <a href="#!" className="secondary-content">
-                  <i className="material-icons">grade</i>
-                </a>
-              </li>
-              <li className="collection-item avatar">
-                <i className="material-icons circle">folder</i>
-                <span className="title">Title</span>
-                <p>
-                  First Line <br />
-                  Second Line
-                </p>
-                <a href="#!" className="secondary-content">
-                  <i className="material-icons">grade</i>
-                </a>
-              </li>
-              <li className="collection-item avatar">
-                <i className="material-icons circle green">insert_chart</i>
-                <span className="title">Title</span>
-                <p>
-                  First Line <br />
-                  Second Line
-                </p>
-                <a href="#!" className="secondary-content">
-                  <i className="material-icons">grade</i>
-                </a>
-              </li>
-              <li className="collection-item avatar">
-                <i className="material-icons circle red">play_arrow</i>
-                <span className="title">Title</span>
-                <p>
-                  First Line <br />
-                  Second Line
-                </p>
-                <a href="#!" className="secondary-content">
-                  <i className="material-icons">grade</i>
-                </a>
-              </li>
+              {DUMMY_PRODUCTS.map(product => (
+                <li className="collection-item avatar">
+                  {/* <i className="material-icons circle red">play_arrow</i> */}
+                  <Link to={`/products/${product.id}`}>
+                    <img
+                      className="order-image left"
+                      src="/defaultShirt.png"
+                      alt=""
+                    />
+                  </Link>
+                  <p>
+                    <h6 className="item-title">{`${product[0].title}`}</h6>{' '}
+                    <br />
+                  </p>
+                  <a href="#!" className="secondary-content">
+                    <p>
+                      Price: {product[0].price} <br />
+                      Quantity: {product[0].quantity}
+                    </p>
+                  </a>
+                </li>
+              ))}
             </ul>
           </div>
         </div>

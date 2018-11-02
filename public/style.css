@@ -12,3 +12,18 @@ nav .nav-wrapper {
 .order-card {
     padding: 0;
 }
+
+.order-image {
+    max-height: 75px;
+    margin-right: 1.25rem;
+    margin-left: -3.25rem;
+}
+
+.secondary-content {
+    color: black;
+    font-size: 1.4rem;
+}
+
+.item-title {
+    font-size: 1.4rem;
+}
