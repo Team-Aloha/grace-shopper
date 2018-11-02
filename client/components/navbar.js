@@ -24,7 +24,7 @@ const Navbar = ({handleClick, isLoggedIn, cartItemCount}) => (
               )}
 
               <li>
-                <Link to="/cart">
+                <Link to="/checkoutPage">
                   {' '}
                   <i class="material-icons left">shopping_cart</i> Cart
                 </Link>
