@@ -17,7 +17,7 @@ class App extends React.Component {
         localStorage.setItem('cart', guestCart)
       }
       this.props.setCart(JSON.parse(localStorage.cart))
-    }
+    } else this.props.getCart()
   }
   render() {
     return (

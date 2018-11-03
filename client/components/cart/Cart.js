@@ -9,13 +9,12 @@ class Cart extends React.Component {
     if (!this.props.user.id) {
       let guestCart = JSON.parse(localStorage.getItem('cart'))
       //filter out ID you are removing
-      let guestCartToAdd = JSON.stringify(
-        guestCart.filter(product => {
-          return product.id !== id
-        })
-      )
-      localStorage.setItem('cart', [guestCartToAdd])
-      this.props.setCart([guestCartToAdd])
+      console.log('precv cart', guestCart)
+      const guestCartToAdd = guestCart.filter(product => product.id !== +id)
+
+      console.log(guestCartToAdd)
+      localStorage.setItem('cart', JSON.stringify(guestCartToAdd))
+      this.props.setCart(guestCartToAdd)
     } else {
       //if they are logged in, dispatch thunk to remove
       this.props.deleteProduct(id)

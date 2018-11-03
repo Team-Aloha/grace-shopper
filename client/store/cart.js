@@ -89,7 +89,6 @@ export const sendOrder = (products, type) => async dispatch => {
  * REDUCER
  */
 export default function(state = initialState, action) {
-  console.log(action)
   switch (action.type) {
     case SET_CART:
       return action.cart
