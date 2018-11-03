@@ -12,7 +12,7 @@ const AuthForm = props => {
 
   return (
     <div className="container">
-      <div className="row" />
+      <div className="row center" />
       <div className="card">
         <div className="card-content">
           <form onSubmit={handleSubmit} name={name}>
@@ -24,15 +24,26 @@ const AuthForm = props => {
               <input id="password" type="password" class="validate" />
               <label for="password">Password</label>
             </div>
-            <div className="col x12 center-align">
-              <button className="btn">{displayName}</button>
+            <div class="input-field col s12 center">
+              <button className="btn btn-med login-button">
+                {displayName}
+              </button>
             </div>
             {error && error.response && <div> {error.response.data} </div>}
           </form>
+          <div className="center" id="or-div">
+            or
+          </div>
+          <div class="input-field col s12 center">
+            <a href="/auth/google">
+              <button className="btn btn-med red login-button">
+                {' '}
+                <i class="fab fa-google google-icon" /> Sign in with Google
+              </button>
+            </a>
+          </div>
         </div>
       </div>
-
-      <a href="/auth/google">{displayName} with Google</a>
     </div>
   )
 }

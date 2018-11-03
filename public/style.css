@@ -14,3 +14,17 @@ nav ul a span.badge {
     color: white;
     margin-right: -1.5rem;
 }
+
+.login-button {
+    width: 100%;
+}
+
+.google-icon {
+    margin-right: 1rem;
+}
+
+#or-div {
+    margin-top: -10px;
+    margin-bottom: -10px;
+}
+
