@@ -1,6 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {getCart, deleteProduct, setCart} from '../../store'
+import {getCart, deleteProduct, setCart, sendOrder} from '../../store'
 import {default as SingleCartItem} from './SingleCartItem'
 
 class Cart extends React.Component {
@@ -20,6 +20,10 @@ class Cart extends React.Component {
     }
   }
 
+  handlePlaceOrder = (products, type) => {
+    console.log('placing order', products, type)
+    this.props.sendOrder(products, type)
+  }
   componentDidMount() {
     //ask if theres a user
     if (!this.props.user.id) {
@@ -79,6 +83,17 @@ class Cart extends React.Component {
             </tbody>
           </table>
         </div>
+        <button
+          type="button"
+          onClick={() =>
+            this.handlePlaceOrder(
+              this.props.cart,
+              this.props.user.id ? 'registered' : 'guest'
+            )
+          }
+        >
+          Place Order Test
+        </button>
       </div>
     )
   }
@@ -102,6 +117,9 @@ const mapDispatch = dispatch => {
     },
     deleteProduct: id => {
       dispatch(deleteProduct({id}))
+    },
+    sendOrder: (products, type) => {
+      dispatch(sendOrder(products, type))
     }
   }
 }
