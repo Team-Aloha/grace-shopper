@@ -32,7 +32,9 @@ class App extends React.Component {
 const mapDispatchToProps = dispatch => {
   return {
     fetchProducts: () => dispatch(fetchProducts()),
-    fetchCategories: () => dispatch(fetchCategories())
+    fetchCategories: () => dispatch(fetchCategories()),
+    setCart: cart => dispatch(setCart(cart)),
+    getCart: () => dispatch(getCart())
   }
 }
 const mapStateToProps = state => {
