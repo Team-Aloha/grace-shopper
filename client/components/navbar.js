@@ -9,7 +9,7 @@ const Navbar = ({handleClick, isLoggedIn, cartItemCount}) => (
     <nav>
       <div className="nav-wrapper">
         <a href="#" className="brand-logo">
-          Logo
+          <Link to="/home">Logo</Link>
         </a>
 
         <ul id="nav-mobile" className="right hide-on-med-and-down">
@@ -24,19 +24,17 @@ const Navbar = ({handleClick, isLoggedIn, cartItemCount}) => (
               )}
 
               <li>
-                <Link to="/cart">
+                <Link to="/checkoutPage">
                   {' '}
                   <i className="material-icons left">shopping_cart</i> Cart
                 </Link>
               </li>
-              <li>
-                <Link to="/home">Home</Link>
-              </li>
+              <li />
               <li>
                 <Link to="/products">Products</Link>
               </li>
               <li>
-                <Link to="/categories">Categories</Link>
+                <Link to="/profile">Profile</Link>
               </li>
               <li>
                 <a href="#" onClick={handleClick}>
@@ -47,7 +45,7 @@ const Navbar = ({handleClick, isLoggedIn, cartItemCount}) => (
           ) : (
             <React.Fragment>
               <li>
-                <Link to="/cart">
+                <Link to="/checkoutPage">
                   {' '}
                   <i className="material-icons left">shopping_cart</i> Cart
                 </Link>

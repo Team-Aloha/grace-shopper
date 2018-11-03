@@ -4,6 +4,31 @@ nav .nav-wrapper {
     margin-bottom: 2rem;
 }
 
+
+
+#order {
+    border: 0;
+}
+
+.order-card {
+    padding: 0;
+}
+
+.order-image {
+    max-height: 75px;
+    margin-right: 1.25rem;
+    margin-left: -3.25rem;
+}
+
+.secondary-content {
+    color: black;
+    font-size: 1.4rem;
+}
+
+.item-title {
+    font-size: 1.4rem;
+}
+=======
 .card .card-image img {
     height: 300px;
 	overflow: hidden;
@@ -27,4 +52,3 @@ nav ul a span.badge {
     margin-top: -10px;
     margin-bottom: -10px;
 }
-

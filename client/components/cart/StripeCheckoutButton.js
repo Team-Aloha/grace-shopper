@@ -20,7 +20,6 @@ class StripeCheckoutButton extends Component {
     if (!this.state.loaded) {
       return <React.Fragment>I AM LOADING</React.Fragment>
     } else {
-      debugger
       const productsInCart = []
 
       this.props.cart.forEach(product => {
@@ -46,7 +45,7 @@ class StripeCheckoutButton extends Component {
           stripeKey={process.env.REACT_APP_STRIPE_KEY}
         >
           <button className="btn waves-effect waves-light btn-large blue lighten-2">
-            Continue to Checkout
+            Checkout
           </button>
         </StripeCheckout>
       )
