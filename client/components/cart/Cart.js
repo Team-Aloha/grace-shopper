@@ -5,9 +5,11 @@ import {default as SingleCartItem} from './SingleCartItem'
 
 class Cart extends React.Component {
   handleRemove = id => {
+    
+    //if user is not logged in, remove item
     if (!this.props.user.id) {
       let guestCart = JSON.parse(localStorage.getItem('cart'))
-
+      //filter out ID you are removing
       let guestCartToAdd = JSON.stringify(
         guestCart.filter(product => {
           return product.id !== id
@@ -16,6 +18,7 @@ class Cart extends React.Component {
       localStorage.setItem('cart', [guestCartToAdd])
       this.props.setCart([guestCartToAdd])
     } else {
+      //if they are logged in, dispatch thunk to remove
       this.props.deleteProduct(id)
     }
   }
