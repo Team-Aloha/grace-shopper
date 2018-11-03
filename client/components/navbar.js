@@ -17,7 +17,7 @@ const Navbar = ({handleClick, isLoggedIn, cartItemCount}) => (
             <React.Fragment>
               {cartItemCount > 0 ? (
                 <li>
-                  <span class="badge">{cartItemCount}</span>
+                  <span className="badge">{cartItemCount}</span>
                 </li>
               ) : (
                 <div />
@@ -26,7 +26,7 @@ const Navbar = ({handleClick, isLoggedIn, cartItemCount}) => (
               <li>
                 <Link to="/cart">
                   {' '}
-                  <i class="material-icons left">shopping_cart</i> Cart
+                  <i className="material-icons left">shopping_cart</i> Cart
                 </Link>
               </li>
               <li>
@@ -49,7 +49,7 @@ const Navbar = ({handleClick, isLoggedIn, cartItemCount}) => (
               <li>
                 <Link to="/cart">
                   {' '}
-                  <i class="material-icons left">shopping_cart</i> Cart
+                  <i className="material-icons left">shopping_cart</i> Cart
                 </Link>
               </li>
               <li>
