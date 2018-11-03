@@ -5,6 +5,7 @@ nav .nav-wrapper {
 }
 
 
+
 #order {
     border: 0;
 }
@@ -26,4 +27,28 @@ nav .nav-wrapper {
 
 .item-title {
     font-size: 1.4rem;
+}
+=======
+.card .card-image img {
+    height: 300px;
+	overflow: hidden;
+}
+
+nav ul a span.badge {
+    background: green;
+    color: white;
+    margin-right: -1.5rem;
+}
+
+.login-button {
+    width: 100%;
+}
+
+.google-icon {
+    margin-right: 1rem;
+}
+
+#or-div {
+    margin-top: -10px;
+    margin-bottom: -10px;
 }

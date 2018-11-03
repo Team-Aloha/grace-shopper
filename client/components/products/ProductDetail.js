@@ -1,7 +1,7 @@
 import React from 'react'
 import {withRouter, Link} from 'react-router-dom'
 import {connect} from 'react-redux'
-import {fetchOneProduct, putProductToCart} from '../../store'
+import {fetchOneProduct, putProductToCart, setCart} from '../../store'
 import history from '../../history'
 
 class ProductDetail extends React.Component {
@@ -40,10 +40,28 @@ class ProductDetail extends React.Component {
       id: this.props.product.id,
       quantity: this.state.quantity
     }
-
+    //IF NO ONE IS LOGGED IN THEN...
     if (!this.props.user.id) {
-      this.state.guestCart.push(productToAdd)
-      localStorage.setItem('cart', this.state.guestCart)
+      let guestCart = JSON.parse(localStorage.getItem('cart'))
+      let found = false
+      guestCart.map(product => {
+        if (product.id === productToAdd.id) {
+          product.quantity = +productToAdd.quantity + +product.quantity
+          found = true
+          return product
+        }
+        return product
+      })
+
+      if (found) {
+        localStorage.setItem('cart', JSON.stringify(guestCart))
+      } else {
+        //coerce it into an integer
+        productToAdd.quantity = +productToAdd.quantity
+        guestCart.push(productToAdd)
+        localStorage.setItem('cart', JSON.stringify(guestCart))
+      }
+      //IF SOMEONE IS LOGGED IN
     } else {
       this.props.addProduct(productToAdd)
     }
@@ -52,9 +70,6 @@ class ProductDetail extends React.Component {
   }
 
   render() {
-    console.log('props>>>>>', this.props.user)
-    console.log('the product', this.props.product)
-
     const {product} = this.props
     return (
       <React.Fragment>
@@ -116,7 +131,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => ({
   getAProduct: productId => dispatch(fetchOneProduct(productId)),
   //{id: 1, quantity: 2}
-  addProduct: product => dispatch(putProductToCart(product))
+  addProduct: product => dispatch(putProductToCart(product)),
+  setCart: cart => dispatch(setCart(cart))
 })
 
 export default withRouter(
