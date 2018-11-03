@@ -56,6 +56,8 @@ class ProductDetail extends React.Component {
       if (found) {
         localStorage.setItem('cart', JSON.stringify(guestCart))
       } else {
+        //coerce it into an integer
+        productToAdd.quantity = +productToAdd.quantity
         guestCart.push(productToAdd)
         localStorage.setItem('cart', JSON.stringify(guestCart))
       }

@@ -34,7 +34,7 @@ class Cart extends React.Component {
 
     if (!this.props.user.id) {
       let guestCart = JSON.parse(localStorage.getItem('cart'))
-
+      console.log(guestCart)
       this.props.setCart(guestCart)
       this.setState({loaded: true})
     } else {
