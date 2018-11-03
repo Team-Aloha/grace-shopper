@@ -40,18 +40,28 @@ class ProductDetail extends React.Component {
       id: this.props.product.id,
       quantity: this.state.quantity
     }
-
+    //IF NO ONE IS LOGGED IN THEN...
     if (!this.props.user.id) {
       let guestCart = JSON.parse(localStorage.getItem('cart'))
-      guestCart.push(productToAdd)
-      let guestCartToAdd = JSON.stringify(guestCart)
+      let found = false
+      guestCart.map(product => {
+        if (product.id === productToAdd.id) {
+          product.quantity = +productToAdd.quantity + +product.quantity
+          found = true
+          return product
+        }
+        return product
+      })
 
-      localStorage.setItem('cart', [guestCartToAdd])
-
-      //this.props.addProduct(guestCartToAdd)
-      this.props.addProduct(productToAdd)
-      // this.state.guestCart.push(productToAdd)
-      // localStorage.setItem('cart', this.state.guestCart)
+      if (found) {
+        localStorage.setItem('cart', JSON.stringify(guestCart))
+      } else {
+        //coerce it into an integer
+        productToAdd.quantity = +productToAdd.quantity
+        guestCart.push(productToAdd)
+        localStorage.setItem('cart', JSON.stringify(guestCart))
+      }
+      //IF SOMEONE IS LOGGED IN
     } else {
       this.props.addProduct(productToAdd)
     }
@@ -60,9 +70,6 @@ class ProductDetail extends React.Component {
   }
 
   render() {
-    console.log('props>>>>>', this.props.user)
-    console.log('the product', this.props.product)
-
     const {product} = this.props
     return (
       <React.Fragment>
