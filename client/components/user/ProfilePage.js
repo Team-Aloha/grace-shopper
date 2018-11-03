@@ -2,10 +2,10 @@ import React from 'react'
 import {withRouter, Link} from 'react-router-dom'
 import {connect} from 'react-redux'
 import store from '../../store'
-import CheckoutForm from './CheckoutForm'
-import {default as Cart} from './Cart'
+import Profile from './Profile'
+import OrderList from './OrderList'
 
-class CheckoutPage extends React.Component {
+class ProfilePage extends React.Component {
   componentDidMount() {}
 
   handleChange(evt) {}
@@ -18,15 +18,16 @@ class CheckoutPage extends React.Component {
         <div className="container">
           <div className="row">
             <div className="center-align">
-              <h3>Review your order</h3>
+              <h3>Your Profile</h3>
             </div>
           </div>
           <div className="row">
             <div className="col s12 xl5">
-              <CheckoutForm />
+              <Profile />
             </div>
             <div className="col s12 xl7">
-              <Cart />
+              <h5 className="center-align">Orders</h5>
+              <OrderList />
             </div>
           </div>
         </div>
@@ -44,5 +45,5 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 }
 
 export default withRouter(
-  connect(mapStateToProps, mapDispatchToProps)(CheckoutPage)
+  connect(mapStateToProps, mapDispatchToProps)(ProfilePage)
 )
