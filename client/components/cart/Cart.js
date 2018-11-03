@@ -1,6 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {getCart, deleteProduct, setCart} from '../../store'
+import {getCart, deleteProduct, setCart, sendOrder} from '../../store'
 import {default as SingleCartItem} from './SingleCartItem'
 
 class Cart extends React.Component {
@@ -12,13 +12,11 @@ class Cart extends React.Component {
     }
   }
 
-
   handleRemove = id => {
     // if (!this.props.user.id) {
     //   this.props.products = this.props.products.filter(product => {
     //    return product.id !== id
     //   })
-
 
     // }
     console.log('trying to remove id ', id)
@@ -26,23 +24,32 @@ class Cart extends React.Component {
     this.props.deleteProduct(id)
   }
 
-  handleUpdate = () => {
-    console.log('trying to update  ')
+  handlePlaceOrder = (products, type) => {
+    console.log('placing order', products, type)
+    this.props.sendOrder(products, type)
   }
+
   componentDidMount() {
     //ask if theres a user
-
+    //this is currently running before it finishes getting the user data
+    //from the store so it is always saying they are not
+    //logged in...not quite sure how to fix...
+    //using the update hooks just creates an infinite loop
     if (!this.props.user.id) {
       let guestCart = JSON.parse(localStorage.getItem('cart'))
-
+      console.log('I AM NOT LOGGED IN SO SENDING MY LOCALSTORAGE')
       this.props.setCart(guestCart)
       this.setState({loaded: true})
     } else {
       this.props.getCart()
-      console.log('mount')
-
+      console.log('i am logged in and getting my cart')
       this.setState({loaded: true})
     }
+
+    //comment above and uncomment this to test
+    // this.props.getCart()
+    // console.log('i am logged in and getting my cart')
+    // this.setState({loaded: true})
   }
   render() {
     if (!this.state.loaded) {
@@ -106,6 +113,12 @@ class Cart extends React.Component {
               </table>
             </div>
           </div>
+          <button
+            type="button"
+            onClick={() => this.handlePlaceOrder(this.props.cart, 'registered')}
+          >
+            Place Order Test
+          </button>
         </React.Fragment>
       )
     }
@@ -114,6 +127,7 @@ class Cart extends React.Component {
 
 const mapState = state => {
   const {cart, products, user} = state
+  // console.log('i have mapped state to props')
   return {
     cart,
     products,
@@ -126,10 +140,14 @@ const mapDispatch = dispatch => {
       dispatch(setCart(cart))
     },
     getCart: () => {
+      // console.log('i am getting my cart using redux')
       dispatch(getCart())
     },
     deleteProduct: id => {
       dispatch(deleteProduct({id}))
+    },
+    sendOrder: (products, type) => {
+      dispatch(sendOrder(products, type))
     }
   }
 }

@@ -4,6 +4,7 @@ import axios from 'axios'
  * ACTION TYPES
  */
 const SET_CART = 'SET_CART'
+const PLACE_ORDER = 'PLACE_ORDER'
 // const ADD_PRODUCT = 'ADD_PRODUCT'
 // const REMOVE_PRODUCT = 'REMOVE_PRODUCT'
 // const CHANGE_QUANTITY = 'CHANGE_QUANTITY'
@@ -21,19 +22,18 @@ export const setCart = cart => ({
   cart
 })
 
+export const placeOrder = () => ({
+  type: PLACE_ORDER
+})
+
 /**
  * THUNK CREATORS
  */
 //get cart
 export const getCart = () => async dispatch => {
   try {
-    //uncomment when implemented
-    // const test = await axios.get('/api/cart/')
-    // console.log(test)
     const {data} = await axios.get('/api/cart/')
-    // console.log(test.data.products)
-    // const data = [{id: 1, quantity: 2}, {id: 2, quantity: 3}]
-    //const data = []
+    console.log(data.products)
     dispatch(setCart(data.products))
   } catch (err) {
     console.error(err)
@@ -67,6 +67,25 @@ export const updateQuantity = product => async dispatch => {
   }
 }
 
+//this is the THUNK for creating an order.
+//the API expects an object that looks like this:
+/*
+{
+  products: [array of objects...AKA the cart],
+  type: 'registered' or 'guest'
+}
+*/
+export const sendOrder = (products, type) => async dispatch => {
+  try {
+    console.log('i am testing to see how to tell if i am logged in')
+    const {data} = await axios.post('/api/orders/', {products, type})
+    console.log(data)
+    dispatch(placeOrder())
+  } catch (err) {
+    console.log(err)
+  }
+}
+
 /**
  * REDUCER
  */
@@ -75,7 +94,8 @@ export default function(state = initialState, action) {
   switch (action.type) {
     case SET_CART:
       return action.cart
-
+    case PLACE_ORDER:
+      return []
     default:
       return state
   }

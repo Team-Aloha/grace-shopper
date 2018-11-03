@@ -12,14 +12,13 @@ class App extends React.Component {
     this.props.fetchCategories()
 
     if (!this.props.user.id) {
+      if (!localStorage.cart) {
+        // let guestCart = JSON.stringify([{id: 1, quantity: 2}])
 
-     if (!localStorage.cart) {
-     // let guestCart = JSON.stringify([{id: 1, quantity: 2}])
+        localStorage.setItem('cart', JSON.stringify([]))
 
-       localStorage.setItem('cart', [])
-
-       console.log('localstorage', localStorage);
-     }
+        console.log('localstorage', localStorage)
+      }
     }
   }
   render() {

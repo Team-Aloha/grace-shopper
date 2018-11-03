@@ -30,7 +30,7 @@ router.post('/test', async (req, res, next) => {
 router.post('/', async (req, res, next) => {
   try {
     const {products} = req.body
-
+    console.log(req.body)
     //create array of IDs so we can fetch the price info from Product
     const ids = products.map(item => item.id)
     const productInfo = await Product.findAll({
