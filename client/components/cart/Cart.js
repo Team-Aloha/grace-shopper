@@ -22,6 +22,7 @@ class Cart extends React.Component {
 
   handlePlaceOrder = (products, type) => {
     console.log('placing order', products, type)
+    if (!this.props.user.id) localStorage.setItem(JSON.stringify([]))
     this.props.sendOrder(products, type)
   }
   componentDidMount() {
