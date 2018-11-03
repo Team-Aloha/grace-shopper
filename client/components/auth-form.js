@@ -11,26 +11,39 @@ const AuthForm = props => {
   const {name, displayName, handleSubmit, error} = props
 
   return (
-    <div>
-      <form onSubmit={handleSubmit} name={name}>
-        <div>
-          <label htmlFor="email">
-            <small>Email</small>
-          </label>
-          <input name="email" type="text" />
+    <div className="container">
+      <div className="row center" />
+      <div className="card">
+        <div className="card-content">
+          <form onSubmit={handleSubmit} name={name}>
+            <div className="input-field col s12">
+              <input id="email" type="email" className="validate" />
+              <label htmlFor="email">Email</label>
+            </div>
+            <div className="input-field col s12">
+              <input id="password" type="password" className="validate" />
+              <label htmlFor="password">Password</label>
+            </div>
+            <div className="input-field col s12 center">
+              <button className="btn btn-med login-button">
+                {displayName}
+              </button>
+            </div>
+            {error && error.response && <div> {error.response.data} </div>}
+          </form>
+          <div className="center" id="or-div">
+            or
+          </div>
+          <div className="input-field col s12 center">
+            <a href="/auth/google">
+              <button className="btn btn-med red login-button valign-wrapper">
+                {' '}
+                <i className="fab fa-google google-icon" /> Sign in with Google
+              </button>
+            </a>
+          </div>
         </div>
-        <div>
-          <label htmlFor="password">
-            <small>Password</small>
-          </label>
-          <input name="password" type="password" />
-        </div>
-        <div>
-          <button type="submit">{displayName}</button>
-        </div>
-        {error && error.response && <div> {error.response.data} </div>}
-      </form>
-      <a href="/auth/google">{displayName} with Google</a>
+      </div>
     </div>
   )
 }
