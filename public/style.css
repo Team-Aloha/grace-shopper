@@ -20,7 +20,9 @@ nav ul a span.badge {
 }
 
 .google-icon {
-    margin-right: 1rem;
+    margin-right: 0rem;
+    font-size: 1.1rem;
+    vertical-align: bottom;
 }
 
 #or-div {
