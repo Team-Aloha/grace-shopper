@@ -14,16 +14,22 @@ class Cart extends React.Component {
 
 
   handleRemove = id => {
-    // if (!this.props.user.id) {
-    //   this.props.products = this.props.products.filter(product => {
-    //    return product.id !== id
-    //   })
+    if (!this.props.user.id) {
 
-
-    // }
+      let guestCart = JSON.parse(localStorage.getItem('cart'))
+      console.log(guestCart, 'guestcart')
+      console.log(id, 'id')
+      let guestCartToAdd = JSON.stringify(guestCart.filter(product => {
+       return product.id !== id
+      }))
+      console.log(guestCartToAdd, 'guestcarttoadd')
+      localStorage.setItem('cart', [guestCartToAdd])
+      this.props.setCart([guestCartToAdd])
+    } else {
     console.log('trying to remove id ', id)
     console.log(this.props, 'this.props')
     this.props.deleteProduct(id)
+    }
   }
 
   handleUpdate = () => {
