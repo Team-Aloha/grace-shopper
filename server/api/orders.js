@@ -30,7 +30,6 @@ router.post('/test', async (req, res, next) => {
 router.post('/', async (req, res, next) => {
   try {
     const {products} = req.body
-    console.log(req.body)
     //create array of IDs so we can fetch the price info from Product
     const ids = products.map(item => item.id)
     const productInfo = await Product.findAll({
@@ -68,7 +67,7 @@ router.post('/', async (req, res, next) => {
     }
 
     //make new order
-    const logId = req.user || null
+    const logId = !req.user ? null : req.user.id
     await Order.create({
       products: orderProducts,
       userId: logId

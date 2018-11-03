@@ -5,7 +5,6 @@ import {default as SingleCartItem} from './SingleCartItem'
 
 class Cart extends React.Component {
   handleRemove = id => {
-    
     //if user is not logged in, remove item
     if (!this.props.user.id) {
       let guestCart = JSON.parse(localStorage.getItem('cart'))
@@ -24,8 +23,8 @@ class Cart extends React.Component {
   }
 
   handlePlaceOrder = (products, type) => {
-    console.log('placing order', products, type)
-    if (!this.props.user.id) localStorage.setItem(JSON.stringify([]))
+    console.log('placing order!!', products, type)
+    if (!this.props.user.id) localStorage.setItem('cart', JSON.stringify([]))
     this.props.sendOrder(products, type)
   }
   componentDidMount() {

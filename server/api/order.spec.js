@@ -82,7 +82,6 @@ describe('Category API routes', () => {
       const res = await user.post('/api/orders/').send({
         products: [{id: 2, quantity: 1}, {id: 1, quantity: 3}]
       })
-      console.log(res.body)
       expect(res.body).to.be.an('array')
       expect(res.body.length).to.be.equal(2)
     })
@@ -101,7 +100,7 @@ describe('Category API routes', () => {
       expect(cart.body.products).to.be.an('array')
       expect(cart.body.products.length).to.be.equal(0)
     })
-    it.only('POST /api/orders makes 1 order if posted once', async () => {
+    it('POST /api/orders makes 1 order if posted once', async () => {
       const user = await createUserWithCart('cart@cart.com')
 
       await user.post('/api/orders/').send({
@@ -111,7 +110,7 @@ describe('Category API routes', () => {
       expect(res.body).to.be.an('array')
       expect(res.body.length).to.be.equal(1)
     })
-    it.only('POST /api/orders makes 2 orders if 2 separate orders are made', async () => {
+    it('POST /api/orders makes 2 orders if 2 separate orders are made', async () => {
       const user = await createUserWithCart('cart@cart.com')
 
       await user.post('/api/orders/').send({
@@ -127,7 +126,7 @@ describe('Category API routes', () => {
       expect(res.body).to.be.an('array')
       expect(res.body.length).to.be.equal(2)
     })
-    it.only('PUT /api/orders/:orderId updates order status', async () => {
+    it('PUT /api/orders/:orderId updates order status', async () => {
       const user = await createUserWithNoCart('cart@cart.com')
       //use test method for posting so we don't have to
       //write cart logic yet
