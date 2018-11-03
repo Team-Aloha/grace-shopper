@@ -4,117 +4,83 @@ import {getCart, deleteProduct, setCart} from '../../store'
 import {default as SingleCartItem} from './SingleCartItem'
 
 class Cart extends React.Component {
-  constructor() {
-    super()
-    this.state = {
-      loaded: false,
-      cart: []
-    }
-  }
-
-
   handleRemove = id => {
     if (!this.props.user.id) {
-
       let guestCart = JSON.parse(localStorage.getItem('cart'))
-      console.log(guestCart, 'guestcart')
-      console.log(id, 'id')
-      let guestCartToAdd = JSON.stringify(guestCart.filter(product => {
-       return product.id !== id
-      }))
-      console.log(guestCartToAdd, 'guestcarttoadd')
+
+      let guestCartToAdd = JSON.stringify(
+        guestCart.filter(product => {
+          return product.id !== id
+        })
+      )
       localStorage.setItem('cart', [guestCartToAdd])
       this.props.setCart([guestCartToAdd])
     } else {
-    console.log('trying to remove id ', id)
-    console.log(this.props, 'this.props')
-    this.props.deleteProduct(id)
+      this.props.deleteProduct(id)
     }
   }
 
-  handleUpdate = () => {
-    console.log('trying to update  ')
-  }
   componentDidMount() {
     //ask if theres a user
-
     if (!this.props.user.id) {
       let guestCart = JSON.parse(localStorage.getItem('cart'))
-      console.log(guestCart)
       this.props.setCart(guestCart)
-      this.setState({loaded: true})
     } else {
       this.props.getCart()
-      console.log('mount')
-
-      this.setState({loaded: true})
     }
   }
   render() {
-    if (!this.state.loaded) {
-      return <React.Fragment>I AM LOADING</React.Fragment>
-    } else if (this.props.cart.length === 0) {
-      return (
-        <React.Fragment>Your cart is empty! Go buy some stuff</React.Fragment>
+    const productsInCart = []
+    let totalAmount = 0
+    this.props.cart.forEach(product => {
+      productsInCart.push(
+        this.props.products.filter(prod => prod.id === product.id)
       )
-    } else {
-      //we have a cart time to load it
-      const productsInCart = []
-      let totalAmount = 0
-      this.props.cart.forEach(product => {
-        productsInCart.push(
-          this.props.products.filter(prod => prod.id === product.id)
-        )
-      })
-
-      return (
-        <React.Fragment>
-          <div className="card">
-            <div className="card-content">
-              <table>
-                <thead>
-                  <tr>
-                    <th>Product Name</th>
-                    <th>Quantity</th>
-                    <th>Unit Price</th>
-                    <th>Total Price</th>
-                    <th />
-                  </tr>
-                </thead>
-                <tbody>
-                  {productsInCart.map((item, i) => {
-                    if (item[0]) {
-                      //here to prevent render errors
-                      const displayItem = item[0]
-                      totalAmount +=
-                        displayItem.price * this.props.cart[i].quantity
-                      return (
-                        <SingleCartItem
-                          key={displayItem.id}
-                          item={displayItem}
-                          quantity={this.props.cart[i].quantity}
-                          handleRemove={this.handleRemove}
-                          sendQuantityBack={this.receiveStateFromChild}
-                        />
-                      )
-                    }
-                  })}
-                  <tr>
-                    <td />
-                    <td />
-                    <td>
-                      <b>Cart Subtotal:</b>
-                    </td>
-                    <td>{totalAmount}</td>
-                    <td />
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </React.Fragment>
-      )
-    }
+    })
+    return (
+      <div className="card">
+        <div className="card-content">
+          <table>
+            <thead>
+              <tr>
+                <th>Product Name</th>
+                <th>Quantity</th>
+                <th>Unit Price</th>
+                <th>Total Price</th>
+                <th />
+              </tr>
+            </thead>
+            <tbody>
+              {productsInCart.map((item, i) => {
+                if (item[0]) {
+                  //here to prevent render errors
+                  const displayItem = item[0]
+                  totalAmount += displayItem.price * this.props.cart[i].quantity
+                  return (
+                    <SingleCartItem
+                      key={displayItem.id}
+                      item={displayItem}
+                      quantity={this.props.cart[i].quantity}
+                      handleRemove={this.handleRemove}
+                      sendQuantityBack={this.receiveStateFromChild}
+                    />
+                  )
+                }
+              })}
+              <tr>
+                <td />
+                <td />
+                <td>
+                  <b>Cart Subtotal:</b>
+                </td>
+                <td>{totalAmount}</td>
+                <td />
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    )
   }
 }
 

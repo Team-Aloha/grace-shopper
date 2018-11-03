@@ -4,7 +4,7 @@ import {connect} from 'react-redux'
 import {Navbar} from './components'
 import Routes from './routes'
 import {AllProducts} from './components/products'
-import {fetchProducts, fetchCategories} from './store'
+import {fetchProducts, fetchCategories, getCart, setCart} from './store'
 
 class App extends React.Component {
   componentDidMount() {
@@ -16,6 +16,7 @@ class App extends React.Component {
         const guestCart = JSON.stringify([])
         localStorage.setItem('cart', guestCart)
       }
+      this.props.setCart(JSON.parse(localStorage.cart))
     }
   }
   render() {
@@ -35,8 +36,10 @@ const mapDispatchToProps = dispatch => {
   }
 }
 const mapStateToProps = state => {
+  const {user, cart} = state
   return {
-    user: state.user
+    user,
+    cart
   }
 }
 
