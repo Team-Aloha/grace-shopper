@@ -16,15 +16,15 @@ const AuthForm = props => {
       <div className="card">
         <div className="card-content">
           <form onSubmit={handleSubmit} name={name}>
-            <div class="input-field col s12">
-              <input id="email" type="email" class="validate" />
-              <label for="email">Email</label>
+            <div className="input-field col s12">
+              <input id="email" type="email" className="validate" />
+              <label htmlFor="email">Email</label>
             </div>
-            <div class="input-field col s12">
-              <input id="password" type="password" class="validate" />
-              <label for="password">Password</label>
+            <div className="input-field col s12">
+              <input id="password" type="password" className="validate" />
+              <label htmlFor="password">Password</label>
             </div>
-            <div class="input-field col s12 center">
+            <div className="input-field col s12 center">
               <button className="btn btn-med login-button">
                 {displayName}
               </button>
@@ -34,11 +34,11 @@ const AuthForm = props => {
           <div className="center" id="or-div">
             or
           </div>
-          <div class="input-field col s12 center">
+          <div className="input-field col s12 center">
             <a href="/auth/google">
-              <button className="btn btn-med red login-button">
+              <button className="btn btn-med red login-button valign-wrapper">
                 {' '}
-                <i class="fab fa-google google-icon" /> Sign in with Google
+                <i className="fab fa-google google-icon" /> Sign in with Google
               </button>
             </a>
           </div>
