@@ -1,5 +1,6 @@
 import history from '../history'
 import axios from 'axios'
+import {GET_USER, REMOVE_USER} from './user'
 /**
  * ACTION TYPES
  */
@@ -143,20 +144,31 @@ export function localCartMiddleware(store) {
         : []
 
       if (!isAuthenticated) {
-        if (state.cart.length === 0 && localStorage.length > 0) {
-          console.log(
-            'the state.cart is empty and there is something in local storage'
-          )
-          console.log('the local storage cart', localStorageCart)
+        if (localStorage.length > 0) {
           return store.dispatch(setCart(localStorageCart))
         }
-        if (state.cart.length > 0) {
-          console.log('the state.cart is not empty')
-          console.log('the cart', localStorageCart)
-        }
+        // if (state.cart.length === 0 && localStorage.length > 0) {
+        //   console.log(
+        //     'the state.cart is empty and there is something in local storage'
+        //   )
+        //   console.log('the local storage cart', localStorageCart)
+        //   return store.dispatch(setCart(localStorageCart))
+        // }
+        // if (state.cart.length > 0) {
+        //   console.log('the state.cart is not empty')
+        //   return store.dispatch(setCart(localStorageCart))
+        // }
       } else {
-        console.log('the user is authenticated')
+        return store.dispatch(setCart(localStorageCart))
       }
+    }
+
+    if (action.type === GET_USER) {
+      console.log('the user logged in')
+    }
+
+    if (action.type === REMOVE_USER) {
+      console.log('the user logged out')
     }
 
     // Call the next dispatch method in the middleware chain.
