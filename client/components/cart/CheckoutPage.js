@@ -7,9 +7,12 @@ import {default as Cart} from './Cart'
 
 class CheckoutPage extends React.Component {
   componentDidMount() {
-    if (this.props.shouldPromptUser) {
-      this.props.history.push('/cart/promptUser')
-    }
+    // Look at later
+    // console.log('the cart', this.props.cart)
+    // console.log('cart is not empty', this.props.cart.length)
+    // if (this.props.shouldPromptUser) {
+    //   this.props.history.push('/cart/promptUser')
+    // }
   }
 
   handleChange(evt) {}
@@ -40,8 +43,10 @@ class CheckoutPage extends React.Component {
 }
 
 const mapStateToProps = state => {
+  const {shouldPromptUser, cart} = state
   return {
-    shouldPromptUser: state.shouldPromptUser
+    shouldPromptUser,
+    cart
   }
 }
 
