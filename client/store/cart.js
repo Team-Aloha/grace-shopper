@@ -152,10 +152,6 @@ export function localCartMiddleware(store) {
       }
     }
 
-    if (action.type === REMOVE_USER) {
-      console.log('the user logged out')
-    }
-
     // Call the next dispatch method in the middleware chain.
     let returnValue = next(action)
 
@@ -169,6 +165,23 @@ export function localCartMiddleware(store) {
       if (localStorage.length > 0) {
         console.log('there is something in the local cart after user logged in')
         store.dispatch(setPromptUserAddLocalCart(true))
+      } else {
+        store.dispatch(setPromptUserAddLocalCart(false))
+      }
+    }
+
+    if (action.type === REMOVE_USER) {
+      console.log('the user logged out')
+      let localStorageCart = localStorage.getItem('cart')
+        ? JSON.parse(localStorage.getItem('cart'))
+        : []
+      const state = store.getState()
+      console.log('the state', state)
+      if (localStorage.length > 0) {
+        console.log('there is something in the local cart after user logged in')
+        store.dispatch(setPromptUserAddLocalCart(true))
+      } else {
+        store.dispatch(setPromptUserAddLocalCart(false))
       }
     }
 
