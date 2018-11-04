@@ -44,6 +44,13 @@ const Navbar = ({handleClick, isLoggedIn, cartItemCount}) => (
             </React.Fragment>
           ) : (
             <React.Fragment>
+              {cartItemCount > 0 ? (
+                <li>
+                  <span className="badge">{cartItemCount}</span>
+                </li>
+              ) : (
+                <div />
+              )}
               <li>
                 <Link to="/checkoutPage">
                   {' '}
