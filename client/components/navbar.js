@@ -8,9 +8,9 @@ const Navbar = ({handleClick, isLoggedIn, cartItemCount}) => (
   <div>
     <nav>
       <div className="nav-wrapper">
-        <a href="#" className="brand-logo">
-          <Link to="/home">Logo</Link>
-        </a>
+        <Link className="brand-logo" to="/home">
+          Logo
+        </Link>
 
         <ul id="nav-mobile" className="right hide-on-med-and-down">
           {isLoggedIn ? (
