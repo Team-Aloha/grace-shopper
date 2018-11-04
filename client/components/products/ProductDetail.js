@@ -1,7 +1,12 @@
 import React from 'react'
 import {withRouter, Link} from 'react-router-dom'
 import {connect} from 'react-redux'
-import {fetchOneProduct, putProductToCart, setCart} from '../../store'
+import {
+  fetchOneProduct,
+  putProductToCart,
+  setCart,
+  checkLocalStorage
+} from '../../store'
 import history from '../../history'
 
 class ProductDetail extends React.Component {
@@ -35,6 +40,7 @@ class ProductDetail extends React.Component {
 
   handleClick(evt) {
     evt.preventDefault()
+    this.props.checkLocalStorage()
 
     let productToAdd = {
       id: this.props.product.id,
@@ -132,6 +138,7 @@ const mapDispatchToProps = dispatch => ({
   getAProduct: productId => dispatch(fetchOneProduct(productId)),
   //{id: 1, quantity: 2}
   addProduct: product => dispatch(putProductToCart(product)),
+  checkLocalStorage: () => dispatch(checkLocalStorage()),
   setCart: cart => dispatch(setCart(cart))
 })
 

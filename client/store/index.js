@@ -8,7 +8,7 @@ import {singleProduct as product} from './products'
 import filter from './filter'
 import categories from './categories'
 import cart from './cart'
-import {localStorageListener} from './cart'
+import {checkLocalStorageListener} from './cart'
 
 const reducer = combineReducers({
   user,
@@ -24,7 +24,7 @@ const middleware = composeWithDevTools(
 )
 const store = createStore(reducer, middleware)
 
-store.subscribe(localStorageListener.bind(null, store))
+store.subscribe(checkLocalStorageListener.bind(null, store))
 
 export default store
 export * from './user'

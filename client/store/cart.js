@@ -5,6 +5,7 @@ import axios from 'axios'
  */
 const SET_CART = 'SET_CART'
 const PLACE_ORDER = 'PLACE_ORDER'
+const CHECK_LOCALSTORAGE = 'CHECK_LOCALSTORAGE'
 
 // const ADD_PRODUCT = 'ADD_PRODUCT'
 // const REMOVE_PRODUCT = 'REMOVE_PRODUCT'
@@ -25,6 +26,10 @@ export const setCart = cart => ({
 
 export const placeOrder = () => ({
   type: PLACE_ORDER
+})
+
+export const checkLocalStorage = () => ({
+  type: CHECK_LOCALSTORAGE
 })
 /**
  * THUNK CREATORS
@@ -99,6 +104,7 @@ export default function(state = initialState, action) {
   }
 }
 
-export function localStorageListener() {
+export function checkLocalStorageListener() {
   const store = arguments[0]
+  console.log('the state', store.getState())
 }
