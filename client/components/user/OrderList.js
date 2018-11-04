@@ -1,7 +1,7 @@
 import React from 'react'
 import {withRouter, Link} from 'react-router-dom'
 import {connect} from 'react-redux'
-import {fetchOneProduct, updateProduct} from '../../store'
+import {fetchOneProduct, updateProduct, fetchOrders} from '../../store'
 import {fetchCategories} from '../../store'
 import store from '../../store'
 
@@ -15,10 +15,10 @@ const getTotalAmount = products => {
   })
   .reduce((a, b) => a + b, 0)
   return `${totalAmount}`
-} 
+}
 
 const DUMMY_ORDERS = [
- {  
+ {
      id: 1,
      createdAt: '1/1/2018',
      status: 'shipped',
@@ -39,7 +39,7 @@ const DUMMY_ORDERS = [
         }]
      ]
  },
- {  
+ {
      id: 2,
      createdAt: '1/1/2018',
      status: 'pending',
@@ -64,52 +64,48 @@ const DUMMY_ORDERS = [
 
 ]
 
-class OrderList extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      readOnly: true,
-      user: {
-        name: '',
-        email: '',
-        address: '',
-        city: '',
-        state: '',
-        zip: ''
-      }
-    }
+export class OrderList extends React.Component {
+  // constructor(props) {
+  //   super(props)
+  //   this.state = {
+  //     readOnly: true,
+  //     orders: []
+  //   }
     // store.dispatch(fetchOneCampus(campusId))
-    this.handleChange = this.handleChange.bind(this)
-    this.handleSubmit = this.handleSubmit.bind(this)
-    this.toggleEditProfile = this.toggleEditProfile.bind(this)
-  }
+   // this.handleChange = this.handleChange.bind(this)
+    //this.handleSubmit = this.handleSubmit.bind(this)
+    //this.toggleEditProfile = this.toggleEditProfile.bind(this)
 
-  componentDidUpdate(prevProps, prevState) {
-    // After fetching redux has passed in the student as
-    // props, now we want to set those values to our local state
-    if (prevProps.user !== this.props.user) {
-      this.setState({
-        user: this.props.user
-      })
-    }
-  }
+
+  // componentDidUpdate(prevProps, prevState) {
+  //   // After fetching redux has passed in the student as
+  //   // props, now we want to set those values to our local state
+  //   if (prevProps.orders !== this.props.orders) {
+  //     this.setState({
+  //       orders: this.props.orders
+  //     })
+  //   }
+  // }
 
   componentDidMount() {
     const userId = this.props.match.params.userId
+    //call thunk here
+    console.log(this.props, 'props')
+    this.props.fetchOrders()
   }
 
-  handleChange(evt) {
-    evt.preventDefault()
-    const user = {[evt.target.name]: evt.target.value}
-    this.setState({user})
-  }
+  // handleChange(evt) {
+  //   evt.preventDefault()
+  //   const user = {[evt.target.name]: evt.target.value}
+  //   this.setState({user})
+  // }
 
-  handleSubmit = evt => {
-    evt.preventDefault()
-  }
-  toggleEditProfile = () => {
-    this.setState({readOnly: !this.state.readOnly})
-  }
+  // handleSubmit = evt => {
+  //   evt.preventDefault()
+  // }
+  // toggleEditProfile = () => {
+  //   this.setState({readOnly: !this.state.readOnly})
+  // }
   render() {
     if (Object.keys(this.props.user).length < 1) {
       return <div>User not logged in...</div>
@@ -131,7 +127,7 @@ class OrderList extends React.Component {
         </thead>
 
         <tbody>
-            {DUMMY_ORDERS.map(order=>{
+            {this.props.orders.map(order=>{
                 return (
                     <tr>
                         <td>
@@ -147,7 +143,7 @@ class OrderList extends React.Component {
                                 <Link to={`/orders/${order.id}`}>{order.status}</Link>
                             </td>
                 </tr>
-                )    
+                )
             })
 
             }
@@ -155,7 +151,7 @@ class OrderList extends React.Component {
 
         </tbody>
       </table>
-            
+
           </div>
         </div>
       </React.Fragment>
@@ -165,15 +161,16 @@ class OrderList extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    user: state.user
+    user: state.user,
+    orders: state.orders
   }
 }
 
-const mapDispatchToProps = (dispatch, ownProps) => {
-  return {
-    dispatch: dispatch
-  }
-}
+//put thunk to fetch orders on props
+
+const mapDispatchToProps = dispatch => ({
+   fetchOrders: () => dispatch(fetchOrders())
+  })
 
 export default withRouter(
   connect(mapStateToProps, mapDispatchToProps)(OrderList)
