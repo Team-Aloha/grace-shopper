@@ -5,63 +5,67 @@ import {fetchOneProduct, updateProduct} from '../../store'
 import {fetchCategories} from '../../store'
 import store from '../../store'
 
-
 const getTotalAmount = products => {
- let totalAmount = products.map((item, i) => {
-    if (item[0]) {
-      const displayItem = item[0]
+  let totalAmount = products
+    .map((item, i) => {
+      const displayItem = item
       return displayItem.price * displayItem.quantity
-    }
-  })
-  .reduce((a, b) => a + b, 0)
+    })
+    .reduce((a, b) => a + b, 0)
   return `${totalAmount}`
-} 
+}
 
 const DUMMY_ORDERS = [
- {  
-     id: 1,
-     createdAt: '1/1/2018',
-     status: 'shipped',
-     products: [
-        [{
-            id:1,
-            title: 'blue shirt',
-            price: 100,
-            quantity: 1,
-            imageUrl: 'defaultShirt.png'
-        }],
-        [{
-            id:2,
-            title: 'red shirt',
-            price:  200,
-            quantity:1,
-            imageUrl: 'defaultShirt.png'
-        }]
-     ]
- },
- {  
-     id: 2,
-     createdAt: '1/1/2018',
-     status: 'pending',
-     products: [
-        [{
-            id:1,
-            title: 'pink shirt',
-            price: 500,
-            quantity: 1,
-            imageUrl: 'defaultShirt.png'
-        }],
-        [{
-            id:2,
-            title: 'yellow shirt',
-            price:  500,
-            quantity:2,
-            imageUrl: 'defaultShirt.png'
-        }]
-     ]
- }
-
-
+  {
+    id: 1,
+    createdAt: '1/1/2018',
+    status: 'shipped',
+    products: [
+      [
+        {
+          id: 1,
+          title: 'blue shirt',
+          price: 100,
+          quantity: 1,
+          imageUrl: 'defaultShirt.png'
+        }
+      ],
+      [
+        {
+          id: 2,
+          title: 'red shirt',
+          price: 200,
+          quantity: 1,
+          imageUrl: 'defaultShirt.png'
+        }
+      ]
+    ]
+  },
+  {
+    id: 2,
+    createdAt: '1/1/2018',
+    status: 'pending',
+    products: [
+      [
+        {
+          id: 1,
+          title: 'pink shirt',
+          price: 500,
+          quantity: 1,
+          imageUrl: 'defaultShirt.png'
+        }
+      ],
+      [
+        {
+          id: 2,
+          title: 'yellow shirt',
+          price: 500,
+          quantity: 2,
+          imageUrl: 'defaultShirt.png'
+        }
+      ]
+    ]
+  }
 ]
 
 class OrderList extends React.Component {
@@ -119,43 +123,36 @@ class OrderList extends React.Component {
       <React.Fragment>
         {' '}
         <div className="card">
-          <div className="card-content" id="order-card" >
-          <table>
-        <thead>
-          <tr>
-              <th>Date</th>
-              <th>Products</th>
-              <th>Total</th>
-              <th>Status</th>
-          </tr>
-        </thead>
-
-        <tbody>
-            {DUMMY_ORDERS.map(order=>{
-                return (
-                    <tr>
-                        <td>
-                       {order.createdAt}
-                       </td>
-                       <td>
-                           {order.products.map(product=>(<p>{product[0].title}</p>)) }
-                        </td>
-                        <td>
-                            {getTotalAmount(order.products)}
-                            </td>
-                            <td>
-                                <Link to={`/orders/${order.id}`}>{order.status}</Link>
-                            </td>
+          <div className="card-content" id="order-card">
+            <table>
+              <thead>
+                <tr>
+                  <th>Date</th>
+                  <th>Products</th>
+                  <th>Total</th>
+                  <th>Status</th>
                 </tr>
-                )    
-            })
+              </thead>
 
-            }
-
-
-        </tbody>
-      </table>
-            
+              <tbody>
+                {DUMMY_ORDERS.map(order => {
+                  return (
+                    <tr>
+                      <td>{order.createdAt}</td>
+                      <td>
+                        {order.products.map(product => (
+                          <p>{product[0].title}</p>
+                        ))}
+                      </td>
+                      <td>{getTotalAmount(order.products)}</td>
+                      <td>
+                        <Link to={`/orders/${order.id}`}>{order.status}</Link>
+                      </td>
+                    </tr>
+                  )
+                })}
+              </tbody>
+            </table>
           </div>
         </div>
       </React.Fragment>
