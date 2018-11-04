@@ -40,7 +40,6 @@ class ProductDetail extends React.Component {
 
   handleClick(evt) {
     evt.preventDefault()
-    this.props.checkLocalStorage()
 
     let productToAdd = {
       id: this.props.product.id,
@@ -71,7 +70,7 @@ class ProductDetail extends React.Component {
     } else {
       this.props.addProduct(productToAdd)
     }
-
+    this.props.checkLocalStorage()
     history.push('/products')
   }
 

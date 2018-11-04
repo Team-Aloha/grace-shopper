@@ -107,16 +107,17 @@ export default function(state = initialState, action) {
 export function checkLocalStorageListener() {
   const store = arguments[0]
   const state = store.getState()
-  let isAuthenticated = Object.keys(state.user).length > 0 ? true : false
-  console.log('the user is authonticated', isAuthenticated)
+  const isAuthenticated = state.user.id ? true : false
   if (!isAuthenticated) {
-    // make sure that localstorage exists
-    let cart = localStorage.getItem('cart')
+    let localStorageCart = localStorage.getItem('cart')
       ? JSON.parse(localStorage.getItem('cart'))
       : []
-    let itemCount = 0
-    if (cart.length) {
-      console.log('LS cart ', cart)
+    if (state.cart.length < 1 && localStorage.getItem('cart')) {
+      console.log(
+        'the state.cart is empty and there is something in local storage'
+      )
+      console.log('the cart', localStorageCart)
+      // store.dispatch(setCart(localStorageCart))
     }
   } else {
     console.log('the user is authenticated')
