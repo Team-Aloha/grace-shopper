@@ -154,5 +154,18 @@ describe('Category API routes', () => {
       const res2 = await user.get('/api/products/2').expect(200)
       expect(res2.body.quantity).to.be.equal(8)
     })
+    it('POST /api/orders does not create an order if there is not enough quantity', async () => {
+      //original quantity for product 1: 20, 2: 10
+      //expected quantity for product 1: 18, 2: 8
+      const user = await createUserWithCart('cart@cart.com')
+
+      const res = await user
+        .post('/api/orders/')
+        .send({
+          products: [{id: 1, quantity: 20000}, {id: 2, quantity: 2}]
+        })
+        .expect(400)
+      expect(res.body.status).to.be.equal('failed')
+    })
   }) // end describe('/api/users')
 }) // end describe('User routes')

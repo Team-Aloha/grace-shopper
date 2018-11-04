@@ -119,7 +119,11 @@ router.post('/', async (req, res, next) => {
         )
       })
     } //end of else
-    res.json(response)
+    let status;
+    if (response.status === 'failed') {
+      status= 400
+    } else status = 200
+    res.status(status).json(response)
   } catch (err) {
     next(err)
   }
