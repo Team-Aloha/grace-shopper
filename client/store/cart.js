@@ -134,13 +134,17 @@ export function checkLocalStorageListener() {
 
 export function localCartMiddleware({getState}) {
   return next => action => {
-    console.log('will dispatch', action)
+    // console.log('will dispatch', action)
 
     // Call the next dispatch method in the middleware chain.
     let returnValue = next(action)
+    // console.log('the return value', returnValue)
+    // console.log('state after dispatch', getState())
 
-    console.log('state after dispatch', getState())
-
+    if (action.type === CHECK_LOCALSTORAGE) {
+      console.log('this is local storage action')
+      console.log('the state', getState())
+    }
     // This will likely be the action itself, unless
     // a middleware further in chain changed it.
     return returnValue
