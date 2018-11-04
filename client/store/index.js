@@ -28,8 +28,6 @@ const middleware = composeWithDevTools(
 )
 const store = createStore(reducer, middleware)
 
-// store.subscribe(checkLocalStorageListener.bind(null, store))
-
 export default store
 export * from './user'
 export * from './products'

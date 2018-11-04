@@ -105,34 +105,6 @@ export default function(state = initialState, action) {
   }
 }
 
-export function checkLocalStorageListener() {
-  const store = arguments[0]
-  const state = store.getState()
-  console.log('the state', state)
-
-  const isAuthenticated = state.user.id ? true : false
-
-  let localStorageCart = localStorage.getItem('cart')
-    ? JSON.parse(localStorage.getItem('cart'))
-    : []
-
-  if (!isAuthenticated) {
-    console.log('is authenticated')
-    if (state.cart.length === 0 && localStorage.length > 0) {
-      console.log(
-        'the state.cart is empty and there is something in local storage'
-      )
-      console.log('the local storage cart', localStorageCart)
-    }
-    if (state.cart.length > 0) {
-      console.log('the state.cart is not empty')
-      console.log('the cart', localStorageCart)
-    }
-  } else {
-    console.log('the user is authenticated')
-  }
-}
-
 export function localCartMiddleware(store) {
   return next => action => {
     if (action.type === CHECK_LOCALSTORAGE) {
@@ -163,16 +135,24 @@ export function localCartMiddleware(store) {
       }
     }
 
-    if (action.type === GET_USER) {
-      console.log('the user logged in')
-    }
-
     if (action.type === REMOVE_USER) {
       console.log('the user logged out')
     }
 
     // Call the next dispatch method in the middleware chain.
     let returnValue = next(action)
+
+    if (action.type === GET_USER) {
+      console.log('the user logged in')
+      let localStorageCart = localStorage.getItem('cart')
+        ? JSON.parse(localStorage.getItem('cart'))
+        : []
+      const state = store.getState()
+      console.log('the state', state)
+      if (localStorage.length > 0) {
+        console.log('there is something in the local cart after user logged in')
+      }
+    }
 
     // This will likely be the action itself, unless
     // a middleware further in chain changed it.
