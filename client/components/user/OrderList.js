@@ -8,10 +8,9 @@ import store from '../../store'
 
 const getTotalAmount = products => {
  let totalAmount = products.map((item, i) => {
-    if (item[0]) {
-      const displayItem = item[0]
+      const displayItem = item
       return displayItem.price * displayItem.quantity
-    }
+
   })
   .reduce((a, b) => a + b, 0)
   return `${totalAmount}`
@@ -90,8 +89,8 @@ export class OrderList extends React.Component {
   componentDidMount() {
     const userId = this.props.match.params.userId
     //call thunk here
-    console.log(this.props, 'props')
     this.props.fetchOrders()
+    console.log(this.props, 'props')
   }
 
   // handleChange(evt) {
@@ -134,7 +133,7 @@ export class OrderList extends React.Component {
                        {order.createdAt}
                        </td>
                        <td>
-                           {order.products.map(product=>(<p>{product[0].title}</p>)) }
+                           {order.products.map(product=>(<p>{product.title}</p>)) }
                         </td>
                         <td>
                             {getTotalAmount(order.products)}
@@ -162,7 +161,9 @@ export class OrderList extends React.Component {
 const mapStateToProps = state => {
   return {
     user: state.user,
-    orders: state.orders
+    orders: state.orders,
+    products: state.products,
+    cart: state.cart
   }
 }
 
