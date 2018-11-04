@@ -135,17 +135,6 @@ export function localCartMiddleware(store) {
         if (localStorage.length > 0) {
           return store.dispatch(setCart(localStorageCart))
         }
-        // if (state.cart.length === 0 && localStorage.length > 0) {
-        //   console.log(
-        //     'the state.cart is empty and there is something in local storage'
-        //   )
-        //   console.log('the local storage cart', localStorageCart)
-        //   return store.dispatch(setCart(localStorageCart))
-        // }
-        // if (state.cart.length > 0) {
-        //   console.log('the state.cart is not empty')
-        //   return store.dispatch(setCart(localStorageCart))
-        // }
       } else {
         // authenticated user
         return store.dispatch(setCart(localStorageCart))
@@ -156,12 +145,11 @@ export function localCartMiddleware(store) {
     let returnValue = next(action)
 
     if (action.type === GET_USER) {
-      console.log('the user logged in')
+      // console.log('the user logged in')
       let localStorageCart = localStorage.getItem('cart')
         ? JSON.parse(localStorage.getItem('cart'))
         : []
       const state = store.getState()
-      console.log('the state', state)
       if (localStorage.length > 0) {
         console.log('there is something in the local cart after user logged in')
         store.dispatch(setPromptUserAddLocalCart(true))
@@ -171,14 +159,14 @@ export function localCartMiddleware(store) {
     }
 
     if (action.type === REMOVE_USER) {
-      console.log('the user logged out')
+      // console.log('the user logged out')
       let localStorageCart = localStorage.getItem('cart')
         ? JSON.parse(localStorage.getItem('cart'))
         : []
       const state = store.getState()
       console.log('the state', state)
       if (localStorage.length > 0) {
-        console.log('there is something in the local cart after user logged in')
+        // console.log('there is something in the local cart after user logged in')
         store.dispatch(setPromptUserAddLocalCart(true))
       } else {
         store.dispatch(setPromptUserAddLocalCart(false))
