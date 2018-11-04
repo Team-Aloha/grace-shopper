@@ -7,6 +7,7 @@ import {GET_USER, REMOVE_USER} from './user'
 const SET_CART = 'SET_CART'
 const PLACE_ORDER = 'PLACE_ORDER'
 const CHECK_LOCALSTORAGE = 'CHECK_LOCALSTORAGE'
+const SET_PROMPT_USER_ADD_LOCAL_CART = 'SET_PROMPT_USER_ADD_LOCAL_CART'
 
 // const ADD_PRODUCT = 'ADD_PRODUCT'
 // const REMOVE_PRODUCT = 'REMOVE_PRODUCT'
@@ -31,6 +32,11 @@ export const placeOrder = () => ({
 
 export const checkLocalStorage = () => ({
   type: CHECK_LOCALSTORAGE
+})
+
+export const setPromptUserAddLocalCart = decision => ({
+  type: SET_PROMPT_USER_ADD_LOCAL_CART,
+  decision
 })
 /**
  * THUNK CREATORS
@@ -105,6 +111,15 @@ export default function(state = initialState, action) {
   }
 }
 
+export function shouldPromptUser(state = false, action) {
+  switch (action.type) {
+    case SET_PROMPT_USER_ADD_LOCAL_CART:
+      return action.decision
+    default:
+      return state
+  }
+}
+
 export function localCartMiddleware(store) {
   return next => action => {
     if (action.type === CHECK_LOCALSTORAGE) {
@@ -116,6 +131,7 @@ export function localCartMiddleware(store) {
         : []
 
       if (!isAuthenticated) {
+        // unauthenticated user
         if (localStorage.length > 0) {
           return store.dispatch(setCart(localStorageCart))
         }
@@ -131,6 +147,7 @@ export function localCartMiddleware(store) {
         //   return store.dispatch(setCart(localStorageCart))
         // }
       } else {
+        // authenticated user
         return store.dispatch(setCart(localStorageCart))
       }
     }

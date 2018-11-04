@@ -8,7 +8,11 @@ import {singleProduct as product} from './products'
 import filter from './filter'
 import categories from './categories'
 import cart from './cart'
-import {checkLocalStorageListener, localCartMiddleware} from './cart'
+import {
+  checkLocalStorageListener,
+  localCartMiddleware,
+  shouldPromptUser
+} from './cart'
 
 const reducer = combineReducers({
   user,
@@ -16,7 +20,8 @@ const reducer = combineReducers({
   filter,
   categories,
   product,
-  cart
+  cart,
+  shouldPromptUser
 })
 
 const middleware = composeWithDevTools(

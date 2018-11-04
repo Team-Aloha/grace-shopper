@@ -4,12 +4,19 @@ import {connect} from 'react-redux'
 import {Navbar} from './components'
 import Routes from './routes'
 import {AllProducts} from './components/products'
-import {fetchProducts, fetchCategories, getCart, setCart} from './store'
+import {
+  fetchProducts,
+  fetchCategories,
+  getCart,
+  setCart,
+  setPromptUserAddLocalCart
+} from './store'
 
 class App extends React.Component {
   componentDidMount() {
     this.props.fetchProducts()
     this.props.fetchCategories()
+    this.props.setPromptUserAddLocalCart()
 
     if (!this.props.user.id) {
       if (!localStorage.cart) {
@@ -34,7 +41,8 @@ const mapDispatchToProps = dispatch => {
     fetchProducts: () => dispatch(fetchProducts()),
     fetchCategories: () => dispatch(fetchCategories()),
     setCart: cart => dispatch(setCart(cart)),
-    getCart: () => dispatch(getCart())
+    getCart: () => dispatch(getCart()),
+    setPromptUserAddLocalCart: () => dispatch(setPromptUserAddLocalCart(false))
   }
 }
 const mapStateToProps = state => {
