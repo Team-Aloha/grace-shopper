@@ -132,19 +132,36 @@ export function checkLocalStorageListener() {
   }
 }
 
-export function localCartMiddleware({getState}) {
+export function localCartMiddleware(store) {
   return next => action => {
-    // console.log('will dispatch', action)
+    if (action.type === CHECK_LOCALSTORAGE) {
+      let state = store.getState()
+      const isAuthenticated = state.user.id ? true : false
+
+      let localStorageCart = localStorage.getItem('cart')
+        ? JSON.parse(localStorage.getItem('cart'))
+        : []
+
+      if (!isAuthenticated) {
+        if (state.cart.length === 0 && localStorage.length > 0) {
+          console.log(
+            'the state.cart is empty and there is something in local storage'
+          )
+          console.log('the local storage cart', localStorageCart)
+          return store.dispatch(setCart(localStorageCart))
+        }
+        if (state.cart.length > 0) {
+          console.log('the state.cart is not empty')
+          console.log('the cart', localStorageCart)
+        }
+      } else {
+        console.log('the user is authenticated')
+      }
+    }
 
     // Call the next dispatch method in the middleware chain.
     let returnValue = next(action)
-    // console.log('the return value', returnValue)
-    // console.log('state after dispatch', getState())
 
-    if (action.type === CHECK_LOCALSTORAGE) {
-      console.log('this is local storage action')
-      console.log('the state', getState())
-    }
     // This will likely be the action itself, unless
     // a middleware further in chain changed it.
     return returnValue
