@@ -98,3 +98,7 @@ export default function(state = initialState, action) {
       return state
   }
 }
+
+export function localStorageListener() {
+  const store = arguments[0]
+}
