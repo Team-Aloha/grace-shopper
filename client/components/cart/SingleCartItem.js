@@ -11,10 +11,25 @@ class SingleCartItem extends React.Component {
   }
   handleChange = evt => {
     this.setState({quantity: evt.target.value})
-    this.props.updateQuantity({
-      id: this.props.item.id,
-      quantity: evt.target.value
-    })
+    //they are logged in, so use thunk to update store / database
+    if (this.props.user.id) {
+      this.props.updateQuantity({
+        id: this.props.item.id,
+        quantity: +evt.target.value
+      })
+    } else {
+      //they are not logged in...gotta do local storage changes then
+      //update store!
+      console.log('I AM UPDATING CART ON LOCALSTORAGE')
+      const newCart = JSON.parse(localStorage.cart).map(product => {
+        if (product.id === this.props.item.id) {
+          product.quantity = +evt.target.value
+        }
+        return product
+      })
+      console.log(newCart)
+      localStorage.setItem('cart', JSON.stringify(newCart))
+    }
   }
 
   componentDidMount() {
@@ -57,6 +72,14 @@ class SingleCartItem extends React.Component {
   }
 }
 
+const mapState = state => {
+  const {cart, user} = state
+  return {
+    cart,
+    user
+  }
+}
+
 const mapDispatch = dispatch => {
   return {
     updateQuantity: product => {
@@ -68,4 +91,4 @@ const mapDispatch = dispatch => {
   }
 }
 
-export default connect(null, mapDispatch)(SingleCartItem)
+export default connect(mapState, mapDispatch)(SingleCartItem)
