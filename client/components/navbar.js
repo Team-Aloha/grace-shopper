@@ -83,7 +83,9 @@ const Navbar = ({handleClick, isLoggedIn, cartItemCount}) => (
 const mapState = state => {
   return {
     isLoggedIn: !!state.user.id,
-    cartItemCount: state.cart.length
+    cartItemCount: state.cart
+      .map(item => item.quantity)
+      .reduce((a, b) => +a + +b, 0)
   }
 }
 
