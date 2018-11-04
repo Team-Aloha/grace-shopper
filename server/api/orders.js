@@ -39,7 +39,7 @@ router.post('/', async (req, res, next) => {
       response.status = 'fail'
       response.message.push('No blank orders')
     } else {
-      console.log('DEBUG: do we continue')
+      // console.log('DEBUG: do we continue')
       //create array of IDs so we can fetch the price info from Product
       const ids = products.map(item => item.id)
       const productInfo = await Product.findAll({
@@ -52,7 +52,7 @@ router.post('/', async (req, res, next) => {
       //make order array...
       //order array needs to have a products with: [{id, quantity, price}]
       //also need to check if quantity allows order here
-      console.log(productInfo)
+      // console.log(productInfo)
 
       const updatedProducts = []
       const orderProducts = products.map(item => {
@@ -63,9 +63,9 @@ router.post('/', async (req, res, next) => {
 
         const foundPrice = productInfo.filter(prod => {
           if (+id === +prod.id) {
-            console.log('found item has id ', id)
-            console.log('we want to buy ', quantity)
-            console.log('on server it has ', prod.quantity)
+            // console.log('found item has id ', id)
+            // console.log('we want to buy ', quantity)
+            // console.log('on server it has ', prod.quantity)
             if (+prod.quantity >= +quantity) {
               //this item is allowed to be purchased. push it to updatedProducts
               //updateProducts contains the new quantity that will be
@@ -108,7 +108,7 @@ router.post('/', async (req, res, next) => {
           userId: logId
         })
         response.status = 'success'
-        response.message.push(orderProducts)
+        response.message = orderProducts
       }
 
       //update database for updated quantity

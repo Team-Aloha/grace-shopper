@@ -82,8 +82,10 @@ describe('Category API routes', () => {
       const res = await user.post('/api/orders/').send({
         products: [{id: 2, quantity: 1}, {id: 1, quantity: 3}]
       })
-      expect(res.body).to.be.an('array')
-      expect(res.body.length).to.be.equal(2)
+      expect(res.body.message).to.be.an('array')
+      expect(res.body.message.length).to.be.equal(2)
+      expect(res.body.message[0].price).to.be.equal(2000)
+      expect(res.body.message[1].price).to.be.equal(1000)
     })
     it('POST /api/orders clears cart for a logged in user', async () => {
       const user = await createUserWithCart('cart@cart.com')
@@ -92,8 +94,6 @@ describe('Category API routes', () => {
       const res = await user.post('/api/orders/').send({
         products: [{id: 1, quantity: 2}, {id: 2, quantity: 2}]
       })
-      expect(res.body).to.be.an('array')
-      expect(res.body.length).to.be.equal(2)
 
       // check if cart was emptied after purchase
       const cart = await user.get('/api/cart')
@@ -139,6 +139,20 @@ describe('Category API routes', () => {
         .send({status: 'shipped'})
         .expect(200)
       expect(res.body[0].status).to.be.equal('shipped')
+    })
+    it('POST /api/orders makes 1 order and updates the quantity in Products Table', async () => {
+      //original quantity for product 1: 20, 2: 10
+      //expected quantity for product 1: 18, 2: 8
+      const user = await createUserWithCart('cart@cart.com')
+
+      await user.post('/api/orders/').send({
+        products: [{id: 1, quantity: 2}, {id: 2, quantity: 2}]
+      })
+
+      const res = await user.get('/api/products/1').expect(200)
+      expect(res.body.quantity).to.be.equal(18)
+      const res2 = await user.get('/api/products/2').expect(200)
+      expect(res2.body.quantity).to.be.equal(8)
     })
   }) // end describe('/api/users')
 }) // end describe('User routes')
