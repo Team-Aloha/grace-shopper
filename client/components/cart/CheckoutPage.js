@@ -6,7 +6,11 @@ import CheckoutForm from './CheckoutForm'
 import {default as Cart} from './Cart'
 
 class CheckoutPage extends React.Component {
-  componentDidMount() {}
+  componentDidMount() {
+    if (this.props.shouldPromptUser) {
+      this.props.history.push('/cart/promptUser')
+    }
+  }
 
   handleChange(evt) {}
 
@@ -36,7 +40,9 @@ class CheckoutPage extends React.Component {
 }
 
 const mapStateToProps = state => {
-  return {}
+  return {
+    shouldPromptUser: state.shouldPromptUser
+  }
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => {

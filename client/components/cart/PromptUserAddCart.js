@@ -4,18 +4,30 @@ import {getLocalCart, deleteProduct, setCart, sendOrder} from '../../store'
 import {default as SingleCartItem} from './SingleCartItem'
 
 class PromptUserAddLocalCart extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      cart: []
+    }
+  }
   componentDidMount() {
-    let guestCart = JSON.parse(localStorage.getItem('cart'))
-    this.props.setCart(guestCart)
+    let localCart = JSON.parse(localStorage.getItem('cart'))
+    this.setState({cart: localCart})
+    this.props.setCart(localCart)
   }
   render() {
+    console.log('the cart', this.state.cart)
     const productsInCart = []
     let totalAmount = 0
-    this.props.cart.forEach(product => {
+    if (!this.state.cart) {
+      return <div>nothing to load</div>
+    }
+    this.state.cart.forEach(product => {
       productsInCart.push(
         this.props.products.filter(prod => prod.id === product.id)
       )
     })
+    debugger
     return (
       <div className="card">
         <div className="card-content">
@@ -63,8 +75,10 @@ class PromptUserAddLocalCart extends React.Component {
   }
 }
 
-const mapState = state => {
-  return {}
+const mapState = ({products}) => {
+  return {
+    products
+  }
 }
 const mapDispatch = dispatch => {
   return {

@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 import {withRouter, Route, Switch} from 'react-router-dom'
 import PropTypes from 'prop-types'
 import {Login, Signup, UserHome, Cart} from './components'
-import {CheckoutForm, CheckoutPage} from './components/cart'
+import {CheckoutForm, CheckoutPage, PromptUserAddCart} from './components/cart'
 import {me} from './store'
 import {AllProducts, ProductDetail} from './components/products'
 import {EditProductForm} from './components/admin'
@@ -26,7 +26,8 @@ class Routes extends Component {
         {/* Routes placed here are available to all visitors */}
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />
-        <Route path="/cart" component={Cart} />
+        <Route exact path="/cart" component={Cart} />
+        <Route path="/cart/promptUser" component={PromptUserAddCart} />
         <Route path="/checkout" component={CheckoutForm} />
         <Route path="/checkoutPage" component={CheckoutPage} />
         <Route path="/profile" component={ProfilePage} />
