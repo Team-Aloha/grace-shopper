@@ -168,6 +168,7 @@ export function localCartMiddleware(store) {
       console.log('the state', state)
       if (localStorage.length > 0) {
         console.log('there is something in the local cart after user logged in')
+        store.dispatch(setPromptUserAddLocalCart(true))
       }
     }
 
