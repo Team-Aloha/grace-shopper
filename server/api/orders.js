@@ -68,8 +68,11 @@ router.post('/', async (req, res, next) => {
             console.log('on server it has ', prod.quantity)
             if (+prod.quantity >= +quantity) {
               //this item is allowed to be purchased. push it to updatedProducts
+              //updateProducts contains the new quantity that will be
+              //posted in the database
               updatedProducts.push({id, quantity: prod.quantity - quantity})
             } else {
+              //if there is not enough quantity, send fail status with msg
               response.status = 'failed'
               response.message.push(
                 `There are not enough ${prod.title} in stock`
@@ -78,20 +81,20 @@ router.post('/', async (req, res, next) => {
             return prod
           }
         })
-        //check if we have failed here
         //foundPrice is now an array of size 1 so pull price from it
         const {price} = foundPrice[0]
         return {id, quantity, price}
       })
-      console.log('DEBUG')
-      console.log(updatedProducts)
-      console.log(orderProducts)
+      // console.log('DEBUG')
+      // console.log(updatedProducts)
+      // console.log(orderProducts)
 
       //orderProducts is now what we will send to our orders DB!!
-      //first lets delete the cart
+      //if we have failed, no need to do anything else
       if (response.status !== 'failed') {
+        //if logged in, delete cart
+
         if (req.user) {
-          //only need to delete cart for a logged in user
           await Cart.update(
             {products: []},
             {returning: true, where: {userId: req.user.id}}
@@ -108,7 +111,7 @@ router.post('/', async (req, res, next) => {
         response.message.push(orderProducts)
       }
 
-      //update database
+      //update database for updated quantity
       updatedProducts.forEach(async newProduct => {
         await Product.update(
           {quantity: newProduct.quantity},
