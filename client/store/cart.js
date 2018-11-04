@@ -106,5 +106,21 @@ export default function(state = initialState, action) {
 
 export function checkLocalStorageListener() {
   const store = arguments[0]
-  console.log('the state', store.getState())
+  const state = store.getState()
+  let isAuthenticated = Object.keys(state.user).length > 0 ? true : false
+  console.log('the user is authonticated', isAuthenticated)
+  if (!isAuthenticated) {
+    // make sure that localstorage exists
+    let cart = localStorage.getItem('cart')
+      ? JSON.parse(localStorage.getItem('cart'))
+      : []
+    let itemCount = 0
+    if (cart.length) {
+      console.log('LS cart ', cart)
+    }
+  } else {
+    console.log('the user is authenticated')
+  }
+
+  // should grab the useful thing in localstore
 }
