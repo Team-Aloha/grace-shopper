@@ -5,6 +5,7 @@ import axios from 'axios'
  */
 const SET_CART = 'SET_CART'
 const PLACE_ORDER = 'PLACE_ORDER'
+const CHECK_LOCALSTORAGE = 'CHECK_LOCALSTORAGE'
 
 // const ADD_PRODUCT = 'ADD_PRODUCT'
 // const REMOVE_PRODUCT = 'REMOVE_PRODUCT'
@@ -26,6 +27,11 @@ export const setCart = cart => ({
 export const placeOrder = () => ({
   type: PLACE_ORDER
 })
+
+export const checkLocalStorage = () => ({
+  type: CHECK_LOCALSTORAGE
+})
+
 /**
  * THUNK CREATORS
  */
@@ -106,5 +112,35 @@ export default function(state = initialState, action) {
       return []
     default:
       return state
+  }
+}
+
+export function localCartMiddleware(store) {
+  return next => action => {
+    if (action.type === CHECK_LOCALSTORAGE) {
+      let state = store.getState()
+      const isAuthenticated = state.user.id ? true : false
+
+      let localStorageCart = localStorage.getItem('cart')
+        ? JSON.parse(localStorage.getItem('cart'))
+        : []
+
+      if (!isAuthenticated) {
+        // unauthenticated user
+        if (localStorageCart.length > 0) {
+          return store.dispatch(setCart(localStorageCart))
+        }
+      } else {
+        // authenticated user
+        return store.dispatch(setCart(state.cart))
+      }
+    }
+
+    // Call the next dispatch method in the middleware chain.
+    let returnValue = next(action)
+
+    // This will likely be the action itself, unless
+    // a middleware further in chain changed it.
+    return returnValue
   }
 }

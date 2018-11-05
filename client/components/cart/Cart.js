@@ -41,6 +41,9 @@ class Cart extends React.Component {
         this.props.products.filter(prod => prod.id === product.id)
       )
     })
+    if (this.props.cart.length < 1) {
+      return <div>There are no items in your cart...</div>
+    }
     return (
       <div className="card">
         <div className="card-content">

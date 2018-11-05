@@ -8,9 +8,9 @@ const Navbar = ({handleClick, isLoggedIn, cartItemCount}) => (
   <div>
     <nav>
       <div className="nav-wrapper">
-        <a href="#" className="brand-logo">
-          <Link to="/home">Logo</Link>
-        </a>
+        <Link className="brand-logo" to="/home">
+          Logo
+        </Link>
 
         <ul id="nav-mobile" className="right hide-on-med-and-down">
           {isLoggedIn ? (
@@ -44,6 +44,13 @@ const Navbar = ({handleClick, isLoggedIn, cartItemCount}) => (
             </React.Fragment>
           ) : (
             <React.Fragment>
+              {cartItemCount > 0 ? (
+                <li>
+                  <span className="badge">{cartItemCount}</span>
+                </li>
+              ) : (
+                <div />
+              )}
               <li>
                 <Link to="/checkoutPage">
                   {' '}
@@ -76,7 +83,9 @@ const Navbar = ({handleClick, isLoggedIn, cartItemCount}) => (
 const mapState = state => {
   return {
     isLoggedIn: !!state.user.id,
-    cartItemCount: state.cart.length
+    cartItemCount: state.cart
+      .map(item => item.quantity)
+      .reduce((a, b) => +a + +b, 0)
   }
 }
 

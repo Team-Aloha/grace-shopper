@@ -49,13 +49,9 @@ class CheckoutForm extends React.Component {
 
   handleSubmit = evt => {
     evt.preventDefault()
-    // this.props.amendUser(this.state)
   }
 
   render() {
-    console.log('the product id', this.props.match.params.checkoutId)
-    console.log('the state', this.props.user)
-
     if (Object.keys(this.props.user).length < 1) {
       return <div>User not logged in...</div>
     }
