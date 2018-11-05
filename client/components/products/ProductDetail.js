@@ -8,7 +8,9 @@ import {
   checkLocalStorage
 } from '../../store'
 import history from '../../history'
+import EditProductForm from '../admin/EditProductForm'
 const numeral = require('numeral')
+
 
 class ProductDetail extends React.Component {
   constructor(props) {
@@ -77,8 +79,71 @@ class ProductDetail extends React.Component {
 
   render() {
     const {product} = this.props
+
+    let button;
+
+    if (this.props.user.isAdmin){
+      return (
+        <React.Fragment>
+        <div>
+        <EditProductForm  />
+        </div>
+        <div>
+        <div className="container">
+          <div className="row">
+            <div className="col xl6">
+              <img className="responsive-img" src="/defaultShirt.png" />
+            </div>
+
+            <div className="col xl6">
+              <div className="row">
+                <div className="col">
+                  <h5>{product.title}</h5>
+                  <h6>{product.price}</h6>
+                  <p>{product.description}</p>
+                </div>
+              </div>
+              <div className="row">
+                <div className="col xl6">
+                  <div className="input-field">
+                    <input
+                      name="quantity"
+                      id="quantity"
+                      type="number"
+                      min="1"
+                      className="validate"
+                      value={this.state.quantity}
+                      onChange={this.handleChange}
+                    />
+                  </div>
+                </div>
+
+                <div className="col xl6 center">
+                  <button
+                    type="button"
+                    onClick={this.handleClick}
+                    className="btn"
+                  >
+                    <i className="material-icons left">shopping_cart</i>Add To
+                    Cart
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {button}
+        </div>
+       </div>
+       </React.Fragment>
+      )
+     } else {
+
+
     const price = numeral(product.price/1000).format('$0,0.00')
+
     return (
+
       <React.Fragment>
         <div className="container">
           <div className="row">
@@ -122,10 +187,13 @@ class ProductDetail extends React.Component {
               </div>
             </div>
           </div>
+
+          {button}
         </div>
       </React.Fragment>
     )
   }
+}
 }
 
 const mapStateToProps = state => {
