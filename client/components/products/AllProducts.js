@@ -21,10 +21,20 @@ const mapDispatchToProps = dispatch => ({
 })
 
 class AllProducts extends React.Component {
+  renderButton(){
+
+    if(this.props && this.props.user.isAdmin){
+      return (
+        <button onClick={this.handleClick}>
+        Add a Product
+        </button>
+        )
+      }
+    }
 
 
-  handleClick(){
-    history.push('/')
+  handleClick = () => {
+    this.props.history.push('/admin/products/add')
 
   }
   render() {
@@ -98,7 +108,7 @@ class AllProducts extends React.Component {
               <ProductCard product={product} key={product.id} />
             ))}
           </div>
-         
+         {this.renderButton()}
         </div>
       </React.Fragment>
 
