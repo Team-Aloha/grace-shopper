@@ -57,3 +57,8 @@ nav ul a span.badge {
 	position: fixed;
 	background: #ffff !important; 
 }
+
+
+ nav ul li#count-badge a:hover    {
+    background-color: white !important;
+ }
