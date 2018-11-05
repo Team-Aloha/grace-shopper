@@ -27,6 +27,7 @@ export const fetchAdminOrders = () => async dispatch => {
 }
 
 export const fetchOneOrder = orderId => async dispatch => {
+  console.log(orderId, 'orderId in store')
   const response = await axios.get(`/api/orders/${orderId}`)
   const order = response.data
   dispatch(setOneOrder(order))
@@ -61,7 +62,7 @@ export default function(state = defaultOrders, action) {
 export function singleOrder(state = {}, action) {
   switch (action.type) {
     case SET_ONE_ORDER:
-      return action.orders
+      return action.order
 
     default:
       return state
