@@ -69,26 +69,6 @@ const DUMMY_ORDERS = [
 ]
 
 export class OrderList extends React.Component {
-  // constructor(props) {
-  //   super(props)
-  //   this.state = {
-  //     readOnly: true,
-  //     orders: []
-  //   }
-  // store.dispatch(fetchOneCampus(campusId))
-  // this.handleChange = this.handleChange.bind(this)
-  //this.handleSubmit = this.handleSubmit.bind(this)
-  //this.toggleEditProfile = this.toggleEditProfile.bind(this)
-
-  // componentDidUpdate(prevProps, prevState) {
-  //   // After fetching redux has passed in the student as
-  //   // props, now we want to set those values to our local state
-  //   if (prevProps.orders !== this.props.orders) {
-  //     this.setState({
-  //       orders: this.props.orders
-  //     })
-  //   }
-  // }
 
   componentDidMount() {
     const userId = this.props.match.params.userId

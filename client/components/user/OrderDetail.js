@@ -3,7 +3,7 @@ import React from 'react'
 import {withRouter, Link} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {fetchOneProduct, updateProduct} from '../../store'
-import {fetchCategories} from '../../store'
+import {fetchCategories, fetchOrders} from '../../store'
 import store from '../../store'
 
 const DUMMY_USER = {
@@ -54,7 +54,10 @@ class OrderDetail extends React.Component {
   }
 
   componentDidMount() {
-    const userId = this.props.match.params.userId
+    const orderId = this.props.match.params.orderId
+    this.props.fetchOrders()
+   // console.log(this.props, 'props for orderdetail')
+    console.log(orderId, 'orderId')
   }
 
   handleChange(evt) {
@@ -69,21 +72,36 @@ class OrderDetail extends React.Component {
   toggleEditProfile = () => {
     this.setState({readOnly: !this.state.readOnly})
   }
+
+  getProductName = id => {
+    const productInfo = this.props.products.filter(product => id === product.id)
+    if (productInfo[0]) {
+      return productInfo[0].title
+    }
+    return ''
+  }
+
   render() {
+    console.log(this.props, 'propsorderdetail')
     if (Object.keys(this.props.user).length < 1) {
       return <div>User not logged in...</div>
     }
-
+    const orderId = Number(this.props.match.params.orderId)
+    const order = this.props.orders.filter(item => item.id === +orderId)[0]
+    console.log(this.props.orders, 'props.order')
+    console.log(order, 'order')
+    if (order) {
     return (
+
       <div className="container">
         <h3 className="center-align">Order</h3>
         <div className="card">
           <div className="card-content" id="order-card">
             <ul className="collection">
-              {DUMMY_PRODUCTS.map(product => (
-                <li className="collection-item avatar">
+              {order.products.map(product => (
+                <li className="collection-item avatar" key={product.id}>
                   {/* <i className="material-icons circle red">play_arrow</i> */}
-                  <Link to={`/products/${product[0].id}`}>
+                  <Link to={`/products/${product.id}`}>
                     <img
                       className="order-image left"
                       src="/defaultShirt.png"
@@ -91,13 +109,13 @@ class OrderDetail extends React.Component {
                     />
                   </Link>
                   <p>
-                    <h6 className="item-title">{`${product[0].title}`}</h6>{' '}
+                    <h6 className="item-title">{this.getProductName(product.id)}</h6>{' '}
                     <br />
                   </p>
                   <a href="#!" className="secondary-content">
                     <p>
-                      Price: {product[0].price} <br />
-                      Quantity: {product[0].quantity}
+                      Price: {product.price} <br />
+                      Quantity: {product.quantity}
                     </p>
                   </a>
                 </li>
@@ -105,84 +123,26 @@ class OrderDetail extends React.Component {
             </ul>
           </div>
         </div>
-        <h3 className="center-align">Shipped To</h3>
-        <div className="card">
-          <div className="card-content" id="order-card">
-            <div className="input-field">
-              <input
-                name="address"
-                id="address"
-                type="text"
-                className="validate"
-                value={this.props.user.address}
-                onChange={this.handleChange}
-                readOnly={true}
-              />
-              <label className="active" htmlFor="address">
-                Address
-              </label>
-            </div>
-            <div className="input-field">
-              <input
-                name="city"
-                id="city"
-                type="text"
-                className="validate"
-                value={this.props.user.city}
-                onChange={this.handleChange}
-                readOnly={true}
-              />
-              <label className="active" htmlFor="city">
-                City
-              </label>
-            </div>
-            <div className="input-field">
-              <input
-                name="state"
-                id="state"
-                type="text"
-                className="validate"
-                value={this.props.user.state}
-                onChange={this.handleChange}
-                readOnly={true}
-              />
-              <label className="active" htmlFor="state">
-                State
-              </label>
-            </div>
-            <div className="input-field">
-              <input
-                name="zip"
-                id="zip"
-                type="text"
-                pattern="[0-9]{5}"
-                className="zip"
-                value={this.props.user.zip}
-                onChange={this.handleChange}
-                readOnly={true}
-              />
-              <label className="active" htmlFor="zip">
-                Zip
-              </label>
-            </div>
-          </div>
-        </div>
-      </div>
+        <h3 className="center-align">Shipped To {order.address} {order.city} {order.state}</h3>
+       </div>
     )
+   } else {
+     return <div></div>
+   }
   }
 }
 
 const mapStateToProps = state => {
   return {
-    user: DUMMY_USER
+    user: state.user,
+    orders: state.orders,
+    products: state.products
   }
 }
 
-const mapDispatchToProps = (dispatch, ownProps) => {
-  return {
-    dispatch: dispatch
-  }
-}
+const mapDispatchToProps = dispatch => ({
+  fetchOrders: () => dispatch(fetchOrders())
+})
 
 export default withRouter(
   connect(mapStateToProps, mapDispatchToProps)(OrderDetail)
