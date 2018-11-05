@@ -1,26 +1,52 @@
 const router = require('express').Router()
 const {Order, Product, Cart} = require('../db/models')
 
+const {isLoggedIn, adminsOnly, testingOnly} = require('../utils/apiMiddleware')
+
 /*TODO:
-1.  make this check for quantity T_T
-2. ...look where i can refactor to fetch from cart instead of getting info from server
-^^ however i need this logic anyway for getting info from non logged in
+
+look where i can refactor to fetch from cart instead of getting info from server
+however i need this logic anyway for getting info from non logged in...so mayvbe
+not do this
 */
 
+router.get('/', isLoggedIn, async (req, res, next) => {
+  try {
+    const orders = await Order.findAll({where: {userId: req.user.id}})
+    res.json(orders)
+  } catch (err) {
+    next(err)
+  }
+})
+
+router.put('/:orderId', adminsOnly, async (req, res, next) => {
+  const {status} = req.body
+  try {
+    const updatedOrder = await Order.update(
+      {status},
+      {
+        returning: true,
+        where: {id: req.params.orderId}
+      }
+    )
+    res.json(updatedOrder[1])
+  } catch (err) {
+    next(err)
+  }
+})
+
 //this is a test post route for unittests ONLY
-router.post('/test', async (req, res, next) => {
+router.post('/test', testingOnly, async (req, res, next) => {
   try {
     //only allow this route to be ran during testing
-    if (process.env.NODE_ENV === 'test') {
-      const {products} = req.body
-      const order = await Order.create({
-        status: 'processing',
-        userId: req.user.id,
-        products
-      })
+    const {products} = req.body
+    const order = await Order.create({
+      status: 'processing',
+      userId: req.user.id,
+      products
+    })
 
-      res.json(order)
-    }
+    res.json(order)
   } catch (err) {
     next(err)
   }
@@ -39,7 +65,6 @@ router.post('/', async (req, res, next) => {
       response.status = 'fail'
       response.message.push('No blank orders')
     } else {
-      // console.log('DEBUG: do we continue')
       //create array of IDs so we can fetch the price info from Product
       const ids = products.map(item => item.id)
       const productInfo = await Product.findAll({
@@ -119,35 +144,11 @@ router.post('/', async (req, res, next) => {
         )
       })
     } //end of else
-    let status;
+    let status
     if (response.status === 'failed') {
-      status= 400
+      status = 400
     } else status = 200
     res.status(status).json(response)
-  } catch (err) {
-    next(err)
-  }
-})
-
-router.put('/:orderId', async (req, res, next) => {
-  const {status} = req.body
-  try {
-    const updatedOrder = await Order.update(
-      {status},
-      {
-        returning: true,
-        where: {id: req.params.orderId}
-      }
-    )
-    res.json(updatedOrder[1])
-  } catch (err) {
-    next(err)
-  }
-})
-router.get('/', async (req, res, next) => {
-  try {
-    const orders = await Order.findAll({where: {userId: req.user.id}})
-    res.json(orders)
   } catch (err) {
     next(err)
   }
