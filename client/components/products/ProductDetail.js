@@ -4,8 +4,7 @@ import {connect} from 'react-redux'
 import {fetchOneProduct, putProductToCart, setCart} from '../../store'
 import history from '../../history'
 import EditProductForm from '../admin/EditProductForm'
-const numeral = require('numeral')
-
+import numeral from 'numeral'
 
 class ProductDetail extends React.Component {
   constructor(props) {
@@ -51,7 +50,6 @@ class ProductDetail extends React.Component {
         if (product.id === productToAdd.id) {
           product.quantity = +productToAdd.quantity + +product.quantity
           found = true
-          return product
         }
         return product
       })
@@ -68,133 +66,135 @@ class ProductDetail extends React.Component {
     } else {
       this.props.addProduct(productToAdd)
     }
-    console.log(this.props);
+    console.log(this.props)
     history.push('/products')
   }
 
   render() {
-
     const {product} = this.props
 
-    const price = numeral(product.price/100).format('$0,0.00')
+    const price = numeral(product.price / 100).format('$0,0.00')
 
+    let button
 
-    let button;
-
-    if (this.props.user.isAdmin){
+    if (this.props.user.isAdmin) {
       return (
         <React.Fragment>
-        <div>
-        <EditProductForm  />
-        </div>
-        <div>
-        <div className="container">
-          <div className="row">
-            <div className="col xl6">
-              <img className="responsive-img" src="/defaultShirt.png" />
-            </div>
-
-            <div className="col xl6">
-              <div className="row">
-                <div className="col">
-                  <h5>{product.title}</h5>
-                  <h6>{product.price}</h6>
-                  <p>{product.description}</p>
-                </div>
-              </div>
+          <div>
+            <EditProductForm />
+          </div>
+          <div>
+            <div className="container">
               <div className="row">
                 <div className="col xl6">
-                  <div className="input-field">
-                    <input
-                      name="quantity"
-                      id="quantity"
-                      type="number"
-                      min="1"
-                      className="validate"
-                      value={this.state.quantity}
-                      onChange={this.handleChange}
-                    />
+                  <img
+                    className="responsive-img"
+                    src={`/${product.imageUrl}`}
+                  />
+                </div>
+
+                <div className="col xl6">
+                  <div className="row">
+                    <div className="col">
+                      <h5>{product.title}</h5>
+                      <h6>
+                        {product.quantity > 0
+                          ? 'Quantity: ' + product.quantity
+                          : 'Product No Longer Available'}
+                      </h6>
+                      <h6>{price}</h6>
+                      <p>{product.description}</p>
+                    </div>
+                  </div>
+                  <div className="row">
+                    <div className="col xl6">
+                      <div className="input-field">
+                        <input
+                          name="quantity"
+                          id="quantity"
+                          type="number"
+                          min="1"
+                          className="validate"
+                          value={this.state.quantity}
+                          onChange={this.handleChange}
+                        />
+                      </div>
+                    </div>
+
+                    <div className="col xl6 center">
+                      <button
+                        type="button"
+                        onClick={this.handleClick}
+                        className="btn"
+                      >
+                        <i className="material-icons left">shopping_cart</i>Add
+                        To Cart
+                      </button>
+                    </div>
                   </div>
                 </div>
-
-                <div className="col xl6 center">
-                  <button
-                    type="button"
-                    onClick={this.handleClick}
-                    className="btn"
-                  >
-                    <i className="material-icons left">shopping_cart</i>Add To
-                    Cart
-                  </button>
-                </div>
               </div>
+
+              {button}
             </div>
           </div>
-
-          {button}
-        </div>
-       </div>
-       </React.Fragment>
+        </React.Fragment>
       )
-     } else {
+    } else {
+      const price = numeral(product.price / 1000).format('$0,0.00')
 
-
-    const price = numeral(product.price/1000).format('$0,0.00')
-
-
-    return (
-
-      <React.Fragment>
-        <div className="container">
-          <div className="row">
-            <div className="col xl6">
-              <img className="responsive-img" src="/defaultShirt.png" />
-            </div>
-
-            <div className="col xl6">
-              <div className="row">
-                <div className="col">
-                  <h5>{product.title}</h5>
-                  <h6>{price}</h6>
-                  <p>{product.description}</p>
-                  <p>Inventory: {product.quantity}</p>
-                </div>
+      return (
+        <React.Fragment>
+          <div className="container">
+            <div className="row">
+              <div className="col xl6">
+                <img className="responsive-img" src="/defaultShirt.png" />
               </div>
-              <div className="row">
-                <div className="col xl6">
-                  <div className="input-field">
-                    <input
-                      name="quantity"
-                      id="quantity"
-                      type="number"
-                      min="1"
-                      className="validate"
-                      value={this.state.quantity}
-                      onChange={this.handleChange}
-                    />
+
+              <div className="col xl6">
+                <div className="row">
+                  <div className="col">
+                    <h5>{product.title}</h5>
+                    <h6>{price}</h6>
+                    <p>{product.description}</p>
+                    <p>Inventory: {product.quantity}</p>
                   </div>
                 </div>
+                <div className="row">
+                  <div className="col xl6">
+                    <div className="input-field">
+                      <input
+                        name="quantity"
+                        id="quantity"
+                        type="number"
+                        min="1"
+                        className="validate"
+                        value={this.state.quantity}
+                        onChange={this.handleChange}
+                      />
+                    </div>
+                  </div>
 
-                <div className="col xl6 center">
-                  <button
-                    type="button"
-                    onClick={this.handleClick}
-                    className="btn"
-                  >
-                    <i className="material-icons left">shopping_cart</i>Add To
-                    Cart
-                  </button>
+                  <div className="col xl6 center">
+                    <button
+                      type="button"
+                      onClick={this.handleClick}
+                      className="btn"
+                    >
+                      <i className="material-icons left">shopping_cart</i>Add To
+                      Cart
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
 
-          {button}
-        </div>
-      </React.Fragment>
-    )
+            {button}
+          </div>
+        </React.Fragment>
+      )
+    }
   }
-}
 }
 
 const mapStateToProps = state => {
