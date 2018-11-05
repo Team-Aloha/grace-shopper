@@ -105,18 +105,7 @@ export class OrderList extends React.Component {
     return ''
   }
 
-  // handleChange(evt) {
-  //   evt.preventDefault()
-  //   const user = {[evt.target.name]: evt.target.value}
-  //   this.setState({user})
-  // }
 
-  // handleSubmit = evt => {
-  //   evt.preventDefault()
-  // }
-  // toggleEditProfile = () => {
-  //   this.setState({readOnly: !this.state.readOnly})
-  // }
   render() {
     if (Object.keys(this.props.user).length < 1) {
       return <div>User not logged in...</div>
@@ -139,7 +128,7 @@ export class OrderList extends React.Component {
                 {this.props.orders.map(order => {
                   return (
                     <tr key={order.id}>
-                      <td>{order.createdAt}</td>
+                      <td>{order.createdAt.toString().slice(0, -14)}</td>
                       <td>
                         {order.products.map(product => (
                           <p key={product.id}>

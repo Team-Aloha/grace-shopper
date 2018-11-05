@@ -6,6 +6,7 @@ import {default as ProductCard} from './ProductCard'
 const mapStateToProps = state => {
   return {
     categories: state.categories,
+    user: state.user,
     prods: state.products.filter(product => {
       if (state.filter.visibilityFilter === -1) {
         return true
@@ -20,8 +21,38 @@ const mapDispatchToProps = dispatch => ({
 })
 
 class AllProducts extends React.Component {
+  renderButton(){
+
+    if(this.props && this.props.user.isAdmin){
+      return (
+        <button onClick={this.handleClick}>
+        Add a Product
+        </button>
+        )
+      }
+    }
+
+
+  handleClick = () => {
+    this.props.history.push('/admin/products/add')
+
+  }
   render() {
+    // const isAdmin = this.state.user.isAdmin
+    // adminButton = function(props) {
+    //   return (
+    //     <button onClick={props.onClick}>
+    //     Add a Product
+    //     </button>
+    //   )
+    // }
+    console.log(this.props, 'props')
+    if (!this.props) {
+      return <div>Loading...</div>
+    }
+
     return (
+
       <React.Fragment>
         <div className="parallax-container valign-wrapper">
           <div className="section no-pad-bot">
@@ -77,8 +108,10 @@ class AllProducts extends React.Component {
               <ProductCard product={product} key={product.id} />
             ))}
           </div>
+         {this.renderButton()}
         </div>
       </React.Fragment>
+
     )
   }
 }
