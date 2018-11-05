@@ -5,10 +5,10 @@ import {Link, withRouter} from 'react-router-dom'
 import {logout} from '../store'
 
 const Navbar = ({handleClick, isLoggedIn, cartItemCount}) => (
-  <div>
+  <div className="navbar-fixed">
     <nav>
-      <div className="nav-wrapper">
-        <Link className="brand-logo" to="/home">
+      <div className="container nav-wrapper">
+        <Link className="brand-logo white" to="/home">
           Logo
         </Link>
 
