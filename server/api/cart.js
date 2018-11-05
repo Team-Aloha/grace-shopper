@@ -1,14 +1,6 @@
 const router = require('express').Router()
 const {Cart} = require('../db/models')
-
-const isLoggedIn = (req, res, next) => {
-  if (!req.user.id) {
-    const err = new Error('Not allowed!')
-    err.status = 401
-    return next(err)
-  }
-  next()
-}
+const {isLoggedIn} = require('../utils/apiMiddleware')
 
 router.get('/', isLoggedIn, async (req, res, next) => {
   try {

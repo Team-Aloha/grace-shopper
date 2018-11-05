@@ -2,15 +2,7 @@ const router = require('express').Router()
 const {Product} = require('../db/models')
 const Sequelize = require('sequelize')
 module.exports = router
-
-const adminsOnly = (req, res, next) => {
-  if (!req.user.isAdmin) {
-    const err = new Error('Not allowed!')
-    err.status = 401
-    return next(err)
-  }
-  next()
-}
+const {adminsOnly} = require('../utils/apiMiddleware')
 
 router.get('/', async (req, res, next) => {
   try {

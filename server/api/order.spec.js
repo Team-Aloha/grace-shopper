@@ -3,6 +3,8 @@ const {expect} = require('chai')
 const db = require('../db')
 const {Order, Product} = require('../db/models')
 const app = require('../index')
+const agent = require('supertest')(app)
+
 // const Cart = db.model('cart')
 // const agent = require('supertest')(app)
 const {
@@ -41,6 +43,10 @@ describe('Category API routes', () => {
           categories: [4, 5]
         }
       ])
+    })
+    it('GET /api/orders does not allow a non logged in user to access the route', async () => {
+      //should return 401: unauthorized
+      await agent.get('/api/orders').expect(401)
     })
     it('GET /api/orders returns empty array for no orders', async () => {
       const user = await createUserWithNoCart('cart@cart.com')
