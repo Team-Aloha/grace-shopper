@@ -127,12 +127,12 @@ export function localCartMiddleware(store) {
 
       if (!isAuthenticated) {
         // unauthenticated user
-        if (localStorage.length > 0) {
+        if (localStorageCart.length > 0) {
           return store.dispatch(setCart(localStorageCart))
         }
       } else {
         // authenticated user
-        return store.dispatch(setCart(localStorageCart))
+        return store.dispatch(setCart(state.cart))
       }
     }
 
