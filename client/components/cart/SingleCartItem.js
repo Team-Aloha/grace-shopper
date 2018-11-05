@@ -1,6 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {updateQuantity, deleteProduct} from '../../store'
+const numeral = require('numeral')
 
 //this needs to be a stateful component so we can link the
 //quantity to a variable
@@ -22,6 +23,12 @@ class SingleCartItem extends React.Component {
   }
 
   render() {
+    //calculate unit price and convert to currency
+    const price = numeral(this.props.item.price/1000).format('$0,0.00')
+    //calculate total price and convert to currency
+    const total = numeral((this.props.quantity * this.props.item.price)/1000).format('$0,0.00')
+
+
     return (
       <React.Fragment>
         <tr>
@@ -40,8 +47,8 @@ class SingleCartItem extends React.Component {
               />
             </div>
           </td>
-          <td>{this.props.item.price}</td>
-          <td>{this.props.quantity * this.props.item.price}</td>
+          <td>{price}</td>{/* price calculated line right below render*/}
+          <td>{total}</td>{/* price calculated line right below render */}
           <td>
             <button
               type="button"

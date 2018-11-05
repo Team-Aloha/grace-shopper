@@ -2,6 +2,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {getCart, deleteProduct, setCart, sendOrder} from '../../store'
 import {default as SingleCartItem} from './SingleCartItem'
+const numeral = require('numeral')
 
 class Cart extends React.Component {
   handleRemove = id => {
@@ -79,7 +80,7 @@ class Cart extends React.Component {
                 <td>
                   <b>Cart Subtotal:</b>
                 </td>
-                <td>{totalAmount}</td>
+                <td>{numeral(totalAmount/1000).format('$0,0.00')}</td>
                 <td />
               </tr>
             </tbody>

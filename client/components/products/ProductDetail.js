@@ -3,6 +3,7 @@ import {withRouter, Link} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {fetchOneProduct, putProductToCart, setCart} from '../../store'
 import history from '../../history'
+const numeral = require('numeral')
 
 class ProductDetail extends React.Component {
   constructor(props) {
@@ -71,6 +72,7 @@ class ProductDetail extends React.Component {
 
   render() {
     const {product} = this.props
+    const price = numeral(product.price/1000).format('$0,0.00')
     return (
       <React.Fragment>
         <div className="container">
@@ -83,7 +85,7 @@ class ProductDetail extends React.Component {
               <div className="row">
                 <div className="col">
                   <h5>{product.title}</h5>
-                  <h6>{product.price}</h6>
+                  <h6>{price}</h6>
                   <p>{product.description}</p>
                 </div>
               </div>
