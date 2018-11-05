@@ -15,6 +15,7 @@ const adminsOnly = (req, res, next) => {
   }
   next()
 }
+
 const testingOnly = (req, res, next) => {
   if (!process.env.NODE_ENV === 'test') {
     const err = new Error('Not allowed!')
