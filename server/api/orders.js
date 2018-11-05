@@ -19,6 +19,17 @@ router.get('/', isLoggedIn, async (req, res, next) => {
   }
 })
 
+router.get('/:orderId', async (req, res, next) => {
+  try {
+    const order = await Order.findOne({
+      where: {id: req.params.orderId}
+    })
+    res.json(order)
+  } catch (err) {
+    next(err)
+  }
+})
+
 router.put('/:orderId', adminsOnly, async (req, res, next) => {
   const {status} = req.body
   try {

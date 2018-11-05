@@ -33,7 +33,7 @@ class Routes extends Component {
 
         {/* Products */}
         <Route exact path="/products" component={AllProducts} />
-        <Route path="/products/:productId" component={ProductDetail} />
+        <Route exact path="/products/:productId" component={ProductDetail} />
 
         {/* Orders */}
         <Route path="/orders/:orderId" component={OrderDetail} />
