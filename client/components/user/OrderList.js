@@ -105,18 +105,7 @@ export class OrderList extends React.Component {
     return ''
   }
 
-  // handleChange(evt) {
-  //   evt.preventDefault()
-  //   const user = {[evt.target.name]: evt.target.value}
-  //   this.setState({user})
-  // }
 
-  // handleSubmit = evt => {
-  //   evt.preventDefault()
-  // }
-  // toggleEditProfile = () => {
-  //   this.setState({readOnly: !this.state.readOnly})
-  // }
   render() {
     if (Object.keys(this.props.user).length < 1) {
       return <div>User not logged in...</div>

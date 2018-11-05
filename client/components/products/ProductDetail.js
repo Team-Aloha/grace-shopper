@@ -81,7 +81,58 @@ class ProductDetail extends React.Component {
 
     if (this.props.user.isAdmin){
       return (
-       <EditProductForm  />
+        <React.Fragment>
+        <div>
+        <EditProductForm  />
+        </div>
+        <div>
+        <div className="container">
+          <div className="row">
+            <div className="col xl6">
+              <img className="responsive-img" src="/defaultShirt.png" />
+            </div>
+
+            <div className="col xl6">
+              <div className="row">
+                <div className="col">
+                  <h5>{product.title}</h5>
+                  <h6>{product.price}</h6>
+                  <p>{product.description}</p>
+                </div>
+              </div>
+              <div className="row">
+                <div className="col xl6">
+                  <div className="input-field">
+                    <input
+                      name="quantity"
+                      id="quantity"
+                      type="number"
+                      min="1"
+                      className="validate"
+                      value={this.state.quantity}
+                      onChange={this.handleChange}
+                    />
+                  </div>
+                </div>
+
+                <div className="col xl6 center">
+                  <button
+                    type="button"
+                    onClick={this.handleClick}
+                    className="btn"
+                  >
+                    <i className="material-icons left">shopping_cart</i>Add To
+                    Cart
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {button}
+        </div>
+       </div>
+       </React.Fragment>
       )
      } else {
 
