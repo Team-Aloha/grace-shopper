@@ -8,6 +8,7 @@ import {
   checkLocalStorage
 } from '../../store'
 import history from '../../history'
+import EditProductForm from '../admin/EditProductForm'
 
 class ProductDetail extends React.Component {
   constructor(props) {
@@ -76,7 +77,16 @@ class ProductDetail extends React.Component {
 
   render() {
     const {product} = this.props
+    let button;
+
+    if (this.props.user.isAdmin){
+      return (
+       <EditProductForm  />
+      )
+     } else {
+
     return (
+
       <React.Fragment>
         <div className="container">
           <div className="row">
@@ -120,10 +130,13 @@ class ProductDetail extends React.Component {
               </div>
             </div>
           </div>
+
+          {button}
         </div>
       </React.Fragment>
     )
   }
+}
 }
 
 const mapStateToProps = state => {
