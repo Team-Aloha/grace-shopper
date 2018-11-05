@@ -37,8 +37,7 @@ class CheckoutForm extends React.Component {
 
   componentDidMount() {
     const userId = this.props.match.params.userId
-    // this.props.dispatch(fetchOneUser(userId))
-    // this.props.dispatch(fetchCategories())
+    this.setState({user: this.props.user})
   }
 
   handleChange(evt) {

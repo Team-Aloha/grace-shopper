@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {withRouter, Route, Switch} from 'react-router-dom'
 import PropTypes from 'prop-types'
-import {Login, Signup, UserHome, Cart} from './components'
+import {Login, Signup, UserHome, Cart, AdminOrderList} from './components'
 import {CheckoutForm, CheckoutPage} from './components/cart'
 import {me} from './store'
 import {AllProducts, ProductDetail} from './components/products'
@@ -41,6 +41,7 @@ class Routes extends Component {
           path="/admin/products/:productId/edit"
           component={EditProductForm}
         />
+        <Route path="/admin/orders" component={AdminOrderList} />
         <Route path="/admin/products/add" component={AddProductForm} />
 
         {isLoggedIn && (

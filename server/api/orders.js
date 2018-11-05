@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const {Order, Product, Cart} = require('../db/models')
+const {Order, Product, Cart, User} = require('../db/models')
 
 const {isLoggedIn, adminsOnly, testingOnly} = require('../utils/apiMiddleware')
 const stripe = require('stripe')(process.env.EXPRESS_STRIPE_KEY)
@@ -19,12 +19,19 @@ router.get('/', isLoggedIn, async (req, res, next) => {
   }
 })
 
+
 router.get('/:orderId', async (req, res, next) => {
   try {
     const order = await Order.findOne({
       where: {id: req.params.orderId}
     })
     res.json(order)
+
+router.get('/admin', adminsOnly, async (req, res, next) => {
+  try {
+    const orders = await Order.findAll({order: ['id'], include: [User]})
+    res.json(orders)
+
   } catch (err) {
     next(err)
   }
