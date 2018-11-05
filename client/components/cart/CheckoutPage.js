@@ -36,7 +36,7 @@ class CheckoutPage extends React.Component {
 }
 
 const mapStateToProps = state => {
-  const {shouldPromptUser, cart} = state
+  const {cart} = state
   return {
     cart
   }
