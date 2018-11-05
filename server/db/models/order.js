@@ -4,7 +4,7 @@ const db = require('../db')
 const Order = db.define('orders', {
   status: {
     type: Sequelize.ENUM,
-    values: ['processing', 'shipped', 'received'],
+    values: ['processing', 'shipped', 'received', 'cancelled'],
     defaultValue: 'processing'
   },
   products: {

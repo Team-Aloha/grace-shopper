@@ -5,7 +5,8 @@ import Select from 'react-select'
 const options = [
   {value: 'processing', label: 'Processing'},
   {value: 'shipped', label: 'Shipped'},
-  {value: 'received', label: 'Received'}
+  {value: 'received', label: 'Received'},
+  {value: 'cancelled', label: 'Cancelled'}
 ]
 
 const getTotalAmount = products => {
