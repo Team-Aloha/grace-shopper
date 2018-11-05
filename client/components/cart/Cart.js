@@ -42,7 +42,6 @@ class Cart extends React.Component {
   }
 
   render() {
-    let test = this.props.products[0]
     const productsInCart = []
     let totalAmount = 0
     this.props.cart.forEach(product => {
