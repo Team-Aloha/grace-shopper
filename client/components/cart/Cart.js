@@ -9,10 +9,8 @@ class Cart extends React.Component {
     if (!this.props.user.id) {
       let guestCart = JSON.parse(localStorage.getItem('cart'))
       //filter out ID you are removing
-      console.log('precv cart', guestCart)
       const guestCartToAdd = guestCart.filter(product => product.id !== +id)
 
-      console.log(guestCartToAdd)
       localStorage.setItem('cart', JSON.stringify(guestCartToAdd))
       this.props.setCart(guestCartToAdd)
     } else {
@@ -23,8 +21,8 @@ class Cart extends React.Component {
 
   handlePlaceOrder = (products, type) => {
     console.log('placing order!!', products, type)
-    if (!this.props.user.id) localStorage.setItem('cart', JSON.stringify([]))
-    this.props.sendOrder(products, type)
+    // if (!this.props.user.id) localStorage.setItem('cart', JSON.stringify([]))
+    this.props.sendOrder(products, type, this.props.user.id)
   }
   componentDidMount() {
     //ask if theres a user
@@ -68,7 +66,6 @@ class Cart extends React.Component {
                       item={displayItem}
                       quantity={this.props.cart[i].quantity}
                       handleRemove={this.handleRemove}
-                      sendQuantityBack={this.receiveStateFromChild}
                     />
                   )
                 }

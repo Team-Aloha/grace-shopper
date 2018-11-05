@@ -86,13 +86,23 @@ export const updateQuantity = product => async dispatch => {
   products: [array of objects...AKA the cart],
   type: 'registered' or 'guest'
 }
+it expects a response:
+{
+  status: 'success' or 'fail'
+  message: if success: an object containing order, if fail a message why
+}
 */
-export const sendOrder = (products, type) => async dispatch => {
+export const sendOrder = (products, type, loggedIn) => async dispatch => {
   try {
-    console.log('i am testing to see how to tell if i am logged in')
+    console.log('AM I LOGGED IN', loggedIn)
     const {data} = await axios.post('/api/orders/', {products, type})
     console.log(data)
-    dispatch(placeOrder())
+    if (data.status === 'success') {
+      if (!loggedIn) localStorage.setItem('cart', JSON.stringify([]))
+      dispatch(placeOrder())
+    } else {
+      console.log('YOUR ORDER FAILED.')
+    }
   } catch (err) {
     console.log(err)
   }

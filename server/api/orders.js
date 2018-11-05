@@ -30,49 +30,100 @@ router.post('/test', async (req, res, next) => {
 router.post('/', async (req, res, next) => {
   try {
     const {products} = req.body
-    //create array of IDs so we can fetch the price info from Product
-    const ids = products.map(item => item.id)
-    const productInfo = await Product.findAll({
-      where: {
-        id: {$in: ids}
-      },
-      attributes: ['id', 'price']
-    })
-
-    //make order array...
-    //order array needs to have a products with: [{id, quantity, price}]
-    const orderProducts = products.map(item => {
-      const {id, quantity} = item
-
-      //filter found products to find  the price that matches the id
-      const foundPrice = productInfo.filter(prod => {
-        if (+id === +prod.id) {
-          return prod
-        }
+    //create response object
+    const response = {
+      status: '',
+      message: []
+    }
+    if (products.length === 0) {
+      response.status = 'fail'
+      response.message.push('No blank orders')
+    } else {
+      // console.log('DEBUG: do we continue')
+      //create array of IDs so we can fetch the price info from Product
+      const ids = products.map(item => item.id)
+      const productInfo = await Product.findAll({
+        where: {
+          id: {$in: ids}
+        },
+        attributes: ['id', 'title', 'price', 'quantity']
       })
 
-      //foundPrice is now an array of size 1 so pull price from it
-      const {price} = foundPrice[0]
-      return {id, quantity, price}
-    })
+      //make order array...
+      //order array needs to have a products with: [{id, quantity, price}]
+      //also need to check if quantity allows order here
+      // console.log(productInfo)
 
-    //orderProducts is now what we will send to our orders DB!!
-    //first lets delete the cart
-    if (req.user) {
-      //only need to delete cart for a logged in user
-      await Cart.update(
-        {products: []},
-        {returning: true, where: {userId: req.user.id}}
-      )
-    }
+      const updatedProducts = []
+      const orderProducts = products.map(item => {
+        const {id, quantity} = item
 
-    //make new order
-    const logId = !req.user ? null : req.user.id
-    await Order.create({
-      products: orderProducts,
-      userId: logId
-    })
-    res.json(orderProducts)
+        //filter found products to find  the price that matches the id
+        //maybe add a check here if quantity is allowed?
+
+        const foundPrice = productInfo.filter(prod => {
+          if (+id === +prod.id) {
+            // console.log('found item has id ', id)
+            // console.log('we want to buy ', quantity)
+            // console.log('on server it has ', prod.quantity)
+            if (+prod.quantity >= +quantity) {
+              //this item is allowed to be purchased. push it to updatedProducts
+              //updateProducts contains the new quantity that will be
+              //posted in the database
+              updatedProducts.push({id, quantity: prod.quantity - quantity})
+            } else {
+              //if there is not enough quantity, send fail status with msg
+              response.status = 'failed'
+              response.message.push(
+                `There are not enough ${prod.title} in stock`
+              )
+            }
+            return prod
+          }
+        })
+        //foundPrice is now an array of size 1 so pull price from it
+        const {price} = foundPrice[0]
+        return {id, quantity, price}
+      })
+      // console.log('DEBUG')
+      // console.log(updatedProducts)
+      // console.log(orderProducts)
+
+      //orderProducts is now what we will send to our orders DB!!
+      //if we have failed, no need to do anything else
+      if (response.status !== 'failed') {
+        //if logged in, delete cart
+
+        if (req.user) {
+          await Cart.update(
+            {products: []},
+            {returning: true, where: {userId: req.user.id}}
+          )
+        }
+
+        //make new order
+        const logId = !req.user ? null : req.user.id
+        await Order.create({
+          products: orderProducts,
+          userId: logId
+        })
+        response.status = 'success'
+        response.message = orderProducts
+      }
+
+      //update database for updated quantity
+      updatedProducts.forEach(async newProduct => {
+        await Product.update(
+          {quantity: newProduct.quantity},
+          {where: {id: newProduct.id}}
+        )
+      })
+    } //end of else
+    let status;
+    if (response.status === 'failed') {
+      status= 400
+    } else status = 200
+    res.status(status).json(response)
   } catch (err) {
     next(err)
   }
