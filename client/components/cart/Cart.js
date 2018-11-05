@@ -1,10 +1,16 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {getCart, deleteProduct, setCart, sendOrder} from '../../store'
+import {
+  getCart,
+  deleteProduct,
+  setCart,
+  sendOrder
+} from '../../store'
 import {default as SingleCartItem} from './SingleCartItem'
 const numeral = require('numeral')
 
 class Cart extends React.Component {
+
   handleRemove = id => {
     //if user is not logged in, remove item
     if (!this.props.user.id) {
@@ -21,7 +27,7 @@ class Cart extends React.Component {
   }
 
   handlePlaceOrder = (products, type) => {
-    console.log('placing order!!', products, type)
+    //console.log('placing order!!', products, type)
     // if (!this.props.user.id) localStorage.setItem('cart', JSON.stringify([]))
     this.props.sendOrder(products, type, this.props.user.id)
   }
@@ -34,6 +40,7 @@ class Cart extends React.Component {
       this.props.getCart()
     }
   }
+
   render() {
     const productsInCart = []
     let totalAmount = 0
@@ -53,6 +60,7 @@ class Cart extends React.Component {
               <tr>
                 <th>Product Name</th>
                 <th>Quantity</th>
+                <th>Inventory</th>
                 <th>Unit Price</th>
                 <th>Total Price</th>
                 <th />
@@ -69,6 +77,7 @@ class Cart extends React.Component {
                       key={displayItem.id}
                       item={displayItem}
                       quantity={this.props.cart[i].quantity}
+                      inventory={this.props.products[i].quantity}
                       handleRemove={this.handleRemove}
                     />
                   )
@@ -77,10 +86,11 @@ class Cart extends React.Component {
               <tr>
                 <td />
                 <td />
+                <td />
                 <td>
                   <b>Cart Subtotal:</b>
                 </td>
-                <td>{numeral(totalAmount/1000).format('$0,0.00')}</td>
+                <td>{numeral(totalAmount / 100).format('$0,0.00')}</td>
                 <td />
               </tr>
             </tbody>
@@ -88,12 +98,12 @@ class Cart extends React.Component {
         </div>
         <button
           type="button"
-          onClick={() =>
+          onClick={() => {
             this.handlePlaceOrder(
               this.props.cart,
               this.props.user.id ? 'registered' : 'guest'
             )
-          }
+          }}
         >
           Place Order Test
         </button>

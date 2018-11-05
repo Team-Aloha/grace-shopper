@@ -1,11 +1,13 @@
 import history from '../history'
 import axios from 'axios'
+
 /**
  * ACTION TYPES
  */
 const SET_CART = 'SET_CART'
 const PLACE_ORDER = 'PLACE_ORDER'
 const CHECK_LOCALSTORAGE = 'CHECK_LOCALSTORAGE'
+const TOAST_ERROR = 'TOAST_ERROR'
 
 // const ADD_PRODUCT = 'ADD_PRODUCT'
 // const REMOVE_PRODUCT = 'REMOVE_PRODUCT'
@@ -15,6 +17,7 @@ const CHECK_LOCALSTORAGE = 'CHECK_LOCALSTORAGE'
  * INITIAL STATE
  */
 const initialState = []
+
 
 /**
  * ACTION CREATORS
@@ -30,6 +33,10 @@ export const placeOrder = () => ({
 
 export const checkLocalStorage = () => ({
   type: CHECK_LOCALSTORAGE
+})
+export const sendError = error => ({
+  type: TOAST_ERROR,
+  error
 })
 
 /**
@@ -100,6 +107,7 @@ export const sendOrder = (products, type, token) => async dispatch => {
     }
   } catch (err) {
     console.log(err)
+    dispatch(sendError(err))
   }
 }
 /**
