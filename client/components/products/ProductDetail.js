@@ -1,12 +1,7 @@
 import React from 'react'
 import {withRouter, Link} from 'react-router-dom'
 import {connect} from 'react-redux'
-import {
-  fetchOneProduct,
-  putProductToCart,
-  setCart,
-  checkLocalStorage
-} from '../../store'
+import {fetchOneProduct, putProductToCart, setCart} from '../../store'
 import history from '../../history'
 const numeral = require('numeral')
 
@@ -71,14 +66,16 @@ class ProductDetail extends React.Component {
     } else {
       this.props.addProduct(productToAdd)
     }
-    this.props.checkLocalStorage()
+    console.log(this.props);
     history.push('/products')
   }
 
   render() {
+
     const {product} = this.props
-    const price = numeral(product.price/1000).format('$0,0.00')
+    const price = numeral(product.price/100).format('$0,0.00')
     return (
+
       <React.Fragment>
         <div className="container">
           <div className="row">
@@ -92,6 +89,7 @@ class ProductDetail extends React.Component {
                   <h5>{product.title}</h5>
                   <h6>{price}</h6>
                   <p>{product.description}</p>
+                  <p>Inventory: {product.quantity}</p>
                 </div>
               </div>
               <div className="row">
@@ -139,7 +137,6 @@ const mapDispatchToProps = dispatch => ({
   getAProduct: productId => dispatch(fetchOneProduct(productId)),
   //{id: 1, quantity: 2}
   addProduct: product => dispatch(putProductToCart(product)),
-  checkLocalStorage: () => dispatch(checkLocalStorage()),
   setCart: cart => dispatch(setCart(cart))
 })
 

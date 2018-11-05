@@ -18,6 +18,7 @@ const ProductCard = props => {
             <Link to={`/products/${product.id}`}>
               <span className="card-title center-align">{product.title}</span>
             </Link>
+            <p className="center-align">Inventory: {product.quantity}</p>
             <div className="center-align">{price}</div>
           </div>
         </div>

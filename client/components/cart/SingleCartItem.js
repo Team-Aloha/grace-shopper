@@ -39,9 +39,9 @@ class SingleCartItem extends React.Component {
 
   render() {
     //calculate unit price and convert to currency
-    const price = numeral(this.props.item.price/1000).format('$0,0.00')
+    const price = numeral(this.props.item.price/100).format('$0,0.00')
     //calculate total price and convert to currency
-    const total = numeral((this.props.quantity * this.props.item.price)/1000).format('$0,0.00')
+    const total = numeral((this.props.quantity * this.props.item.price)/100).format('$0,0.00')
 
 
     return (
@@ -62,6 +62,7 @@ class SingleCartItem extends React.Component {
               />
             </div>
           </td>
+          <td>{this.props.inventory}</td>
           <td>{price}</td>{/* price calculated line right below render*/}
           <td>{total}</td>{/* price calculated line right below render */}
           <td>
