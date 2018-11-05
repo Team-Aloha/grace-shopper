@@ -1,16 +1,10 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {
-  getCart,
-  deleteProduct,
-  setCart,
-  sendOrder
-} from '../../store'
+import {getCart, deleteProduct, setCart, sendOrder} from '../../store'
 import {default as SingleCartItem} from './SingleCartItem'
 const numeral = require('numeral')
 
 class Cart extends React.Component {
-
   handleRemove = id => {
     //if user is not logged in, remove item
     if (!this.props.user.id) {
@@ -96,17 +90,6 @@ class Cart extends React.Component {
             </tbody>
           </table>
         </div>
-        <button
-          type="button"
-          onClick={() => {
-            this.handlePlaceOrder(
-              this.props.cart,
-              this.props.user.id ? 'registered' : 'guest'
-            )
-          }}
-        >
-          Place Order Test
-        </button>
       </div>
     )
   }
