@@ -2,7 +2,7 @@ const router = require('express').Router()
 const {Order, Product, Cart} = require('../db/models')
 
 const {isLoggedIn, adminsOnly, testingOnly} = require('../utils/apiMiddleware')
-
+const stripe = require('stripe')(process.env.EXPRESS_STRIPE_KEY)
 /*TODO:
 
 look where i can refactor to fetch from cart instead of getting info from server
@@ -84,7 +84,6 @@ router.post('/', async (req, res, next) => {
         const {id, quantity} = item
 
         //filter found products to find  the price that matches the id
-        //maybe add a check here if quantity is allowed?
 
         const foundPrice = productInfo.filter(prod => {
           if (+id === +prod.id) {
@@ -116,33 +115,50 @@ router.post('/', async (req, res, next) => {
 
       //orderProducts is now what we will send to our orders DB!!
       //if we have failed, no need to do anything else
+      console.log('MAKING AN ORDER with ', orderProducts)
       if (response.status !== 'failed') {
-        //if logged in, delete cart
-
-        if (req.user) {
-          await Cart.update(
-            {products: []},
-            {returning: true, where: {userId: req.user.id}}
-          )
-        }
-
-        //make new order
-        const logId = !req.user ? null : req.user.id
-        await Order.create({
-          products: orderProducts,
-          userId: logId
+        console.log('TIME TO ACCUM')
+        let totalPrice = 0
+        orderProducts.forEach(prod => {
+          totalPrice += +prod.quantity * +prod.price
         })
-        response.status = 'success'
-        response.message = orderProducts
-      }
+        console.log(req.body.token)
+        //if logged in, delete cart
+        const charge = await stripe.charges.create({
+          amount: totalPrice,
+          currency: 'usd',
+          description: 'test order',
+          source: req.body.token.id
+        })
+        console.log(charge)
+        if (charge.status === 'succeeded') {
+          if (req.user) {
+            await Cart.update(
+              {products: []},
+              {returning: true, where: {userId: req.user.id}}
+            )
+          }
 
-      //update database for updated quantity
-      updatedProducts.forEach(async newProduct => {
-        await Product.update(
-          {quantity: newProduct.quantity},
-          {where: {id: newProduct.id}}
-        )
-      })
+          //make new order
+          const logId = !req.user ? null : req.user.id
+          await Order.create({
+            products: orderProducts,
+            userId: logId
+          })
+          //update database for updated quantity
+          updatedProducts.forEach(async newProduct => {
+            await Product.update(
+              {quantity: newProduct.quantity},
+              {where: {id: newProduct.id}}
+            )
+          })
+          response.status = 'success'
+          response.message = orderProducts
+        } else {
+          response.status = 'failed'
+          response.message.push('Stripe error!')
+        }
+      }
     } //end of else
     let status
     if (response.status === 'failed') {
