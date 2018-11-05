@@ -1,13 +1,11 @@
 import history from '../history'
 import axios from 'axios'
-import {GET_USER, REMOVE_USER} from './user'
 /**
  * ACTION TYPES
  */
 const SET_CART = 'SET_CART'
 const PLACE_ORDER = 'PLACE_ORDER'
 const CHECK_LOCALSTORAGE = 'CHECK_LOCALSTORAGE'
-const SET_PROMPT_USER_ADD_LOCAL_CART = 'SET_PROMPT_USER_ADD_LOCAL_CART'
 
 // const ADD_PRODUCT = 'ADD_PRODUCT'
 // const REMOVE_PRODUCT = 'REMOVE_PRODUCT'
@@ -34,10 +32,6 @@ export const checkLocalStorage = () => ({
   type: CHECK_LOCALSTORAGE
 })
 
-export const setPromptUserAddLocalCart = decision => ({
-  type: SET_PROMPT_USER_ADD_LOCAL_CART,
-  decision
-})
 /**
  * THUNK CREATORS
  */
@@ -121,15 +115,6 @@ export default function(state = initialState, action) {
   }
 }
 
-export function shouldPromptUser(state = false, action) {
-  switch (action.type) {
-    case SET_PROMPT_USER_ADD_LOCAL_CART:
-      return action.decision
-    default:
-      return state
-  }
-}
-
 export function localCartMiddleware(store) {
   return next => action => {
     if (action.type === CHECK_LOCALSTORAGE) {
@@ -153,35 +138,6 @@ export function localCartMiddleware(store) {
 
     // Call the next dispatch method in the middleware chain.
     let returnValue = next(action)
-
-    if (action.type === GET_USER) {
-      // console.log('the user logged in')
-      let localStorageCart = localStorage.getItem('cart')
-        ? JSON.parse(localStorage.getItem('cart'))
-        : []
-      const state = store.getState()
-      if (localStorage.length > 0) {
-        console.log('there is something in the local cart after user logged in')
-        store.dispatch(setPromptUserAddLocalCart(true))
-      } else {
-        store.dispatch(setPromptUserAddLocalCart(false))
-      }
-    }
-
-    if (action.type === REMOVE_USER) {
-      // console.log('the user logged out')
-      let localStorageCart = localStorage.getItem('cart')
-        ? JSON.parse(localStorage.getItem('cart'))
-        : []
-      const state = store.getState()
-      console.log('the state', state)
-      if (localStorage.length > 0) {
-        // console.log('there is something in the local cart after user logged in')
-        store.dispatch(setPromptUserAddLocalCart(true))
-      } else {
-        store.dispatch(setPromptUserAddLocalCart(false))
-      }
-    }
 
     // This will likely be the action itself, unless
     // a middleware further in chain changed it.

@@ -9,11 +9,7 @@ import {singleProduct as product} from './products'
 import filter from './filter'
 import categories from './categories'
 import cart from './cart'
-import {
-  checkLocalStorageListener,
-  localCartMiddleware,
-  shouldPromptUser
-} from './cart'
+import {checkLocalStorageListener, localCartMiddleware} from './cart'
 
 const reducer = combineReducers({
   user,
