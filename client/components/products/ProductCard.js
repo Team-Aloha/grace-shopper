@@ -2,10 +2,9 @@ import React from 'react'
 import {withRouter, Link} from 'react-router-dom'
 const numeral = require('numeral')
 
-
 const ProductCard = props => {
   const {product} = props
-  const price = numeral(product.price/1000).format('$0,0.00')
+  const price = numeral(product.price / 100).format('$0,0.00')
 
   return (
     <React.Fragment>
