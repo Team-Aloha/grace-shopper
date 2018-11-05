@@ -139,7 +139,7 @@ export class OrderList extends React.Component {
                 {this.props.orders.map(order => {
                   return (
                     <tr key={order.id}>
-                      <td>{order.createdAt}</td>
+                      <td>{order.createdAt.toString().slice(0, -14)}</td>
                       <td>
                         {order.products.map(product => (
                           <p key={product.id}>
