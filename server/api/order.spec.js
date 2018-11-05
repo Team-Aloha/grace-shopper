@@ -3,6 +3,8 @@ const {expect} = require('chai')
 const db = require('../db')
 const {Order, Product} = require('../db/models')
 const app = require('../index')
+const agent = require('supertest')(app)
+
 // const Cart = db.model('cart')
 // const agent = require('supertest')(app)
 const {
@@ -42,6 +44,10 @@ describe('Category API routes', () => {
         }
       ])
     })
+    it('GET /api/orders does not allow a non logged in user to access the route', async () => {
+      //should return 401: unauthorized
+      await agent.get('/api/orders').expect(401)
+    })
     it('GET /api/orders returns empty array for no orders', async () => {
       const user = await createUserWithNoCart('cart@cart.com')
 
@@ -79,7 +85,7 @@ describe('Category API routes', () => {
 
     it('POST /api/orders saves prices at time of purchase', async () => {
       const user = await createUserWithNoCart('cart@cart.com')
-      const res = await user.post('/api/orders/').send({
+      const res = await user.post('/api/orders/nostripe').send({
         products: [{id: 2, quantity: 1}, {id: 1, quantity: 3}]
       })
       expect(res.body.message).to.be.an('array')
@@ -91,7 +97,7 @@ describe('Category API routes', () => {
       const user = await createUserWithCart('cart@cart.com')
       //user has this cart:
       //    products: [{id: 1, quantity: 2}, {id: 2, quantity: 2}]
-      const res = await user.post('/api/orders/').send({
+      const res = await user.post('/api/orders/nostripe').send({
         products: [{id: 1, quantity: 2}, {id: 2, quantity: 2}]
       })
 
@@ -103,7 +109,7 @@ describe('Category API routes', () => {
     it('POST /api/orders makes 1 order if posted once', async () => {
       const user = await createUserWithCart('cart@cart.com')
 
-      await user.post('/api/orders/').send({
+      await user.post('/api/orders/nostripe').send({
         products: [{id: 1, quantity: 2}, {id: 2, quantity: 2}]
       })
       const res = await user.get('/api/orders').expect(200)
@@ -113,13 +119,13 @@ describe('Category API routes', () => {
     it('POST /api/orders makes 2 orders if 2 separate orders are made', async () => {
       const user = await createUserWithCart('cart@cart.com')
 
-      await user.post('/api/orders/').send({
+      await user.post('/api/orders/nostripe').send({
         products: [{id: 1, quantity: 2}, {id: 2, quantity: 2}]
       })
 
       await user.put('/api/cart/add').send({id: 1, quantity: 2})
       await user.put('/api/cart/add').send({id: 2, quantity: 5})
-      await user.post('/api/orders/').send({
+      await user.post('/api/orders/nostripe').send({
         products: [{id: 1, quantity: 2}, {id: 2, quantity: 5}]
       })
       const res = await user.get('/api/orders').expect(200)
@@ -145,7 +151,7 @@ describe('Category API routes', () => {
       //expected quantity for product 1: 18, 2: 8
       const user = await createUserWithCart('cart@cart.com')
 
-      await user.post('/api/orders/').send({
+      await user.post('/api/orders/nostripe').send({
         products: [{id: 1, quantity: 2}, {id: 2, quantity: 2}]
       })
 
@@ -160,7 +166,7 @@ describe('Category API routes', () => {
       const user = await createUserWithCart('cart@cart.com')
 
       const res = await user
-        .post('/api/orders/')
+        .post('/api/orders/nostripe')
         .send({
           products: [{id: 1, quantity: 20000}, {id: 2, quantity: 2}]
         })

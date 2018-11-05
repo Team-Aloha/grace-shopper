@@ -9,6 +9,8 @@ import {
 } from '../../store'
 import history from '../../history'
 import EditProductForm from '../admin/EditProductForm'
+const numeral = require('numeral')
+
 
 class ProductDetail extends React.Component {
   constructor(props) {
@@ -77,6 +79,7 @@ class ProductDetail extends React.Component {
 
   render() {
     const {product} = this.props
+
     let button;
 
     if (this.props.user.isAdmin){
@@ -136,6 +139,9 @@ class ProductDetail extends React.Component {
       )
      } else {
 
+
+    const price = numeral(product.price/1000).format('$0,0.00')
+
     return (
 
       <React.Fragment>
@@ -149,7 +155,7 @@ class ProductDetail extends React.Component {
               <div className="row">
                 <div className="col">
                   <h5>{product.title}</h5>
-                  <h6>{product.price}</h6>
+                  <h6>{price}</h6>
                   <p>{product.description}</p>
                 </div>
               </div>

@@ -1,7 +1,8 @@
 const router = require('express').Router()
 const {Cart} = require('../db/models')
+const {isLoggedIn} = require('../utils/apiMiddleware')
 
-router.get('/', async (req, res, next) => {
+router.get('/', isLoggedIn, async (req, res, next) => {
   try {
     const cart = await Cart.findOrCreate({
       where: {userId: req.user.id}
@@ -12,7 +13,7 @@ router.get('/', async (req, res, next) => {
   }
 })
 
-router.put('/add', async (req, res, next) => {
+router.put('/add', isLoggedIn, async (req, res, next) => {
   try {
     const cart = await Cart.findOne({
       where: {userId: req.user.id}
@@ -43,7 +44,7 @@ router.put('/add', async (req, res, next) => {
   }
 })
 
-router.put('/remove', async (req, res, next) => {
+router.put('/remove', isLoggedIn, async (req, res, next) => {
   try {
     const cart = await Cart.findOne({
       where: {userId: req.user.id}
@@ -71,7 +72,7 @@ router.put('/remove', async (req, res, next) => {
   }
 })
 
-router.put('/quantity', async (req, res, next) => {
+router.put('/quantity', isLoggedIn, async (req, res, next) => {
   try {
     const cart = await Cart.findOne({
       where: {userId: req.user.id}

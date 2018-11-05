@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {getCart} from '../../store'
+import {getCart, sendOrder} from '../../store'
 import StripeCheckout from 'react-stripe-checkout'
 if (process.env.NODE_ENV !== 'production') require('../../../secrets')
 //   import { handleToken } from '...store_path'
@@ -11,6 +11,13 @@ class StripeCheckoutButton extends Component {
     this.state = {
       loaded: false
     }
+  }
+
+  onToken = (products, id) => token => {
+    console.log('placing order WITH STRIPE!!')
+    console.log(token, products, id)
+    // if (!this.props.user.id) localStorage.setItem('cart', JSON.stringify([]))
+    this.props.sendOrder(products, id, token)
   }
   componentDidMount() {
     this.props.getCart()
@@ -40,11 +47,16 @@ class StripeCheckoutButton extends Component {
           name="GraceShopper"
           description={`${totalAmount} for Grace Shopper`}
           amount={totalAmount}
-          token={token => console.log(token)}
-          // token={token=>this.props.handleToken(token)}
+          token={this.onToken(
+            this.props.cart,
+            this.props.user.id ? 'registered' : 'guest'
+          )}
           stripeKey={process.env.REACT_APP_STRIPE_KEY}
         >
-          <button className="btn waves-effect waves-light btn-large blue lighten-2">
+          <button
+            type="button"
+            className="btn waves-effect waves-light btn-large blue lighten-2"
+          >
             Checkout
           </button>
         </StripeCheckout>
@@ -53,9 +65,11 @@ class StripeCheckoutButton extends Component {
   }
 }
 const mapStateToProps = state => {
+  const {cart, products, user} = state
   return {
-    cart: state.cart,
-    products: state.products
+    cart,
+    products,
+    user
   }
 }
 
@@ -63,6 +77,9 @@ const mapDispatchToProps = dispatch => {
   return {
     getCart: () => {
       dispatch(getCart())
+    },
+    sendOrder: (products, type, token) => {
+      dispatch(sendOrder(products, type, token))
     }
   }
 }

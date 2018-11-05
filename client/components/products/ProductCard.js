@@ -1,8 +1,11 @@
 import React from 'react'
 import {withRouter, Link} from 'react-router-dom'
+const numeral = require('numeral')
+
 
 const ProductCard = props => {
   const {product} = props
+  const price = numeral(product.price/1000).format('$0,0.00')
 
   return (
     <React.Fragment>
@@ -15,7 +18,7 @@ const ProductCard = props => {
             <Link to={`/products/${product.id}`}>
               <span className="card-title center-align">{product.title}</span>
             </Link>
-            <div className="center-align">${product.price}</div>
+            <div className="center-align">{price}</div>
           </div>
         </div>
       </div>
