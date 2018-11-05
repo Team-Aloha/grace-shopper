@@ -123,7 +123,7 @@ class OrderDetail extends React.Component {
             </ul>
           </div>
         </div>
-        <h3 className="center-align">Shipped To</h3>
+        <h3 className="center-align">Shipped To {order.address} {order.city} {order.state}</h3>
        </div>
     )
    } else {
