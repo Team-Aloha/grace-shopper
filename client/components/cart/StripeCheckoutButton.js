@@ -51,7 +51,7 @@ class StripeCheckoutButton extends Component {
             this.props.cart,
             this.props.user.id ? 'registered' : 'guest'
           )}
-          stripeKey={process.env.REACT_APP_STRIPE_KEY}
+          stripeKey="pk_test_k70oj61a7xpuXfEySnZR79IH"
         >
           <button
             type="button"

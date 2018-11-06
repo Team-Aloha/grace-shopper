@@ -71,12 +71,13 @@ export default function(state = defaultProducts, action) {
     case REMOVE_PRODUCT:
       return state
     case AMEND_PRODUCT: {
-      // const newState = state.map(prod => {
-      //   if (prod.id !== action.id) {
-      //     return prod
-      //   } else return action.prodiuct
-      // })
-      return [...state, action.product]
+      const newState = state.map(prod => {
+        if (prod.id !== action.product[0].id) {
+          return prod
+        } else return action.product[0]
+      })
+
+      return newState
     }
     default:
       return state
