@@ -5,3 +5,4 @@
  */
 export {default as EditProductForm} from './EditProductForm'
 export {default as AddProductForm} from './AddProductForm'
+export {default as Dashboard} from './Dashboard'
