@@ -54,7 +54,7 @@ nav ul a span.badge {
 }
 
 .wood {
-  background-image: url("https://gorhinohealth.com/wp-content/uploads/2017/02/Wood-Grain-Background-1.jpg");
+  background-image: url("./wood.jpg");
   background-repeat: no-repeat;
   height: 30vh;
   background-size: cover;
@@ -67,7 +67,7 @@ nav ul a span.badge {
 }
 
 .sunset {
-  background-image: url("https://buyincasalinda.com/wp-content/uploads/2018/05/Island-life.jpg");
+  background-image: url("./sunset.jpg");
   background-repeat: no-repeat;
   height: 110vh;
   background-size: cover;
