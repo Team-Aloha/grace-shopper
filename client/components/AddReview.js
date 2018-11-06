@@ -23,8 +23,8 @@ class AddReviewForm extends React.Component {
   handleSubmit = evt => {
     evt.preventDefault()
     const newReview = {stars: this.state.stars, text: this.state.text}
-
-    this.props.createReview(newReview)
+    console.log(this.props.id, 'productId')
+    this.props.createReview(newReview, this.props.id)
   }
 
   render() {
@@ -56,7 +56,7 @@ class AddReviewForm extends React.Component {
 }
 
 const mapDispatch = dispatch => ({
-  createReview: review => dispatch(postReview(review))
+  createReview: (review, id) => dispatch(postReview(review, id))
 })
 
 export default withRouter(connect(null, mapDispatch)(AddReviewForm))

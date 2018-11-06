@@ -14,9 +14,11 @@ export const fetchReviews = () => async dispatch => {
   dispatch(setReviews(reviews))
 }
 
-export const postReview = review => async dispatch => {
-  const response = await axios.post('/api/reviews', review)
+export const postReview = (review, productId) => async dispatch => {
+  const response = await axios.post('/api/reviews', {review, productId})
+  console.log(productId, 'thunk')
   const newReview = response.data
+
   dispatch(addReview(newReview))
 }
 
