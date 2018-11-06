@@ -23,11 +23,11 @@ class ProductDetail extends React.Component {
     const productId = this.props.match.params.productId
     this.props.getAProduct(productId)
 
-        //   if (this.props.user.name) {
-        //     this.setState({username: this.props.user.name})
-        // } else {
-        //     this.setState({username: 'Anonymous'})
-        // }
+    //   if (this.props.user.name) {
+    //     this.setState({username: this.props.user.name})
+    // } else {
+    //     this.setState({username: 'Anonymous'})
+    // }
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -84,12 +84,10 @@ class ProductDetail extends React.Component {
     console.log(this.props, 'productdetailprops')
     const price = numeral(product.price / 100).format('$0,0.00')
     // let button
-    
 
     if (this.props.user.isAdmin) {
       return (
         <React.Fragment>
-
           <div>
             <div className="container">
               <div className="row">
@@ -100,64 +98,65 @@ class ProductDetail extends React.Component {
                   />
                 </div>
 
-
-            <div >
-              <div className="container">
-                <div className="row">
-                  <div className="col xl6">
-                    <img
-                      className="responsive-img"
-                      src={`/${product.imageUrl}`}
-                    />
-                  </div>
-
-                  <div className="col xl6 white">
-                    <div className="row">
-                      <div className="col">
-                        <h5>{product.title}</h5>
-                        <h6>
-                          {product.quantity > 0
-                            ? 'Quantity: ' + product.quantity
-                            : 'Product No Longer Available'}
-                        </h6>
-                        <h6>{price}</h6>
-                        <p>{product.description}</p>
-                      </div>
-                    </div>
+                <div>
+                  <div className="container">
                     <div className="row">
                       <div className="col xl6">
-                        <div className="input-field">
-                          <input
-                            name="quantity"
-                            id="quantity"
-                            type="number"
-                            min="1"
-                            className="validate"
-                            value={this.state.quantity}
-                            onChange={this.handleChange}
-                          />
-                        </div>
+                        <img
+                          className="responsive-img"
+                          src={`/${product.imageUrl}`}
+                        />
                       </div>
 
-                      <div className="col xl6 center">
-                        <button
-                          type="button"
-                          onClick={this.handleClick}
-                          className="btn"
-                        >
-                          <i className="material-icons left">shopping_cart</i>Add
-                          To Cart
-                        </button>
+                      <div className="col xl6 white">
+                        <div className="row">
+                          <div className="col">
+                            <h5>{product.title}</h5>
+                            <h6>
+                              {product.quantity > 0
+                                ? 'Quantity: ' + product.quantity
+                                : 'Product No Longer Available'}
+                            </h6>
+                            <h6>{price}</h6>
+                            <p>{product.description}</p>
+                          </div>
+                        </div>
+                        <div className="row">
+                          <div className="col xl6">
+                            <div className="input-field">
+                              <input
+                                name="quantity"
+                                id="quantity"
+                                type="number"
+                                min="1"
+                                className="validate"
+                                value={this.state.quantity}
+                                onChange={this.handleChange}
+                              />
+                            </div>
+                          </div>
+
+                          <div className="col xl6 center">
+                            <button
+                              type="button"
+                              onClick={this.handleClick}
+                              className="btn"
+                            >
+                              <i className="material-icons left">
+                                shopping_cart
+                              </i>Add To Cart
+                            </button>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-              </div>
-          <div className="sand2">
-            <EditProductForm />
-          </div>
+                  <div className="sand2">
+                    <EditProductForm />
+                  </div>
 
-                {button}
+                  {button}
+                </div>
               </div>
             </div>
           </div>
@@ -166,70 +165,67 @@ class ProductDetail extends React.Component {
     } else {
       return (
         <React.Fragment>
-          <div className="sand" >
-          <div className="container">
-            <div className="row">
-              <div className="col xl6">
-                <img className="responsive-img" src="/defaultShirt.png" />
-              </div>
-
-              <div className="col xl6 white">
-                <div className="row">
-                  <div className="col">
-                    <h5>{product.title}</h5>
-                    <h6>{price}</h6>
-                    <p>{product.description}</p>
-                    <p>Inventory: {product.quantity}</p>
-                  </div>
+          <div className="sand">
+            <div className="container">
+              <div className="row">
+                <div className="col xl6">
+                  <img className="responsive-img" src="/defaultShirt.png" />
                 </div>
-                <div className="row">
-                  <div className="col xl6">
-                    <div className="input-field">
-                      <input
-                        name="quantity"
-                        id="quantity"
-                        type="number"
-                        min="1"
-                        className="validate"
-                        value={this.state.quantity}
-                        onChange={this.handleChange}
-                      />
+
+                <div className="col xl6 white">
+                  <div className="row">
+                    <div className="col">
+                      <h5>{product.title}</h5>
+                      <h6>{price}</h6>
+                      <p>{product.description}</p>
+                      <p>Inventory: {product.quantity}</p>
                     </div>
                   </div>
+                  <div className="row">
+                    <div className="col xl6">
+                      <div className="input-field">
+                        <input
+                          name="quantity"
+                          id="quantity"
+                          type="number"
+                          min="1"
+                          className="validate"
+                          value={this.state.quantity}
+                          onChange={this.handleChange}
+                        />
+                      </div>
+                    </div>
 
-                  <div className="col xl6 center">
-                    <button
-                      type="button"
-                      onClick={this.handleClick}
-                      className="btn"
-                    >
-                      <i className="material-icons left">shopping_cart</i>Add To
-                      Cart
-                    </button>
+                    <div className="col xl6 center">
+                      <button
+                        type="button"
+                        onClick={this.handleClick}
+                        className="btn"
+                      >
+                        <i className="material-icons left">shopping_cart</i>Add
+                        To Cart
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>
+              <div>
+                <h2>Submit a Review!</h2>
+                <AddReviewForm id={this.props.product.id} />
+                <h3>Reviews</h3>
+                {this.props.reviews.map(review => (
+                  <div>
+                    <p>Stars: {review.stars} </p>
+                    <p>
+                      {' '}
+                      Submitted by:{' '}
+                      {!review.user ? 'Anonymous' : review.user.name}
+                    </p>
+                    <p>{review.text}</p>
+                  </div>
+                ))}
+              </div>
             </div>
-            <div>
-              <h2>Submit a Review!</h2>
-              <AddReviewForm id={this.props.product.id}/>
-              <h3>Reviews</h3>
-              {this.props.reviews.map(review =>
-
-              (
-                <div>
-                  <p>Stars: {review.stars} </p>
-                  <p> Submitted by: {!review.user ? "Anonymous" : review.user.name}</p>
-                  <p>{review.text}</p>
-
-                </div>
-
-              )
-              )
-            }
-            </div>
-
-          </div>
           </div>
         </React.Fragment>
       )
@@ -241,7 +237,9 @@ const mapStateToProps = state => {
   return {
     product: state.product,
     user: state.user,
-    reviews: state.reviews.filter(review => review.productId === state.product.id)
+    reviews: state.reviews.filter(
+      review => review.productId === state.product.id
+    )
   }
 }
 
