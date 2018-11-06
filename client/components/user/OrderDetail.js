@@ -5,6 +5,7 @@ import {connect} from 'react-redux'
 import {fetchOneProduct, updateProduct} from '../../store'
 import {fetchCategories, fetchOrders} from '../../store'
 import store from '../../store'
+const numeral = require('numeral')
 
 const DUMMY_USER = {
   address: '13 elm',
@@ -95,24 +96,82 @@ class OrderDetail extends React.Component {
                         alt=""
                       />
                     </Link>
-                    <p>
-                      <h6 className="item-title">
-                        {this.getProductName(product.id)}
-                      </h6>{' '}
-                      <br />
-                    </p>
+                    <h6 className="item-title">
+                      {this.getProductName(product.id)}
+                    </h6>{' '}
+                    <br />
                     <a href="#!" className="secondary-content">
                       <p>
-                        Price: {product.price} <br />
+                        Price: {numeral(product.price / 100).format('$0,0.00')}{' '}
+                        <br />
                         Quantity: {product.quantity}
                       </p>
                     </a>
                   </li>
                 ))}
-                <h3 className="center-align">
-                  Shipped To {order.address} {order.city} {order.state}
-                </h3>
               </ul>
+            </div>
+          </div>
+          <h3 className="center-align">Shipped To</h3>
+          <div className="card">
+            <div className="card-content" id="order-card">
+              <div className="input-field">
+                <input
+                  name="address"
+                  id="address"
+                  type="text"
+                  className="validate"
+                  value={this.props.user.address}
+                  onChange={this.handleChange}
+                  readOnly={true}
+                />
+                <label className="active" htmlFor="address">
+                  Address
+                </label>
+              </div>
+              <div className="input-field">
+                <input
+                  name="city"
+                  id="city"
+                  type="text"
+                  className="validate"
+                  value={this.props.user.city}
+                  onChange={this.handleChange}
+                  readOnly={true}
+                />
+                <label className="active" htmlFor="city">
+                  City
+                </label>
+              </div>
+              <div className="input-field">
+                <input
+                  name="state"
+                  id="state"
+                  type="text"
+                  className="validate"
+                  value={this.props.user.state}
+                  onChange={this.handleChange}
+                  readOnly={true}
+                />
+                <label className="active" htmlFor="state">
+                  State
+                </label>
+              </div>
+              <div className="input-field">
+                <input
+                  name="zip"
+                  id="zip"
+                  type="text"
+                  pattern="[0-9]{5}"
+                  className="zip"
+                  value={this.props.user.zip}
+                  onChange={this.handleChange}
+                  readOnly={true}
+                />
+                <label className="active" htmlFor="zip">
+                  Zip
+                </label>
+              </div>
             </div>
           </div>
         </div>
