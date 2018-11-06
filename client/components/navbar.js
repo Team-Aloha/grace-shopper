@@ -6,10 +6,10 @@ import {logout} from '../store'
 
 const Navbar = ({handleClick, isLoggedIn, cartItemCount}) => (
   <div>
-    <nav>
-      <div className="nav-wrapper">
-        <Link className="brand-logo" to="/home">
-          Logo
+    <nav >
+      <div className="nav-wrapper teal lighten-2">
+        <Link className="brand-logo" to="/">
+          Palm Tees
         </Link>
 
         <ul id="nav-mobile" className="right hide-on-med-and-down">

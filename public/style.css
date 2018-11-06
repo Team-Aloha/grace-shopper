@@ -52,3 +52,33 @@ nav ul a span.badge {
     margin-top: -10px;
     margin-bottom: -10px;
 }
+
+.wood {
+  background-image: url("https://gorhinohealth.com/wp-content/uploads/2017/02/Wood-Grain-Background-1.jpg");
+  background-repeat: no-repeat;
+  height: 30vh;
+  background-size: cover;
+}
+.sand {
+  background-image: url("./sandy.jpg");
+  background-repeat: no-repeat;
+  height: 110vh;
+  background-size: cover;
+}
+
+.sunset {
+  background-image: url("https://buyincasalinda.com/wp-content/uploads/2018/05/Island-life.jpg");
+  background-repeat: no-repeat;
+  height: 110vh;
+  background-size: cover;
+}
+
+.shirts {
+  background-image: url("./shirts.jpg");
+  background-repeat: no-repeat;
+  height: 110vh;
+  background-size: cover;
+}
+
+
+

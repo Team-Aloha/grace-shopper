@@ -64,17 +64,20 @@ class AllProducts extends React.Component {
           </div>
           <div className="parallax">
             <img
-              src="http://jkreativ.jegtheme.com/wp-content/uploads/2014/05/geometric.png"
+              src="http://corkscrewjc.com/wp-content/uploads/2014/12/maui-hawaii-beach.jpg"
               alt="Unsplashed background img 2"
               style={{opacity: 1}}
             />
           </div>
         </div>
 
+<div className="yellow lighten-5">
+
+
         <div className="container">
           <div className="row">
             <nav>
-              <div id="category-nav" className="nav-wrapper">
+              <div id="category-nav" className="nav-wrapper teal lighten-2">
                 <ul className="left hide-on-med-and-down">
                   <li>
                     <a href="">Categories:</a>
@@ -109,6 +112,7 @@ class AllProducts extends React.Component {
             ))}
           </div>
          {this.renderButton()}
+        </div>
         </div>
       </React.Fragment>
 
