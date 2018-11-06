@@ -90,10 +90,6 @@ class ProductDetail extends React.Component {
         <div>
           <div className="container">
             <div className="row">
-              <div className="col xl6">
-                <img className="responsive-img" src={`/${product.imageUrl}`} />
-              </div>
-
               <div>
                 <div className="container">
                   <div className="row">
@@ -206,7 +202,7 @@ class ProductDetail extends React.Component {
                 <AddReviewForm id={this.props.product.id} />
                 <h3>Reviews</h3>
                 {this.props.reviews.map(review => (
-                  <div>
+                  <div key={review.id}>
                     <p>Stars: {review.stars} </p>
                     <p>
                       {' '}
