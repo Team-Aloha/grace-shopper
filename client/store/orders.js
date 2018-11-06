@@ -58,7 +58,7 @@ export default function(state = defaultOrders, action) {
   }
 }
 
-//???? why do we have a second function here???????
+//I don't think we use this anymore so can be removed
 export function singleOrder(state = {}, action) {
   switch (action.type) {
     case SET_ONE_ORDER:

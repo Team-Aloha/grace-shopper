@@ -82,6 +82,14 @@ class OrderDetail extends React.Component {
     return ''
   }
 
+  getProductImage = id => {
+    const productInfo = this.props.products.filter(product => id === product.id)
+    if (productInfo[0]) {
+      return productInfo[0].imageUrl
+    }
+    return ''
+  }
+
   render() {
     console.log(this.props, 'propsorderdetail')
     if (Object.keys(this.props.user).length < 1) {
@@ -92,48 +100,50 @@ class OrderDetail extends React.Component {
     console.log(this.props.orders, 'props.order')
     console.log(order, 'order')
     if (order) {
-      return (
-        <div className="container">
-          <h3 className="center-align">Order</h3>
-          <div className="card">
-            <div className="card-content" id="order-card">
-              <ul className="collection">
-                {order.products.map(product => (
-                  <li className="collection-item avatar" key={product.id}>
-                    {/* <i className="material-icons circle red">play_arrow</i> */}
-                    <Link to={`/products/${product.id}`}>
-                      <img
-                        className="order-image left"
-                        src="/defaultShirt.png"
-                        alt=""
-                      />
-                    </Link>
+    return (
+
+      <div className="container">
+        <h3 className="center-align">Order</h3>
+        <div className="card">
+          <div className="card-content" id="order-card">
+            <ul className="collection">
+              {order.products.map(product => (
+                <li className="collection-item avatar" key={product.id}>
+                  {/* <i className="material-icons circle red">play_arrow</i> */}
+                  <Link to={`/products/${product.id}`}>
+                    <img
+                      className="order-image left"
+                      src={`/${this.getProductImage(product.id)}`}
+                      alt=""
+                    />
+                  </Link>
+                  <p>
+                    <h6 className="item-title">{this.getProductName(product.id)}</h6>{' '}
+                    <br />
+                  </p>
+                  <a href="#!" className="secondary-content">
                     <p>
                       <h6 className="item-title">
                         {this.getProductName(product.id)}
                       </h6>{' '}
                       <br />
                     </p>
-                    <a href="#!" className="secondary-content">
-                      <p>
-                        Price: {numeral(+product.price / 100).format('$0,0.00')}{' '}
-                        <br />
-                        Quantity: {product.quantity}
-                      </p>
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
+                  </a>
+                </li>
+              ))}
+        {/* <h3 className="center-align">Shipped To {order.address} {order.city} {order.state}</h3> */}
+
+            </ul>
           </div>
           <h3 className="center-align">
             Shipped To {order.address} {order.city} {order.state}
           </h3>
         </div>
-      )
-    } else {
-      return <div />
-    }
+       </div>
+    )
+   } else {
+     return <div></div>
+   }
   }
 }
 
