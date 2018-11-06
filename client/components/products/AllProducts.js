@@ -102,7 +102,10 @@ class AllProducts extends React.Component {
                     </li>
                   ))}
                 </ul>
-                <form onSubmit={this.handleSubmitSearch}>
+                <form
+                  className="hide-on-med-and-down"
+                  onSubmit={this.handleSubmitSearch}
+                >
                   <div className="input-field right">
                     <input
                       id="search"
