@@ -111,6 +111,11 @@ nav ul a span.badge {
   height: 80vh;
   background-size: cover;
 }
-
+.tom {
+  background-image: url("./tom.jpg");
+  background-repeat: no-repeat;
+  height: 80vh;
+  background-size: cover;
+}
 
 
