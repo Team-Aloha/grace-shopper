@@ -56,7 +56,7 @@ class OrderDetail extends React.Component {
   componentDidMount() {
     const orderId = this.props.match.params.orderId
     this.props.fetchOrders()
-   // console.log(this.props, 'props for orderdetail')
+    // console.log(this.props, 'props for orderdetail')
     console.log(orderId, 'orderId')
   }
 
@@ -99,45 +99,45 @@ class OrderDetail extends React.Component {
     console.log(this.props.orders, 'props.order')
     console.log(order, 'order')
     if (order) {
-    return (
-
-      <div className="container">
-        <h3 className="center-align">Order</h3>
-        <div className="card">
-          <div className="card-content" id="order-card">
-            <ul className="collection">
-              {order.products.map(product => (
-                <li className="collection-item avatar" key={product.id}>
-                  {/* <i className="material-icons circle red">play_arrow</i> */}
-                  <Link to={`/products/${product.id}`}>
-                    <img
-                      className="order-image left"
-                      src={`/${this.getProductImage(product.id)}`}
-                      alt=""
-                    />
-                  </Link>
-                  <p>
-                    <h6 className="item-title">{this.getProductName(product.id)}</h6>{' '}
-                    <br />
-                  </p>
-                  <a href="#!" className="secondary-content">
+      return (
+        <div className="container">
+          <h3 className="center-align">Order</h3>
+          <div className="card">
+            <div className="card-content" id="order-card">
+              <ul className="collection">
+                {order.products.map(product => (
+                  <li className="collection-item avatar" key={product.id}>
+                    {/* <i className="material-icons circle red">play_arrow</i> */}
+                    <Link to={`/products/${product.id}`}>
+                      <img
+                        className="order-image left"
+                        src={`/${this.getProductImage(product.id)}`}
+                        alt=""
+                      />
+                    </Link>
                     <p>
-                      Price: {product.price} <br />
-                      Quantity: {product.quantity}
+                      <h6 className="item-title">
+                        {this.getProductName(product.id)}
+                      </h6>{' '}
+                      <br />
                     </p>
-                  </a>
-                </li>
-              ))}
-        {/* <h3 className="center-align">Shipped To {order.address} {order.city} {order.state}</h3> */}
-
-            </ul>
+                    <a href="#!" className="secondary-content">
+                      <p>
+                        Price: {product.price} <br />
+                        Quantity: {product.quantity}
+                      </p>
+                    </a>
+                  </li>
+                ))}
+                {/* <h3 className="center-align">Shipped To {order.address} {order.city} {order.state}</h3> */}
+              </ul>
+            </div>
           </div>
         </div>
-       </div>
-    )
-   } else {
-     return <div></div>
-   }
+      )
+    } else {
+      return <div />
+    }
   }
 }
 

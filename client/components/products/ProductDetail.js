@@ -141,8 +141,6 @@ class ProductDetail extends React.Component {
         </React.Fragment>
       )
     } else {
-      const price = numeral(product.price / 1000).format('$0,0.00')
-
       return (
         <React.Fragment>
           <div className="container">

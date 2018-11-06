@@ -71,7 +71,9 @@ class Cart extends React.Component {
                       key={displayItem.id}
                       item={displayItem}
                       quantity={this.props.cart[i].quantity}
-                      inventory={this.props.products[i].quantity}
+                      inventory={
+                        this.props.products[this.props.cart[i].id - 1].quantity
+                      }
                       handleRemove={this.handleRemove}
                     />
                   )
