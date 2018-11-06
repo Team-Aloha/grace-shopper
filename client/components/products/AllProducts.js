@@ -43,7 +43,7 @@ class AllProducts extends React.Component {
 
   handleSubmitSearch = evt => {
     evt.preventDefault()
-    console.log('you searched for', this.state.search)
+    console.log('submitted')
   }
   render() {
     // const isAdmin = this.state.user.isAdmin
@@ -54,7 +54,6 @@ class AllProducts extends React.Component {
     //     </button>
     //   )
     // }
-    console.log(this.props, 'props')
     if (!this.props) {
       return <div>Loading...</div>
     }
@@ -103,7 +102,7 @@ class AllProducts extends React.Component {
                     </li>
                   ))}
                 </ul>
-                <form onClick={this.handleSubmitSearch}>
+                <form onSubmit={this.handleSubmitSearch}>
                   <div className="input-field right">
                     <input
                       id="search"
