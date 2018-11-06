@@ -1,6 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {setVisibilityFilter} from '../../store'
+import {setVisibilityFilter, fetchProducts} from '../../store'
 import {withRouter, Link} from 'react-router-dom'
 import {default as ProductCard} from './ProductCard'
 const mapStateToProps = state => {
@@ -17,7 +17,8 @@ const mapStateToProps = state => {
   }
 }
 const mapDispatchToProps = dispatch => ({
-  setVisibilityFilter: newFilter => dispatch(setVisibilityFilter(newFilter))
+  setVisibilityFilter: newFilter => dispatch(setVisibilityFilter(newFilter)),
+  fetchProducts: () => dispatch(fetchProducts())
 })
 
 class AllProducts extends React.Component {
@@ -26,6 +27,10 @@ class AllProducts extends React.Component {
     this.state = {
       search: ''
     }
+  }
+
+  componentDidMount() {
+    this.props.fetchProducts()
   }
   renderButton() {
     if (this.props && this.props.user.isAdmin) {
@@ -131,9 +136,11 @@ class AllProducts extends React.Component {
               </nav>
             </div>
             <div className="row">
-              {this.props.prods.map(product => (
-                <ProductCard product={product} key={product.id} />
-              ))}
+              {this.props.prods.map(product => {
+                if (product.quantity > 0) {
+                  return <ProductCard product={product} key={product.id} />
+                }
+              })}
             </div>
             {this.renderButton()}
           </div>

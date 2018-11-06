@@ -24,17 +24,17 @@ const reducer = combineReducers({
 })
 const toastMiddleware = store => next => action => {
   if (action.error) {
-    vanillatoasts.create({ text: 'Not Enough Inventory', timeout: 5000 });
+    vanillatoasts.create({text: 'Not Enough Inventory', timeout: 5000})
   }
-  next(action);
-};
+  next(action)
+}
 
 const middleware = composeWithDevTools(
   applyMiddleware(
     toastMiddleware,
     thunkMiddleware,
-    createLogger({collapsed: true}),
-    localCartMiddleware
+    localCartMiddleware,
+    createLogger({collapsed: true})
   )
 )
 const store = createStore(reducer, middleware)

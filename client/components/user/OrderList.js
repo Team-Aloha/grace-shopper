@@ -16,59 +16,6 @@ const getTotalAmount = products => {
   return numeral(+totalAmount / 100).format('$0,0.00')
 }
 
-const DUMMY_ORDERS = [
-  {
-    id: 1,
-    createdAt: '1/1/2018',
-    status: 'shipped',
-    products: [
-      [
-        {
-          id: 1,
-          title: 'blue shirt',
-          price: 100,
-          quantity: 1,
-          imageUrl: 'defaultShirt.png'
-        }
-      ],
-      [
-        {
-          id: 2,
-          title: 'red shirt',
-          price: 200,
-          quantity: 1,
-          imageUrl: 'defaultShirt.png'
-        }
-      ]
-    ]
-  },
-  {
-    id: 2,
-    createdAt: '1/1/2018',
-    status: 'pending',
-    products: [
-      [
-        {
-          id: 1,
-          title: 'pink shirt',
-          price: 500,
-          quantity: 1,
-          imageUrl: 'defaultShirt.png'
-        }
-      ],
-      [
-        {
-          id: 2,
-          title: 'yellow shirt',
-          price: 500,
-          quantity: 2,
-          imageUrl: 'defaultShirt.png'
-        }
-      ]
-    ]
-  }
-]
-
 export class OrderList extends React.Component {
   componentDidMount() {
     const userId = this.props.match.params.userId
@@ -78,7 +25,9 @@ export class OrderList extends React.Component {
   }
 
   getProductName = id => {
+    console.log('called')
     const productInfo = this.props.products.filter(product => id === product.id)
+    console.log('debug ', productInfo)
     if (productInfo[0]) {
       return productInfo[0].title
     }

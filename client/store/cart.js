@@ -18,7 +18,6 @@ const TOAST_ERROR = 'TOAST_ERROR'
  */
 const initialState = []
 
-
 /**
  * ACTION CREATORS
  */
@@ -97,7 +96,6 @@ export const sendOrder = (products, type, token) => async dispatch => {
   try {
     console.log('received order', type)
     const {data} = await axios.post('/api/orders/', {products, type, token})
-    console.log(data)
     if (data.status === 'success') {
       if (type !== 'registered')
         localStorage.setItem('cart', JSON.stringify([]))
