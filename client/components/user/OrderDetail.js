@@ -17,11 +17,16 @@ const DUMMY_USER = {
 class OrderDetail extends React.Component {
   constructor(props) {
     super(props)
-    this.state = {}
-    // store.dispatch(fetchOneCampus(campusId))
+    this.state = {
+      name: '',
+      email: '',
+      address: '',
+      city: '',
+      state: '',
+      zip: ''
+    }
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
-    this.toggleEditProfile = this.toggleEditProfile.bind(this)
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -29,7 +34,7 @@ class OrderDetail extends React.Component {
     // props, now we want to set those values to our local state
     if (prevProps.user !== this.props.user) {
       this.setState({
-        order: this.props.user
+        ...this.props.user
       })
     }
   }
@@ -37,8 +42,7 @@ class OrderDetail extends React.Component {
   componentDidMount() {
     const orderId = this.props.match.params.orderId
     this.props.fetchOrders()
-    // console.log(this.props, 'props for orderdetail')
-    console.log(orderId, 'orderId')
+    this.setState({...this.props.user})
   }
 
   handleChange(evt) {
@@ -49,9 +53,6 @@ class OrderDetail extends React.Component {
 
   handleSubmit = evt => {
     evt.preventDefault()
-  }
-  toggleEditProfile = () => {
-    this.setState({readOnly: !this.state.readOnly})
   }
 
   getProductName = id => {
@@ -77,8 +78,6 @@ class OrderDetail extends React.Component {
     }
     const orderId = Number(this.props.match.params.orderId)
     const order = this.props.orders.filter(item => item.id === +orderId)[0]
-    console.log(this.props.orders, 'props.order')
-    console.log(order, 'order')
     if (order) {
       return (
         <div className="container">
