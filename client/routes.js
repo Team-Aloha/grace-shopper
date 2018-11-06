@@ -8,7 +8,8 @@ import {AllProducts, ProductDetail} from './components/products'
 import {
   EditProductForm,
   AddProductForm,
-  AdminUserList
+  AdminUserList,
+  Dashboard
 } from './components/admin'
 import {Profile, ProfilePage, OrderList, OrderDetail} from './components/user'
 /**
