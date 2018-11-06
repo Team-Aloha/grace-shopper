@@ -53,6 +53,10 @@ nav ul a span.badge {
     margin-bottom: -10px;
 }
 
+ nav#category-nav {
+    background: #939EBA !important;
+}
+
 .navbar-fixed nav {
 	position: fixed;
 	background: #ffff !important; 

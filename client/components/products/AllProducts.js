@@ -21,21 +21,29 @@ const mapDispatchToProps = dispatch => ({
 })
 
 class AllProducts extends React.Component {
-  renderButton(){
-
-    if(this.props && this.props.user.isAdmin){
-      return (
-        <button onClick={this.handleClick}>
-        Add a Product
-        </button>
-        )
-      }
+  constructor(props) {
+    super(props)
+    this.state = {
+      search: ''
     }
-
+  }
+  renderButton() {
+    if (this.props && this.props.user.isAdmin) {
+      return <button onClick={this.handleClick}>Add a Product</button>
+    }
+  }
 
   handleClick = () => {
     this.props.history.push('/admin/products/add')
+  }
+  handleChange = evt => {
+    evt.preventDefault()
+    this.setState({[evt.target.name]: evt.target.value})
+  }
 
+  handleSubmitSearch = evt => {
+    evt.preventDefault()
+    console.log('submitted')
   }
   render() {
     // const isAdmin = this.state.user.isAdmin
@@ -46,13 +54,11 @@ class AllProducts extends React.Component {
     //     </button>
     //   )
     // }
-    console.log(this.props, 'props')
     if (!this.props) {
       return <div>Loading...</div>
     }
 
     return (
-
       <React.Fragment>
         <div className="parallax-container valign-wrapper">
           <div className="section no-pad-bot">
@@ -73,33 +79,53 @@ class AllProducts extends React.Component {
 
         <div className="container">
           <div className="row">
-            <nav>
-              <div id="category-nav" className="nav-wrapper">
+            <nav id="category-nav">
+              <div className="nav-wrapper">
                 <ul className="left hide-on-med-and-down">
                   <li>
-                    <a href="">Categories:</a>
+                    <a className="white-text" href="">
+                      Categories:
+                    </a>
                   </li>
                   <li>
-                    <button
-                      type="button"
+                    <a
+                      className="white-text"
                       onClick={() => this.props.setVisibilityFilter(-1)}
                     >
                       All
-                    </button>
+                    </a>
                   </li>
                   {this.props.categories.map(category => (
                     <li key={category.id}>
-                      <button
-                        type="button"
+                      <a
+                        className="white-text"
                         onClick={() =>
                           this.props.setVisibilityFilter(category.id)
                         }
                       >
                         {category.name}
-                      </button>
+                      </a>
                     </li>
                   ))}
                 </ul>
+                <form
+                  className="hide-on-med-and-down"
+                  onSubmit={this.handleSubmitSearch}
+                >
+                  <div className="input-field right">
+                    <input
+                      id="search"
+                      type="search"
+                      name="search"
+                      onChange={this.handleChange}
+                      required
+                    />
+                    <label className="label-icon" htmlFor="search">
+                      <i className="material-icons">search</i>
+                    </label>
+                    <i className="material-icons">close</i>
+                  </div>
+                </form>
               </div>
             </nav>
           </div>
@@ -108,10 +134,9 @@ class AllProducts extends React.Component {
               <ProductCard product={product} key={product.id} />
             ))}
           </div>
-         {this.renderButton()}
+          {this.renderButton()}
         </div>
       </React.Fragment>
-
     )
   }
 }
