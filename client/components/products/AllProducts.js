@@ -3,6 +3,8 @@ import {connect} from 'react-redux'
 import {setVisibilityFilter, fetchProducts} from '../../store'
 import {withRouter, Link} from 'react-router-dom'
 import {default as ProductCard} from './ProductCard'
+
+
 const mapStateToProps = state => {
   return {
     categories: state.categories,

@@ -5,13 +5,16 @@ import {fetchOneProduct, putProductToCart, setCart} from '../../store'
 import history from '../../history'
 import EditProductForm from '../admin/EditProductForm'
 import numeral from 'numeral'
+import AddReviewForm from '../AddReview'
+import {AllReviews} from '../AllReviews'
 
 class ProductDetail extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
       quantity: 1,
-      guestCart: []
+      guestCart: [],
+      username: ''
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleClick = this.handleClick.bind(this)
@@ -19,6 +22,12 @@ class ProductDetail extends React.Component {
   componentDidMount() {
     const productId = this.props.match.params.productId
     this.props.getAProduct(productId)
+
+        //   if (this.props.user.name) {
+        //     this.setState({username: this.props.user.name})
+        // } else {
+        //     this.setState({username: 'Anonymous'})
+        // }
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -72,16 +81,25 @@ class ProductDetail extends React.Component {
 
   render() {
     const {product} = this.props
-
+    console.log(this.props, 'productdetailprops')
     const price = numeral(product.price / 100).format('$0,0.00')
-
-    let button
+    // let button
+    
 
     if (this.props.user.isAdmin) {
       return (
         <React.Fragment>
-          <div className="sand2">
-            <EditProductForm />
+
+          <div>
+            <div className="container">
+              <div className="row">
+                <div className="col xl6">
+                  <img
+                    className="responsive-img"
+                    src={`/${product.imageUrl}`}
+                  />
+                </div>
+
 
             <div >
               <div className="container">
@@ -134,6 +152,10 @@ class ProductDetail extends React.Component {
                     </div>
                   </div>
                 </div>
+              </div>
+          <div className="sand2">
+            <EditProductForm />
+          </div>
 
                 {button}
               </div>
@@ -188,8 +210,25 @@ class ProductDetail extends React.Component {
                 </div>
               </div>
             </div>
+            <div>
+              <h2>Submit a Review!</h2>
+              <AddReviewForm id={this.props.product.id}/>
+              <h3>Reviews</h3>
+              {this.props.reviews.map(review =>
 
-            {button}
+              (
+                <div>
+                  <p>Stars: {review.stars} </p>
+                  <p> Submitted by: {!review.user ? "Anonymous" : review.user.name}</p>
+                  <p>{review.text}</p>
+
+                </div>
+
+              )
+              )
+            }
+            </div>
+
           </div>
           </div>
         </React.Fragment>
@@ -201,7 +240,8 @@ class ProductDetail extends React.Component {
 const mapStateToProps = state => {
   return {
     product: state.product,
-    user: state.user
+    user: state.user,
+    reviews: state.reviews.filter(review => review.productId === state.product.id)
   }
 }
 

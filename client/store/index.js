@@ -5,6 +5,7 @@ import {composeWithDevTools} from 'redux-devtools-extension'
 import user from './user'
 import products from './products'
 import orders, {singleOrder} from './orders'
+import reviews from './reviews'
 import {singleProduct as product} from './products'
 import filter from './filter'
 import categories from './categories'
@@ -22,6 +23,7 @@ const reducer = combineReducers({
   cart,
   orders,
   singleOrder,
+  reviews,
   adminUserList
 })
 const toastMiddleware = store => next => action => {
@@ -48,4 +50,5 @@ export * from './filter'
 export * from './categories'
 export * from './cart'
 export * from './orders'
+export * from './reviews'
 export * from './adminUserList'
