@@ -5,7 +5,6 @@ import {connect} from 'react-redux'
 import {fetchOneProduct, updateProduct} from '../../store'
 import {fetchCategories, fetchOrders} from '../../store'
 import store from '../../store'
-const numeral = require('numeral')
 
 const DUMMY_USER = {
   address: '13 elm',
@@ -124,10 +123,8 @@ class OrderDetail extends React.Component {
                     </p>
                     <a href="#!" className="secondary-content">
                       <p>
-                        <h6 className="item-title">
-                          {this.getProductName(product.id)}
-                        </h6>{' '}
-                        <br />
+                        Price: {product.price} <br />
+                        Quantity: {product.quantity}
                       </p>
                     </a>
                   </li>
@@ -135,9 +132,6 @@ class OrderDetail extends React.Component {
                 {/* <h3 className="center-align">Shipped To {order.address} {order.city} {order.state}</h3> */}
               </ul>
             </div>
-            <h3 className="center-align">
-              Shipped To {order.address} {order.city} {order.state}
-            </h3>
           </div>
         </div>
       )
