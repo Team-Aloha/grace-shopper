@@ -15,6 +15,11 @@ const Dashboard = props => {
                 </a>
               </li>
               <li>
+                <Link className="white-text" to="/admin/products">
+                  View Products
+                </Link>
+              </li>
+              <li>
                 <Link className="white-text" to="/admin/products/add">
                   Add Products
                 </Link>
