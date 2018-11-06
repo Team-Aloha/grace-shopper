@@ -81,9 +81,6 @@ class ProductDetail extends React.Component {
       return (
         <React.Fragment>
           <div>
-            <EditProductForm />
-          </div>
-          <div>
             <div className="container">
               <div className="row">
                 <div className="col xl6">
@@ -134,6 +131,9 @@ class ProductDetail extends React.Component {
                   </div>
                 </div>
               </div>
+          <div>
+            <EditProductForm />
+          </div>
 
               {button}
             </div>
