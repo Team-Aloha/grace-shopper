@@ -5,52 +5,24 @@ import {connect} from 'react-redux'
 import {fetchOneProduct, updateProduct} from '../../store'
 import {fetchCategories, fetchOrders} from '../../store'
 import store from '../../store'
-
-const DUMMY_USER = {
-  address: '13 elm',
-  city: 'chicago',
-  state: 'il',
-  zip: 60651
-}
+const numeral = require('numeral')
 
 class OrderDetail extends React.Component {
   constructor(props) {
     super(props)
-    this.state = {}
-    // store.dispatch(fetchOneCampus(campusId))
-    this.handleChange = this.handleChange.bind(this)
-    this.handleSubmit = this.handleSubmit.bind(this)
-    this.toggleEditProfile = this.toggleEditProfile.bind(this)
-  }
-
-  componentDidUpdate(prevProps, prevState) {
-    // After fetching redux has passed in the student as
-    // props, now we want to set those values to our local state
-    if (prevProps.user !== this.props.user) {
-      this.setState({
-        order: this.props.user
-      })
+    this.state = {
+      name: '',
+      email: '',
+      address: '',
+      city: '',
+      state: '',
+      zip: ''
     }
   }
 
   componentDidMount() {
-    const orderId = this.props.match.params.orderId
     this.props.fetchOrders()
-    // console.log(this.props, 'props for orderdetail')
-    console.log(orderId, 'orderId')
-  }
-
-  handleChange(evt) {
-    evt.preventDefault()
-    const user = {[evt.target.name]: evt.target.value}
-    this.setState({user})
-  }
-
-  handleSubmit = evt => {
-    evt.preventDefault()
-  }
-  toggleEditProfile = () => {
-    this.setState({readOnly: !this.state.readOnly})
+    this.setState({...this.props.user})
   }
 
   getProductName = id => {
@@ -76,8 +48,6 @@ class OrderDetail extends React.Component {
     }
     const orderId = Number(this.props.match.params.orderId)
     const order = this.props.orders.filter(item => item.id === +orderId)[0]
-    console.log(this.props.orders, 'props.order')
-    console.log(order, 'order')
     if (order) {
       return (
         <div className="container">
@@ -95,24 +65,78 @@ class OrderDetail extends React.Component {
                         alt=""
                       />
                     </Link>
-                    <p>
-                      <h6 className="item-title">
-                        {this.getProductName(product.id)}
-                      </h6>{' '}
-                      <br />
-                    </p>
+                    <h6 className="item-title">
+                      {this.getProductName(product.id)}
+                    </h6>{' '}
+                    <br />
                     <a href="#!" className="secondary-content">
                       <p>
-                        Price: {product.price} <br />
+                        Price: {numeral(product.price / 100).format('$0,0.00')}{' '}
+                        <br />
                         Quantity: {product.quantity}
                       </p>
                     </a>
                   </li>
                 ))}
-                <h3 className="center-align">
-                  Shipped To {order.address} {order.city} {order.state}
-                </h3>
               </ul>
+            </div>
+          </div>
+          <h3 className="center-align">Shipped To</h3>
+          <div className="card">
+            <div className="card-content" id="order-card">
+              <div className="input-field">
+                <input
+                  name="address"
+                  id="address"
+                  type="text"
+                  className="validate"
+                  value={this.props.user.address}
+                  readOnly={true}
+                />
+                <label className="active" htmlFor="address">
+                  Address
+                </label>
+              </div>
+              <div className="input-field">
+                <input
+                  name="city"
+                  id="city"
+                  type="text"
+                  className="validate"
+                  value={this.props.user.city}
+                  readOnly={true}
+                />
+                <label className="active" htmlFor="city">
+                  City
+                </label>
+              </div>
+              <div className="input-field">
+                <input
+                  name="state"
+                  id="state"
+                  type="text"
+                  className="validate"
+                  value={this.props.user.state}
+                  readOnly={true}
+                />
+                <label className="active" htmlFor="state">
+                  State
+                </label>
+              </div>
+              <div className="input-field">
+                <input
+                  name="zip"
+                  id="zip"
+                  type="text"
+                  pattern="[0-9]{5}"
+                  className="zip"
+                  value={this.props.user.zip}
+                  readOnly={true}
+                />
+                <label className="active" htmlFor="zip">
+                  Zip
+                </label>
+              </div>
             </div>
           </div>
         </div>
