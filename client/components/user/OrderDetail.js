@@ -7,13 +7,6 @@ import {fetchCategories, fetchOrders} from '../../store'
 import store from '../../store'
 const numeral = require('numeral')
 
-const DUMMY_USER = {
-  address: '13 elm',
-  city: 'chicago',
-  state: 'il',
-  zip: 60651
-}
-
 class OrderDetail extends React.Component {
   constructor(props) {
     super(props)
@@ -25,34 +18,11 @@ class OrderDetail extends React.Component {
       state: '',
       zip: ''
     }
-    this.handleChange = this.handleChange.bind(this)
-    this.handleSubmit = this.handleSubmit.bind(this)
-  }
-
-  componentDidUpdate(prevProps, prevState) {
-    // After fetching redux has passed in the student as
-    // props, now we want to set those values to our local state
-    if (prevProps.user !== this.props.user) {
-      this.setState({
-        ...this.props.user
-      })
-    }
   }
 
   componentDidMount() {
-    const orderId = this.props.match.params.orderId
     this.props.fetchOrders()
     this.setState({...this.props.user})
-  }
-
-  handleChange(evt) {
-    evt.preventDefault()
-    const user = {[evt.target.name]: evt.target.value}
-    this.setState({user})
-  }
-
-  handleSubmit = evt => {
-    evt.preventDefault()
   }
 
   getProductName = id => {
@@ -121,7 +91,6 @@ class OrderDetail extends React.Component {
                   type="text"
                   className="validate"
                   value={this.props.user.address}
-                  onChange={this.handleChange}
                   readOnly={true}
                 />
                 <label className="active" htmlFor="address">
@@ -135,7 +104,6 @@ class OrderDetail extends React.Component {
                   type="text"
                   className="validate"
                   value={this.props.user.city}
-                  onChange={this.handleChange}
                   readOnly={true}
                 />
                 <label className="active" htmlFor="city">
@@ -149,7 +117,6 @@ class OrderDetail extends React.Component {
                   type="text"
                   className="validate"
                   value={this.props.user.state}
-                  onChange={this.handleChange}
                   readOnly={true}
                 />
                 <label className="active" htmlFor="state">
@@ -164,7 +131,6 @@ class OrderDetail extends React.Component {
                   pattern="[0-9]{5}"
                   className="zip"
                   value={this.props.user.zip}
-                  onChange={this.handleChange}
                   readOnly={true}
                 />
                 <label className="active" htmlFor="zip">
