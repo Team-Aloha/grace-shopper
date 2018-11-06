@@ -1,63 +1,46 @@
 import React from 'react'
-import {withRouter, Link} from 'react-router-dom'
+import {withRouter} from 'react-router-dom'
 import {connect} from 'react-redux'
-import {fetchOneProduct, updateProduct} from '../../store'
-import {fetchCategories} from '../../store'
-import store from '../../store'
 import StripeCheckoutButton from './StripeCheckoutButton'
 
 class CheckoutForm extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      user: {
-        name: '',
-        email: '',
-        address: '',
-        city: '',
-        state: '',
-        zip: ''
-      }
+      name: '',
+      email: '',
+      address: '',
+      city: '',
+      state: '',
+      zip: ''
     }
     // store.dispatch(fetchOneCampus(campusId))
     this.handleChange = this.handleChange.bind(this)
-    this.handleSubmit = this.handleSubmit.bind(this)
   }
 
   componentDidUpdate(prevProps, prevState) {
     // After fetching redux has passed in the student as
     // props, now we want to set those values to our local state
     if (prevProps.user !== this.props.user) {
-      //   console.log('the current student', this.props.student)
+      console.log('the current user', this.props.user)
       this.setState({
-        user: this.props.user
+        ...this.props.user
       })
     }
   }
 
   componentDidMount() {
     const userId = this.props.match.params.userId
-    this.setState({user: this.props.user})
+    this.setState({...this.props.user})
   }
 
   handleChange(evt) {
-    evt.preventDefault()
-    const user = {[evt.target.name]: evt.target.value}
-    this.setState({user})
-  }
-
-  handleSubmit = evt => {
-    evt.preventDefault()
+    this.setState({[evt.target.name]: evt.target.value})
   }
 
   render() {
-    // if (Object.keys(this.props.user).length < 1) {
-    //   return <div>User not logged in...</div>
-    // }
-
     return (
       <React.Fragment>
-        {' '}
         <div className="card">
           <div className="card-content">
             <form className="s12 l6" onSubmit={this.handleSubmit}>
@@ -68,7 +51,7 @@ class CheckoutForm extends React.Component {
                     id="name"
                     type="text"
                     className="validate"
-                    value={this.state.user.name}
+                    value={this.state.name}
                     onChange={this.handleChange}
                   />
                   <label className="active" htmlFor="name">
@@ -81,7 +64,7 @@ class CheckoutForm extends React.Component {
                     id="email"
                     type="email"
                     className="validate"
-                    value={this.state.user.email}
+                    value={this.state.email}
                     onChange={this.handleChange}
                   />
                   <label className="active" htmlFor="email">
@@ -94,7 +77,7 @@ class CheckoutForm extends React.Component {
                     id="address"
                     type="text"
                     className="validate"
-                    value={this.state.user.address}
+                    value={this.state.address}
                     onChange={this.handleChange}
                   />
                   <label className="active" htmlFor="address">
@@ -107,7 +90,7 @@ class CheckoutForm extends React.Component {
                     id="city"
                     type="text"
                     className="validate"
-                    value={this.state.user.city}
+                    value={this.state.city}
                     onChange={this.handleChange}
                   />
                   <label className="active" htmlFor="city">
@@ -120,7 +103,7 @@ class CheckoutForm extends React.Component {
                     id="state"
                     type="text"
                     className="validate"
-                    value={this.state.user.state}
+                    value={this.state.state}
                     onChange={this.handleChange}
                   />
                   <label className="active" htmlFor="state">
@@ -134,7 +117,7 @@ class CheckoutForm extends React.Component {
                     type="text"
                     pattern="[0-9]{5}"
                     className="zip"
-                    value={this.state.user.zip}
+                    value={this.state.zip}
                     onChange={this.handleChange}
                   />
                   <label className="active" htmlFor="zip">
@@ -146,7 +129,7 @@ class CheckoutForm extends React.Component {
               <div className="row">
                 <div className="col s12 m12 l12 xl12 center-align">
                   <div className="input-field">
-                    <StripeCheckoutButton />
+                    <StripeCheckoutButton userInfo={this.state} />
                   </div>
                 </div>
               </div>
@@ -164,7 +147,7 @@ const mapStateToProps = state => {
   }
 }
 
-const mapDispatchToProps = (dispatch, ownProps) => {
+const mapDispatchToProps = dispatch => {
   return {
     dispatch: dispatch
   }

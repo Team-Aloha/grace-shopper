@@ -5,10 +5,14 @@ import {Login, Signup, UserHome, Cart, AdminOrderList, Home, NotFound} from './c
 import {CheckoutForm, CheckoutPage} from './components/cart'
 import {me} from './store'
 import {AllProducts, ProductDetail} from './components/products'
-import {EditProductForm} from './components/admin'
-import {AddProductForm} from './components/admin'
+import {
+  EditProductForm,
+  AddProductForm,
+  AdminUserList,
+  AdminProductList,
+  Dashboard
+} from './components/admin'
 import {Profile, ProfilePage, OrderList, OrderDetail} from './components/user'
-
 /**
  * COMPONENT
  */
@@ -42,12 +46,16 @@ class Routes extends Component {
         <Route path="/home" component={UserHome} />
         {isAdmin && (
           <Switch>
+            <Route exact path="/admin" component={Dashboard} />
+            <Route exact path="/admin/products" component={AdminProductList} />
             <Route
               path="/admin/products/:productId/edit"
               component={EditProductForm}
             />
             <Route path="/admin/orders" component={AdminOrderList} />
             <Route path="/admin/products/add" component={AddProductForm} />
+
+            <Route path="/admin/users" component={AdminUserList} />
             <Route path="*" component={NotFound} />
           </Switch>
         )}
