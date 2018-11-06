@@ -1,7 +1,15 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {withRouter, Route, Switch} from 'react-router-dom'
-import {Login, Signup, UserHome, Cart, AdminOrderList, Home, NotFound} from './components'
+import {
+  Login,
+  Signup,
+  UserHome,
+  Cart,
+  AdminOrderList,
+  Home,
+  NotFound
+} from './components'
 import {CheckoutForm, CheckoutPage} from './components/cart'
 import {me} from './store'
 import {AllProducts, ProductDetail} from './components/products'
@@ -46,13 +54,13 @@ class Routes extends Component {
         <Route path="/home" component={UserHome} />
         {isAdmin && (
           <Switch>
-            <Route exact path="/admin" component={Dashboard} />
+            <Route path="/admin/orders" component={AdminOrderList} />
+            <Route exact path="/admin" component={AdminOrderList} />
             <Route exact path="/admin/products" component={AdminProductList} />
             <Route
               path="/admin/products/:productId/edit"
               component={EditProductForm}
             />
-            <Route path="/admin/orders" component={AdminOrderList} />
             <Route path="/admin/products/add" component={AddProductForm} />
 
             <Route path="/admin/users" component={AdminUserList} />
@@ -63,7 +71,6 @@ class Routes extends Component {
         {/* <Route component={Login} /> */}
         <Route path="*" component={NotFound} />
       </Switch>
-
     )
   }
 }
