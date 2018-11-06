@@ -49,16 +49,6 @@ export class AdminOrderList extends React.Component {
                   order={order}
                   adminSetOrderStatus={this.props.adminSetOrderStatus}
                 />
-                // <tr key={order.id}>
-                //   <td>{order.id}</td>
-                //   <td>{order.user.id}</td>
-                //   <td>
-                //     {numeral(getTotalAmount(order.products) / 100).format(
-                //       '$0,0.0)'
-                //     )}
-                //   </td>
-                //   <td>{order.status}</td>
-                // </tr>
               )
             })}
           </tbody>
