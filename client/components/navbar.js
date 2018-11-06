@@ -8,8 +8,8 @@ const Navbar = ({handleClick, isLoggedIn, cartItemCount}) => (
   <div className="navbar-fixed">
     <nav>
       <div className="container nav-wrapper">
-        <Link className="brand-logo white" to="/home">
-          Logo
+        <Link className="brand-logo white" to="/">
+         <i className="material-icons left">spa</i> Palm Tees
         </Link>
 
         <ul id="nav-mobile" className="right hide-on-med-and-down">

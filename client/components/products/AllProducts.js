@@ -82,7 +82,7 @@ class AllProducts extends React.Component {
           </div>
         </div>
 
-        <div>
+        <div className="sky">
           <div className="container">
             <div className="row">
               <nav id="category-nav">
