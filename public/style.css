@@ -56,3 +56,13 @@ nav ul a span.badge {
  nav#category-nav {
     background: #939EBA !important;
 }
+
+.navbar-fixed nav {
+	position: fixed;
+	background: #ffff !important; 
+}
+
+
+ nav ul li#count-badge a:hover    {
+    background-color: white !important;
+ }

@@ -19,10 +19,24 @@ router.get('/', isLoggedIn, async (req, res, next) => {
   }
 })
 
+router.get('/:orderId', async (req, res, next) => {
+  try {
+    const order = await Order.findOne({
+      where: {id: req.params.orderId}
+    })
+    res.json(order)
+
+  } catch (err) {
+    next(err)
+  }
+})
+
+
 router.get('/admin', adminsOnly, async (req, res, next) => {
   try {
     const orders = await Order.findAll({order: ['id'], include: [User]})
     res.json(orders)
+
   } catch (err) {
     next(err)
   }
