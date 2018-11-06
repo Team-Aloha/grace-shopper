@@ -12,26 +12,6 @@ const DUMMY_USER = {
   state: 'il',
   zip: 60651
 }
-const DUMMY_PRODUCTS = [
-  [
-    {
-      id: 1,
-      title: 'blue shirt',
-      price: 100,
-      quantity: 1,
-      imageUrl: 'defaultShirt.png'
-    }
-  ],
-  [
-    {
-      id: 2,
-      title: 'red shirt',
-      price: 200,
-      quantity: 1,
-      imageUrl: 'defaultShirt.png'
-    }
-  ]
-]
 
 class OrderDetail extends React.Component {
   constructor(props) {
@@ -129,7 +109,9 @@ class OrderDetail extends React.Component {
                     </a>
                   </li>
                 ))}
-                {/* <h3 className="center-align">Shipped To {order.address} {order.city} {order.state}</h3> */}
+                <h3 className="center-align">
+                  Shipped To {order.address} {order.city} {order.state}
+                </h3>
               </ul>
             </div>
           </div>
