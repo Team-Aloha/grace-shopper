@@ -5,10 +5,10 @@ import {Link, withRouter} from 'react-router-dom'
 import {logout} from '../store'
 
 const Navbar = ({handleClick, isLoggedIn, cartItemCount}) => (
-  <div>
+  <div className="navbar-fixed">
     <nav>
-      <div className="nav-wrapper">
-        <Link className="brand-logo" to="/home">
+      <div className="container nav-wrapper">
+        <Link className="brand-logo white" to="/home">
           Logo
         </Link>
 
@@ -16,8 +16,11 @@ const Navbar = ({handleClick, isLoggedIn, cartItemCount}) => (
           {isLoggedIn ? (
             <React.Fragment>
               {cartItemCount > 0 ? (
-                <li>
-                  <span className="badge">{cartItemCount}</span>
+                <li id="count-badge">
+                  <Link to="/checkoutPage">
+                    {' '}
+                    <span className="badge">{cartItemCount}</span>
+                  </Link>
                 </li>
               ) : (
                 <div />
@@ -45,8 +48,11 @@ const Navbar = ({handleClick, isLoggedIn, cartItemCount}) => (
           ) : (
             <React.Fragment>
               {cartItemCount > 0 ? (
-                <li>
-                  <span className="badge">{cartItemCount}</span>
+                <li id="count-badge">
+                  <Link to="/checkoutPage">
+                    {' '}
+                    <span className="badge">{cartItemCount}</span>
+                  </Link>
                 </li>
               ) : (
                 <div />
