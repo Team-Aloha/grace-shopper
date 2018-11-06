@@ -90,6 +90,17 @@ class Cart extends React.Component {
             </tbody>
           </table>
         </div>
+        <button
+          type="button"
+          onClick={() => {
+            this.handlePlaceOrder(
+              this.props.cart,
+              this.props.user.id ? 'registered' : 'guest'
+            )
+          }}
+        >
+          Place Order Test
+        </button>
       </div>
     )
   }

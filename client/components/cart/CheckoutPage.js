@@ -14,7 +14,8 @@ class CheckoutPage extends React.Component {
 
   render() {
     return (
-      <React.Fragment>
+      <React.Fragment >
+        <div className="sand">
         <div className="container">
           <div className="row">
             <div className="center-align">
@@ -29,6 +30,7 @@ class CheckoutPage extends React.Component {
               <Cart />
             </div>
           </div>
+        </div>
         </div>
       </React.Fragment>
     )

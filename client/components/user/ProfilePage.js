@@ -15,19 +15,21 @@ class ProfilePage extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <div className="container">
-          <div className="row">
-            <div className="center-align">
-              <h3>Your Profile</h3>
+        <div className="sand">
+          <div className="container">
+            <div className="row">
+              <div className="center-align">
+                <h3>Your Profile</h3>
+              </div>
             </div>
-          </div>
-          <div className="row">
-            <div className="col s12 xl5">
-              <Profile />
-            </div>
-            <div className="col s12 xl7">
-              <h5 className="center-align">Orders</h5>
-              <OrderList />
+            <div className="row">
+              <div className="col s12 xl5">
+                <Profile />
+              </div>
+              <div className="col s12 xl7">
+                <h5 className="center-align">Orders</h5>
+                <OrderList />
+              </div>
             </div>
           </div>
         </div>
