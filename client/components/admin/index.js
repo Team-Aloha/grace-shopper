@@ -5,4 +5,6 @@
  */
 export {default as EditProductForm} from './EditProductForm'
 export {default as AddProductForm} from './AddProductForm'
+export {default as Dashboard} from './Dashboard'
 export {default as AdminUserList} from './AdminUserList'
+export {default as AdminProductList} from './AdminProductList'

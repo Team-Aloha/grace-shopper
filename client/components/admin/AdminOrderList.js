@@ -4,6 +4,7 @@ import {connect} from 'react-redux'
 import {fetchAdminOrders, adminSetOrderStatus} from '../../store'
 import numeral from 'numeral'
 import {default as AdminOrderListRow} from './AdminOrderListRow'
+import Dashboard from './Dashboard'
 
 const getTotalAmount = products => {
   let totalAmount = products
@@ -32,27 +33,40 @@ export class AdminOrderList extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <table className="table-responsive">
-          <thead>
-            <tr>
-              <th>Order ID</th>
-              <th>User ID</th>
-              <th>Price</th>
-              <th>Status</th>
-            </tr>
-          </thead>
-          <tbody>
-            {this.props.orders.map(order => {
-              return (
-                <AdminOrderListRow
-                  key={order.id}
-                  order={order}
-                  adminSetOrderStatus={this.props.adminSetOrderStatus}
-                />
-              )
-            })}
-          </tbody>
-        </table>
+        <Dashboard />
+        <div className="container">
+          <table className="table-responsive">
+            <thead>
+              <tr>
+                <th>Order ID</th>
+                <th>User ID</th>
+                <th>Price</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              {this.props.orders.map(order => {
+                return (
+                  <AdminOrderListRow
+                    key={order.id}
+                    order={order}
+                    adminSetOrderStatus={this.props.adminSetOrderStatus}
+                  />
+                  // <tr key={order.id}>
+                  //   <td>{order.id}</td>
+                  //   <td>{order.user.id}</td>
+                  //   <td>
+                  //     {numeral(getTotalAmount(order.products) / 100).format(
+                  //       '$0,0.0)'
+                  //     )}
+                  //   </td>
+                  //   <td>{order.status}</td>
+                  // </tr>
+                )
+              })}
+            </tbody>
+          </table>
+        </div>
       </React.Fragment>
     )
   }

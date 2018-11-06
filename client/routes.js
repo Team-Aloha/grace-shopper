@@ -8,7 +8,9 @@ import {AllProducts, ProductDetail} from './components/products'
 import {
   EditProductForm,
   AddProductForm,
-  AdminUserList
+  AdminUserList,
+  AdminProductList,
+  Dashboard
 } from './components/admin'
 import {Profile, ProfilePage, OrderList, OrderDetail} from './components/user'
 /**
@@ -45,6 +47,8 @@ class Routes extends Component {
         <Route path="/home" component={UserHome} />
         {isAdmin && (
           <Switch>
+            <Route exact path="/admin" component={Dashboard} />
+            <Route exact path="/admin/products" component={AdminProductList} />
             <Route
               path="/admin/products/:productId/edit"
               component={EditProductForm}
