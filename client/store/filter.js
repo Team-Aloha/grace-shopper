@@ -27,7 +27,12 @@ export const setVisibilityFilter = newFilterType => ({
 /**
  * REDUCER
  */
-export default function(state = initialState, action) {
+export default function(
+  state = {
+    visibilityFilter: -1
+  },
+  action
+) {
   switch (action.type) {
     case SET_VISIBILITY_FILTER:
       return {visibilityFilter: action.visibilityFilter}
