@@ -7,10 +7,7 @@ const {adminsOnly} = require('../utils/apiMiddleware')
 router.get('/', async (req, res, next) => {
   try {
     const products = await Product.findAll({
-      order: ['id'],
-      where: {
-        quantity: {[Sequelize.Op.gt]: 0}
-      }
+      order: ['id']
     })
     res.json(products)
   } catch (err) {

@@ -13,16 +13,17 @@ class StripeCheckoutButton extends Component {
     }
   }
 
-  onToken = (products, id) => token => {
-    console.log('placing order WITH STRIPE!!')
-    console.log(token, products, id)
+  onToken = (products, id, userInfo) => token => {
+    console.log('placing order WITH STRIPE!!', userInfo)
+    console.log(userInfo)
     // if (!this.props.user.id) localStorage.setItem('cart', JSON.stringify([]))
-    this.props.sendOrder(products, id, token)
+    this.props.sendOrder(products, id, token, userInfo)
   }
   componentDidMount() {
     this.props.getCart()
     this.setState({loaded: true})
   }
+
   render() {
     if (!this.state.loaded) {
       return <React.Fragment>I AM LOADING</React.Fragment>
@@ -49,9 +50,10 @@ class StripeCheckoutButton extends Component {
           amount={totalAmount}
           token={this.onToken(
             this.props.cart,
-            this.props.user.id ? 'registered' : 'guest'
+            this.props.user.id ? 'registered' : 'guest',
+            this.props.userInfo
           )}
-          stripeKey={process.env.REACT_APP_STRIPE_KEY}
+          stripeKey="pk_test_k70oj61a7xpuXfEySnZR79IH"
         >
           <button
             type="button"
@@ -78,8 +80,8 @@ const mapDispatchToProps = dispatch => {
     getCart: () => {
       dispatch(getCart())
     },
-    sendOrder: (products, type, token) => {
-      dispatch(sendOrder(products, type, token))
+    sendOrder: (products, type, token, userInfo) => {
+      dispatch(sendOrder(products, type, token, userInfo))
     }
   }
 }

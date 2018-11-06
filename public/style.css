@@ -80,7 +80,12 @@ nav ul a span.badge {
   height: 110vh;
   background-size: cover;
 }
-
+.sand2 {
+  background-image: url("./sandy.jpg");
+  background-repeat: no-repeat;
+  height: auto;
+  background-size: cover;
+}
 .sunset {
   background-image: url("https://buyincasalinda.com/wp-content/uploads/2018/05/Island-life.jpg");
   background-repeat: no-repeat;
@@ -94,7 +99,23 @@ nav ul a span.badge {
   height: 110vh;
   background-size: cover;
 }
-
-
+.sky {
+  background-image: url("./sky.jpg");
+  background-repeat: repeat;
+  height: auto;
+  background-size: cover;
+}
+.wilson {
+  background-image: url("./wilson404.jpg");
+  background-repeat: repeat;
+  height: 80vh;
+  background-size: cover;
+}
+.tom {
+  background-image: url("./tom.jpg");
+  background-repeat: no-repeat;
+  height: 80vh;
+  background-size: cover;
+}
 
 

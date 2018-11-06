@@ -3,6 +3,8 @@ import {withRouter, Link} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {postProduct, fetchCategories} from '../../store'
 import Select from 'react-select'
+import Dashboard from './Dashboard'
+
 class AddProductForm extends React.Component {
   constructor(props) {
     super(props)
@@ -46,6 +48,7 @@ class AddProductForm extends React.Component {
   render() {
     return (
       <React.Fragment>
+        <Dashboard />
         <div className="row center-align">
           <div className="col s12 l6 offset-l3">
             <div className="card">

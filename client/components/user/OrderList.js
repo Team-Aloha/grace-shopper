@@ -4,6 +4,7 @@ import {connect} from 'react-redux'
 import {fetchOneProduct, updateProduct, fetchOrders} from '../../store'
 import {fetchCategories} from '../../store'
 import store from '../../store'
+const numeral = require('numeral')
 
 const getTotalAmount = products => {
   let totalAmount = products
@@ -12,69 +13,14 @@ const getTotalAmount = products => {
       return displayItem.price * displayItem.quantity
     })
     .reduce((a, b) => a + b, 0)
-  return `${totalAmount}`
+  return numeral(+totalAmount / 100).format('$0,0.00')
 }
 
-const DUMMY_ORDERS = [
-  {
-    id: 1,
-    createdAt: '1/1/2018',
-    status: 'shipped',
-    products: [
-      [
-        {
-          id: 1,
-          title: 'blue shirt',
-          price: 100,
-          quantity: 1,
-          imageUrl: 'defaultShirt.png'
-        }
-      ],
-      [
-        {
-          id: 2,
-          title: 'red shirt',
-          price: 200,
-          quantity: 1,
-          imageUrl: 'defaultShirt.png'
-        }
-      ]
-    ]
-  },
-  {
-    id: 2,
-    createdAt: '1/1/2018',
-    status: 'pending',
-    products: [
-      [
-        {
-          id: 1,
-          title: 'pink shirt',
-          price: 500,
-          quantity: 1,
-          imageUrl: 'defaultShirt.png'
-        }
-      ],
-      [
-        {
-          id: 2,
-          title: 'yellow shirt',
-          price: 500,
-          quantity: 2,
-          imageUrl: 'defaultShirt.png'
-        }
-      ]
-    ]
-  }
-]
-
 export class OrderList extends React.Component {
-
   componentDidMount() {
     const userId = this.props.match.params.userId
     //call thunk here
     this.props.fetchOrders()
-    console.log(this.props, 'props')
   }
 
   getProductName = id => {
@@ -84,7 +30,6 @@ export class OrderList extends React.Component {
     }
     return ''
   }
-
 
   render() {
     if (Object.keys(this.props.user).length < 1) {

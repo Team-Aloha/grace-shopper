@@ -18,7 +18,6 @@ const TOAST_ERROR = 'TOAST_ERROR'
  */
 const initialState = []
 
-
 /**
  * ACTION CREATORS
  */
@@ -93,11 +92,21 @@ it expects a response:
   message: if success: an object containing order, if fail a message why
 }
 */
-export const sendOrder = (products, type, token) => async dispatch => {
+export const sendOrder = (
+  products,
+  type,
+  token,
+  userInfo
+) => async dispatch => {
   try {
-    console.log('received order', type)
-    const {data} = await axios.post('/api/orders/', {products, type, token})
-    console.log(data)
+    console.log('received order in think')
+    console.log(userInfo)
+    const {data} = await axios.post('/api/orders/', {
+      products,
+      type,
+      token,
+      userInfo
+    })
     if (data.status === 'success') {
       if (type !== 'registered')
         localStorage.setItem('cart', JSON.stringify([]))
@@ -128,7 +137,7 @@ export function localCartMiddleware(store) {
   return next => action => {
     if (action.type === CHECK_LOCALSTORAGE) {
       let state = store.getState()
-      const isAuthenticated = state.user.id ? true : false
+      const isAuthenticated = !!state.user.id
 
       let localStorageCart = localStorage.getItem('cart')
         ? JSON.parse(localStorage.getItem('cart'))
@@ -136,12 +145,17 @@ export function localCartMiddleware(store) {
 
       if (!isAuthenticated) {
         // unauthenticated user
-        if (localStorageCart.length > 0) {
-          return store.dispatch(setCart(localStorageCart))
-        }
+        return store.dispatch(setCart(localStorageCart))
       } else {
         // authenticated user
-        return store.dispatch(setCart(state.cart))
+        if (localStorageCart.length > 0) {
+          localStorageCart.forEach(item => {
+            store.dispatch(putProductToCart(item))
+          })
+          localStorageCart = []
+          localStorage.setItem('cart', JSON.stringify([]))
+        }
+        return store.dispatch(getCart())
       }
     }
 

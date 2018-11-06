@@ -10,6 +10,7 @@ import {singleProduct as product} from './products'
 import filter from './filter'
 import categories from './categories'
 import cart from './cart'
+import adminUserList from './adminUserList'
 import {checkLocalStorageListener, localCartMiddleware} from './cart'
 import vanillatoasts from 'vanillatoasts'
 
@@ -22,21 +23,22 @@ const reducer = combineReducers({
   cart,
   orders,
   singleOrder,
-  reviews
+  reviews,
+  adminUserList
 })
 const toastMiddleware = store => next => action => {
   if (action.error) {
-    vanillatoasts.create({ text: 'Not Enough Inventory', timeout: 5000 });
+    vanillatoasts.create({text: 'Not Enough Inventory', timeout: 5000})
   }
-  next(action);
-};
+  next(action)
+}
 
 const middleware = composeWithDevTools(
   applyMiddleware(
     toastMiddleware,
     thunkMiddleware,
-    createLogger({collapsed: true}),
-    localCartMiddleware
+    localCartMiddleware,
+    createLogger({collapsed: true})
   )
 )
 const store = createStore(reducer, middleware)
@@ -49,3 +51,4 @@ export * from './categories'
 export * from './cart'
 export * from './orders'
 export * from './reviews'
+export * from './adminUserList'

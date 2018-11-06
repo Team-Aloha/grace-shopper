@@ -60,6 +60,7 @@ router.post('/test', testingOnly, async (req, res, next) => {
   try {
     //only allow this route to be ran during testing
     const {products} = req.body
+
     // [ {id: quantity: }]
     const order = await Order.create({
       status: 'processing',
@@ -76,7 +77,13 @@ router.post('/test', testingOnly, async (req, res, next) => {
 //taking an order
 router.post('/', async (req, res, next) => {
   try {
-    const {products} = req.body
+    const {products, userInfo} = req.body
+    const sendUserData = {
+      address: userInfo.address,
+      zip: userInfo.zip,
+      city: userInfo.city,
+      state: userInfo.state
+    }
     //create response object
     const response = {
       status: '',
@@ -98,7 +105,6 @@ router.post('/', async (req, res, next) => {
       //make order array...
       //order array needs to have a products with: [{id, quantity, price}]
       //also need to check if quantity allows order here
-      // console.log(productInfo)
 
       const updatedProducts = []
       const orderProducts = products.map(item => {
@@ -108,9 +114,6 @@ router.post('/', async (req, res, next) => {
 
         const foundPrice = productInfo.filter(prod => {
           if (+id === +prod.id) {
-            // console.log('found item has id ', id)
-            // console.log('we want to buy ', quantity)
-            // console.log('on server it has ', prod.quantity)
             if (+prod.quantity >= +quantity) {
               //this item is allowed to be purchased. push it to updatedProducts
               //updateProducts contains the new quantity that will be
@@ -138,7 +141,6 @@ router.post('/', async (req, res, next) => {
         orderProducts.forEach(prod => {
           totalPrice += +prod.quantity * +prod.price
         })
-        console.log(req.body.token)
         //attempt to charge to stripe
         const charge = await stripe.charges.create({
           amount: totalPrice,
@@ -159,7 +161,8 @@ router.post('/', async (req, res, next) => {
           const logId = !req.user ? null : req.user.id
           await Order.create({
             products: orderProducts,
-            userId: logId
+            userId: logId,
+            ...sendUserData
           })
           //update database for updated quantity
           updatedProducts.forEach(async newProduct => {

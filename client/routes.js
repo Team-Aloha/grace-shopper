@@ -1,15 +1,26 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {withRouter, Route, Switch} from 'react-router-dom'
-import PropTypes from 'prop-types'
-import {Login, Signup, UserHome, Cart, AdminOrderList, Home} from './components'
+import {
+  Login,
+  Signup,
+  UserHome,
+  Cart,
+  AdminOrderList,
+  Home,
+  NotFound
+} from './components'
 import {CheckoutForm, CheckoutPage} from './components/cart'
 import {me} from './store'
 import {AllProducts, ProductDetail} from './components/products'
-import {EditProductForm} from './components/admin'
-import {AddProductForm} from './components/admin'
+import {
+  EditProductForm,
+  AddProductForm,
+  AdminUserList,
+  AdminProductList,
+  Dashboard
+} from './components/admin'
 import {Profile, ProfilePage, OrderList, OrderDetail} from './components/user'
-
 /**
  * COMPONENT
  */
@@ -19,8 +30,7 @@ class Routes extends Component {
   }
 
   render() {
-    const {isLoggedIn} = this.props
-
+    const {isAdmin} = this.props
     return (
       <Switch>
         {/* Home Page */}
@@ -40,21 +50,26 @@ class Routes extends Component {
 
         {/* Orders */}
         <Route path="/orders/:orderId" component={OrderDetail} />
-        <Route
-          path="/admin/products/:productId/edit"
-          component={EditProductForm}
-        />
-        <Route path="/admin/orders" component={AdminOrderList} />
-        <Route path="/admin/products/add" component={AddProductForm} />
 
-        {isLoggedIn && (
+        <Route path="/home" component={UserHome} />
+        {isAdmin && (
           <Switch>
-            {/* Routes placed here are only available after logging in */}
-            <Route path="/home" component={UserHome} />
+            <Route path="/admin/orders" component={AdminOrderList} />
+            <Route exact path="/admin" component={AdminOrderList} />
+            <Route exact path="/admin/products" component={AdminProductList} />
+            <Route
+              path="/admin/products/:productId/edit"
+              component={EditProductForm}
+            />
+            <Route path="/admin/products/add" component={AddProductForm} />
+
+            <Route path="/admin/users" component={AdminUserList} />
+            <Route path="*" component={NotFound} />
           </Switch>
         )}
         {/* Displays our Login component as a fallback */}
-        <Route component={Login} />
+        {/* <Route component={Login} /> */}
+        <Route path="*" component={NotFound} />
       </Switch>
     )
   }
@@ -67,7 +82,7 @@ const mapState = state => {
   return {
     // Being 'logged in' for our purposes will be defined has having a state.user that has a truthy id.
     // Otherwise, state.user will be an empty object, and state.user.id will be falsey
-    isLoggedIn: !!state.user.id
+    isAdmin: !!state.user.isAdmin
   }
 }
 
@@ -86,7 +101,3 @@ export default withRouter(connect(mapState, mapDispatch)(Routes))
 /**
  * PROP TYPES
  */
-Routes.propTypes = {
-  loadInitialData: PropTypes.func.isRequired,
-  isLoggedIn: PropTypes.bool.isRequired
-}

@@ -71,7 +71,9 @@ class Cart extends React.Component {
                       key={displayItem.id}
                       item={displayItem}
                       quantity={this.props.cart[i].quantity}
-                      inventory={this.props.products[i].quantity}
+                      inventory={
+                        this.props.products[this.props.cart[i].id - 1].quantity
+                      }
                       handleRemove={this.handleRemove}
                     />
                   )
@@ -90,17 +92,6 @@ class Cart extends React.Component {
             </tbody>
           </table>
         </div>
-        <button
-          type="button"
-          onClick={() => {
-            this.handlePlaceOrder(
-              this.props.cart,
-              this.props.user.id ? 'registered' : 'guest'
-            )
-          }}
-        >
-          Place Order Test
-        </button>
       </div>
     )
   }
