@@ -1,6 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {Link, withRouter} from 'react-router-dom'
+import {Link, withRouter, Switch, Route} from 'react-router-dom'
 
 const Dashboard = props => {
   return (
@@ -15,9 +15,14 @@ const Dashboard = props => {
                 </a>
               </li>
               <li>
-                <a className="white-text" onClick={() => console.log('foo')}>
+                <Link className="white-text" to="/admin/products/add">
                   Add Products
-                </a>
+                </Link>
+              </li>
+              <li>
+                <Link className="white-text" to="/admin/orders">
+                  View Orders
+                </Link>
               </li>
             </ul>
           </div>
