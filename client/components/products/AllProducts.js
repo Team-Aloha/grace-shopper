@@ -21,6 +21,12 @@ const mapDispatchToProps = dispatch => ({
 })
 
 class AllProducts extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      search: ''
+    }
+  }
   renderButton() {
     if (this.props && this.props.user.isAdmin) {
       return <button onClick={this.handleClick}>Add a Product</button>
@@ -29,6 +35,15 @@ class AllProducts extends React.Component {
 
   handleClick = () => {
     this.props.history.push('/admin/products/add')
+  }
+  handleChange = evt => {
+    evt.preventDefault()
+    this.setState({[evt.target.name]: evt.target.value})
+  }
+
+  handleSubmitSearch = evt => {
+    evt.preventDefault()
+    console.log('you searched for', this.state.search)
   }
   render() {
     // const isAdmin = this.state.user.isAdmin
@@ -66,7 +81,7 @@ class AllProducts extends React.Component {
         <div className="container">
           <div className="row">
             <nav id="category-nav">
-              <div className="nav-wrapper blue-grey">
+              <div className="nav-wrapper">
                 <ul className="left hide-on-med-and-down">
                   <li>
                     <a href="">Categories:</a>
@@ -88,9 +103,15 @@ class AllProducts extends React.Component {
                     </li>
                   ))}
                 </ul>
-                <form>
+                <form onClick={this.handleSubmitSearch}>
                   <div className="input-field right">
-                    <input id="search" type="search" required />
+                    <input
+                      id="search"
+                      type="search"
+                      name="search"
+                      onChange={this.handleChange}
+                      required
+                    />
                     <label className="label-icon" htmlFor="search">
                       <i className="material-icons">search</i>
                     </label>
