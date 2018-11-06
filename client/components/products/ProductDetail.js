@@ -5,6 +5,7 @@ import {fetchOneProduct, putProductToCart, setCart} from '../../store'
 import history from '../../history'
 import EditProductForm from '../admin/EditProductForm'
 import numeral from 'numeral'
+import AddReviewForm from '../AddReview'
 
 class ProductDetail extends React.Component {
   constructor(props) {
@@ -188,7 +189,10 @@ class ProductDetail extends React.Component {
                 </div>
               </div>
             </div>
-
+            <div>
+              <h2>Submit a Review!</h2>
+              <AddReviewForm />
+            </div>
             {button}
           </div>
         </React.Fragment>

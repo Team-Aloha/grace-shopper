@@ -16,7 +16,7 @@ router.get('/:productId', async (req, res, next) => {
   try {
     const reviews = await Review.findAll({
       where: {
-        productId: productId
+        productId: req.params.productId
       }
     })
     res.json(reviews)
@@ -25,4 +25,16 @@ router.get('/:productId', async (req, res, next) => {
   }
 })
 
+router.post('/', async (req, res, next) => {
+  try {
+    const {stars, text} = req.body
+    const newReview = await Review.create({
+      stars,
+      text
+    })
+    res.json(newReview)
+  } catch (err) {
+    next(err)
+  }
+})
 module.exports = router
