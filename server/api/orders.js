@@ -98,7 +98,6 @@ router.post('/', async (req, res, next) => {
       //make order array...
       //order array needs to have a products with: [{id, quantity, price}]
       //also need to check if quantity allows order here
-      // console.log(productInfo)
 
       const updatedProducts = []
       const orderProducts = products.map(item => {
@@ -108,9 +107,6 @@ router.post('/', async (req, res, next) => {
 
         const foundPrice = productInfo.filter(prod => {
           if (+id === +prod.id) {
-            // console.log('found item has id ', id)
-            // console.log('we want to buy ', quantity)
-            // console.log('on server it has ', prod.quantity)
             if (+prod.quantity >= +quantity) {
               //this item is allowed to be purchased. push it to updatedProducts
               //updateProducts contains the new quantity that will be
@@ -138,7 +134,6 @@ router.post('/', async (req, res, next) => {
         orderProducts.forEach(prod => {
           totalPrice += +prod.quantity * +prod.price
         })
-        console.log(req.body.token)
         //attempt to charge to stripe
         const charge = await stripe.charges.create({
           amount: totalPrice,
