@@ -1,6 +1,6 @@
 const router = require('express').Router()
 const {User} = require('../db/models')
-const {adminsOnly} = require('../utils/apiMiddleware')
+const {adminsOnly, isLoggedIn} = require('../utils/apiMiddleware')
 module.exports = router
 
 router.get('/', adminsOnly, async (req, res, next) => {
@@ -13,6 +13,31 @@ router.get('/', adminsOnly, async (req, res, next) => {
       attributes: ['id', 'email', 'isAdmin']
     })
     res.json(users)
+  } catch (err) {
+    next(err)
+  }
+})
+
+router.put('/profile', isLoggedIn, async (req, res, next) => {
+  const {userInfo} = req.body
+  const sendUserData = {
+    name: userInfo.name,
+    email: userInfo.email,
+    address: userInfo.address,
+    zip: userInfo.zip,
+    city: userInfo.city,
+    state: userInfo.state
+  }
+  try {
+    const updatedUser = await User.update(
+      {...sendUserData},
+      {
+        returning: true,
+        where: {id: req.user.id}
+      }
+    )
+
+    res.json(updatedUser[1])
   } catch (err) {
     next(err)
   }
