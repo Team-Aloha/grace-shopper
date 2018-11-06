@@ -4,6 +4,7 @@ import {connect} from 'react-redux'
 import {fetchOneProduct, updateProduct, fetchOrders} from '../../store'
 import {fetchCategories} from '../../store'
 import store from '../../store'
+const numeral = require('numeral')
 
 const getTotalAmount = products => {
   let totalAmount = products
@@ -12,7 +13,7 @@ const getTotalAmount = products => {
       return displayItem.price * displayItem.quantity
     })
     .reduce((a, b) => a + b, 0)
-  return `${totalAmount}`
+  return numeral(+totalAmount / 100).format('$0,0.00')
 }
 
 const DUMMY_ORDERS = [
@@ -69,7 +70,6 @@ const DUMMY_ORDERS = [
 ]
 
 export class OrderList extends React.Component {
-
   componentDidMount() {
     const userId = this.props.match.params.userId
     //call thunk here
@@ -84,7 +84,6 @@ export class OrderList extends React.Component {
     }
     return ''
   }
-
 
   render() {
     if (Object.keys(this.props.user).length < 1) {
