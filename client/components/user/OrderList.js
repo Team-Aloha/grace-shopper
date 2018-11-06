@@ -25,9 +25,7 @@ export class OrderList extends React.Component {
   }
 
   getProductName = id => {
-    console.log('called')
     const productInfo = this.props.products.filter(product => id === product.id)
-    console.log('debug ', productInfo)
     if (productInfo[0]) {
       return productInfo[0].title
     }

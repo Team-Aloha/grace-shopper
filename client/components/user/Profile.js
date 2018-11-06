@@ -1,28 +1,21 @@
 import React from 'react'
-import {withRouter, Link} from 'react-router-dom'
+import {withRouter} from 'react-router-dom'
 import {connect} from 'react-redux'
-import {fetchOneProduct, updateProduct} from '../../store'
-import {fetchCategories} from '../../store'
-import store from '../../store'
+import {editUserProfile} from '../../store'
 
 class CheckoutForm extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      readOnly: true,
-      user: {
-        name: '',
-        email: '',
-        address: '',
-        city: '',
-        state: '',
-        zip: ''
-      }
+      name: '',
+      email: '',
+      address: '',
+      city: '',
+      state: '',
+      zip: ''
     }
     // store.dispatch(fetchOneCampus(campusId))
     this.handleChange = this.handleChange.bind(this)
-    this.handleSubmit = this.handleSubmit.bind(this)
-    this.toggleEditProfile = this.toggleEditProfile.bind(this)
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -30,7 +23,7 @@ class CheckoutForm extends React.Component {
     // props, now we want to set those values to our local state
     if (prevProps.user !== this.props.user) {
       this.setState({
-        user: this.props.user
+        ...this.props.user
       })
     }
   }
@@ -40,16 +33,12 @@ class CheckoutForm extends React.Component {
   }
 
   handleChange(evt) {
-    evt.preventDefault()
-    const user = {[evt.target.name]: evt.target.value}
-    this.setState({user})
+    this.setState({[evt.target.name]: evt.target.value})
   }
 
-  handleSubmit = evt => {
-    evt.preventDefault()
-  }
-  toggleEditProfile = () => {
-    this.setState({readOnly: !this.state.readOnly})
+  onEditProfile = () => {
+    this.props.editUserProfile(this.state)
+    // this.setState({readOnly: !this.state.readOnly})
   }
   render() {
     if (Object.keys(this.props.user).length < 1) {
@@ -61,7 +50,7 @@ class CheckoutForm extends React.Component {
         {' '}
         <div className="card">
           <div className="card-content">
-            <form className="s12 l6" onSubmit={this.handleSubmit}>
+            <form className="s12 l6">
               <div className="row">
                 <div className="input-field">
                   <input
@@ -69,9 +58,8 @@ class CheckoutForm extends React.Component {
                     id="name"
                     type="text"
                     className="validate"
-                    value={this.state.user.name}
+                    value={this.state.name}
                     onChange={this.handleChange}
-                    readOnly={this.state.readOnly}
                   />
                   <label className="active" htmlFor="name">
                     Full Name
@@ -83,9 +71,8 @@ class CheckoutForm extends React.Component {
                     id="email"
                     type="email"
                     className="validate"
-                    value={this.state.user.email}
+                    value={this.state.email}
                     onChange={this.handleChange}
-                    readOnly={this.state.readOnly}
                   />
                   <label className="active" htmlFor="email">
                     Email
@@ -97,9 +84,8 @@ class CheckoutForm extends React.Component {
                     id="address"
                     type="text"
                     className="validate"
-                    value={this.state.user.address}
+                    value={this.state.address}
                     onChange={this.handleChange}
-                    readOnly={this.state.readOnly}
                   />
                   <label className="active" htmlFor="address">
                     Address
@@ -111,9 +97,8 @@ class CheckoutForm extends React.Component {
                     id="city"
                     type="text"
                     className="validate"
-                    value={this.state.user.city}
+                    value={this.state.city}
                     onChange={this.handleChange}
-                    readOnly={this.state.readOnly}
                   />
                   <label className="active" htmlFor="city">
                     City
@@ -125,9 +110,8 @@ class CheckoutForm extends React.Component {
                     id="state"
                     type="text"
                     className="validate"
-                    value={this.state.user.state}
+                    value={this.state.state}
                     onChange={this.handleChange}
-                    readOnly={this.state.readOnly}
                   />
                   <label className="active" htmlFor="state">
                     State
@@ -140,9 +124,8 @@ class CheckoutForm extends React.Component {
                     type="text"
                     pattern="[0-9]{5}"
                     className="zip"
-                    value={this.state.user.zip}
+                    value={this.state.zip}
                     onChange={this.handleChange}
-                    readOnly={this.state.readOnly}
                   />
                   <label className="active" htmlFor="zip">
                     Zip
@@ -153,10 +136,11 @@ class CheckoutForm extends React.Component {
               <div className="row">
                 <div className="col s12 m12 l12 xl12 center-align">
                   <button
-                    onClick={this.toggleEditProfile}
+                    type="button"
+                    onClick={this.onEditProfile}
                     className="btn waves-effect waves-light btn-large blue lighten-2"
                   >
-                    {this.state.readOnly ? 'Edit' : 'Save'}
+                    Edit Address
                   </button>
                 </div>
               </div>
@@ -176,7 +160,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
-    dispatch: dispatch
+    editUserProfile: userInfo => dispatch(editUserProfile(userInfo))
   }
 }
 
