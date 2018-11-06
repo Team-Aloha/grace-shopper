@@ -83,16 +83,22 @@ class AllProducts extends React.Component {
               <div className="nav-wrapper">
                 <ul className="left hide-on-med-and-down">
                   <li>
-                    <a href="">Categories:</a>
+                    <a className="white-text" href="">
+                      Categories:
+                    </a>
                   </li>
                   <li>
-                    <a onClick={() => this.props.setVisibilityFilter(-1)}>
+                    <a
+                      className="white-text"
+                      onClick={() => this.props.setVisibilityFilter(-1)}
+                    >
                       All
                     </a>
                   </li>
                   {this.props.categories.map(category => (
                     <li key={category.id}>
                       <a
+                        className="white-text"
                         onClick={() =>
                           this.props.setVisibilityFilter(category.id)
                         }
