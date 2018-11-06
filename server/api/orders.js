@@ -19,24 +19,21 @@ router.get('/', isLoggedIn, async (req, res, next) => {
   }
 })
 
+router.get('/admin', adminsOnly, async (req, res, next) => {
+  try {
+    const orders = await Order.findAll({order: ['id'], include: [User]})
+    res.json(orders)
+  } catch (err) {
+    next(err)
+  }
+})
+
 router.get('/:orderId', async (req, res, next) => {
   try {
     const order = await Order.findOne({
       where: {id: req.params.orderId}
     })
     res.json(order)
-
-  } catch (err) {
-    next(err)
-  }
-})
-
-
-router.get('/admin', adminsOnly, async (req, res, next) => {
-  try {
-    const orders = await Order.findAll({order: ['id'], include: [User]})
-    res.json(orders)
-
   } catch (err) {
     next(err)
   }
@@ -63,6 +60,7 @@ router.post('/test', testingOnly, async (req, res, next) => {
   try {
     //only allow this route to be ran during testing
     const {products} = req.body
+    // [ {id: quantity: }]
     const order = await Order.create({
       status: 'processing',
       userId: req.user.id,
