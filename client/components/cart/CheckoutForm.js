@@ -51,9 +51,9 @@ class CheckoutForm extends React.Component {
   }
 
   render() {
-    if (Object.keys(this.props.user).length < 1) {
-      return <div>User not logged in...</div>
-    }
+    // if (Object.keys(this.props.user).length < 1) {
+    //   return <div>User not logged in...</div>
+    // }
 
     return (
       <React.Fragment>
