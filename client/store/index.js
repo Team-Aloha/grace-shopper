@@ -9,6 +9,7 @@ import {singleProduct as product} from './products'
 import filter from './filter'
 import categories from './categories'
 import cart from './cart'
+import adminUserList from './adminUserList'
 import {checkLocalStorageListener, localCartMiddleware} from './cart'
 import vanillatoasts from 'vanillatoasts'
 
@@ -20,7 +21,8 @@ const reducer = combineReducers({
   product,
   cart,
   orders,
-  singleOrder
+  singleOrder,
+  adminUserList
 })
 const toastMiddleware = store => next => action => {
   if (action.error) {
@@ -46,3 +48,4 @@ export * from './filter'
 export * from './categories'
 export * from './cart'
 export * from './orders'
+export * from './adminUserList'
