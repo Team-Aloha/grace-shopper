@@ -93,10 +93,21 @@ it expects a response:
   message: if success: an object containing order, if fail a message why
 }
 */
-export const sendOrder = (products, type, token) => async dispatch => {
+export const sendOrder = (
+  products,
+  type,
+  token,
+  userInfo
+) => async dispatch => {
   try {
-    console.log('received order', type)
-    const {data} = await axios.post('/api/orders/', {products, type, token})
+    console.log('received order in think')
+    console.log(userInfo)
+    const {data} = await axios.post('/api/orders/', {
+      products,
+      type,
+      token,
+      userInfo
+    })
     if (data.status === 'success') {
       if (type !== 'registered')
         localStorage.setItem('cart', JSON.stringify([]))
