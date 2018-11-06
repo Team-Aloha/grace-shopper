@@ -117,5 +117,7 @@ nav ul a span.badge {
   height: 80vh;
   background-size: cover;
 }
-
+.titleHome {
+  font-family: 'Spicy Rice', cursive;
+}
 

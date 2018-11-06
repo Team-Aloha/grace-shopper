@@ -69,7 +69,7 @@ class AllProducts extends React.Component {
           <div className="section no-pad-bot">
             <div className="container">
               <div className="row center">
-                <h3 className="header col s12 l12 light">Aloha!</h3>
+                <h3 className="header col s12 l12 light black-text titleHome">Aloha!</h3>
               </div>
             </div>
           </div>

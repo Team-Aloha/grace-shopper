@@ -37,7 +37,7 @@ export const UserHome = props => {
         <div className="row center" />
         {/* <div className="card"> */}
           <div className="card-content">
-            <div className="center white ">
+            <div className="center white titleHome titleHome">
               <h3>Welcome back {user.name ? user.name : user.email}</h3>
               <h5>Below are some reccomended shirts for you!</h5>
             </div>

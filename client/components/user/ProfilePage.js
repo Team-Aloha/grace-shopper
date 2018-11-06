@@ -18,7 +18,7 @@ class ProfilePage extends React.Component {
         <div className="sand">
           <div className="container">
             <div className="row">
-              <div className="center-align">
+              <div className="center-align titleHome">
                 <h3>Your Profile</h3>
               </div>
             </div>
