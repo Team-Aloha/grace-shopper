@@ -44,7 +44,6 @@ export const sendError = error => ({
 //get cart
 export const getCart = () => async dispatch => {
   try {
-    console.log('!!!')
     const {data} = await axios.get('/api/cart/')
 
     dispatch(setCart(data.products))

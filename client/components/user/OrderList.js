@@ -21,7 +21,6 @@ export class OrderList extends React.Component {
     const userId = this.props.match.params.userId
     //call thunk here
     this.props.fetchOrders()
-    console.log(this.props, 'props')
   }
 
   getProductName = id => {

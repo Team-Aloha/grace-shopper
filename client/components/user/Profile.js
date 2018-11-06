@@ -7,12 +7,12 @@ class CheckoutForm extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      name: '',
-      email: '',
-      address: '',
-      city: '',
-      state: '',
-      zip: ''
+      name: this.props.user.name,
+      email: this.props.user.email,
+      address: this.props.user.address,
+      city: this.props.user.city,
+      state: this.props.user.state,
+      zip: this.props.user.zip
     }
     // store.dispatch(fetchOneCampus(campusId))
     this.handleChange = this.handleChange.bind(this)
