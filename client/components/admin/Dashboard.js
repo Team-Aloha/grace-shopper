@@ -24,6 +24,11 @@ const Dashboard = props => {
                   View Orders
                 </Link>
               </li>
+              <li>
+                <Link className="white-text" to="/admin/users">
+                  View Users
+                </Link>
+              </li>
             </ul>
           </div>
         </nav>
