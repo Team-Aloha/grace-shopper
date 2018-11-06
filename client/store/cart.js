@@ -44,6 +44,7 @@ export const sendError = error => ({
 //get cart
 export const getCart = () => async dispatch => {
   try {
+    console.log('!!!')
     const {data} = await axios.get('/api/cart/')
 
     dispatch(setCart(data.products))
@@ -126,7 +127,7 @@ export function localCartMiddleware(store) {
   return next => action => {
     if (action.type === CHECK_LOCALSTORAGE) {
       let state = store.getState()
-      const isAuthenticated = state.user.id ? true : false
+      const isAuthenticated = !!state.user.id
 
       let localStorageCart = localStorage.getItem('cart')
         ? JSON.parse(localStorage.getItem('cart'))
@@ -134,12 +135,17 @@ export function localCartMiddleware(store) {
 
       if (!isAuthenticated) {
         // unauthenticated user
-        if (localStorageCart.length > 0) {
-          return store.dispatch(setCart(localStorageCart))
-        }
+        return store.dispatch(setCart(localStorageCart))
       } else {
         // authenticated user
-        return store.dispatch(setCart(state.cart))
+        if (localStorageCart.length > 0) {
+          localStorageCart.forEach(item => {
+            store.dispatch(putProductToCart(item))
+          })
+          localStorageCart = []
+          localStorage.setItem('cart', JSON.stringify([]))
+        }
+        return store.dispatch(getCart())
       }
     }
 
