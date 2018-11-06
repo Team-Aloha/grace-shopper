@@ -5,10 +5,12 @@ import {Login, Signup, UserHome, Cart, AdminOrderList, Home} from './components'
 import {CheckoutForm, CheckoutPage} from './components/cart'
 import {me} from './store'
 import {AllProducts, ProductDetail} from './components/products'
-import {EditProductForm} from './components/admin'
-import {AddProductForm, Dashboard} from './components/admin'
+import {
+  EditProductForm,
+  AddProductForm,
+  AdminUserList
+} from './components/admin'
 import {Profile, ProfilePage, OrderList, OrderDetail} from './components/user'
-
 /**
  * COMPONENT
  */
@@ -50,6 +52,7 @@ class Routes extends Component {
             />
             <Route path="/admin/orders" component={AdminOrderList} />
             <Route path="/admin/products/add" component={AddProductForm} />
+            <Route path="/admin/users" component={AdminUserList} />
           </Switch>
         )}
         {/* Displays our Login component as a fallback */}
