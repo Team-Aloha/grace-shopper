@@ -1,5 +1,4 @@
 import axios from 'axios'
-import history from '../history'
 
 /**
  * ACTION TYPES
@@ -47,11 +46,12 @@ export const fetchOneProduct = productId => async dispatch => {
 
 export const updateProduct = product => {
   return async dispatch => {
+    console.log('in thunk')
     const response = await axios.put(`/api/products/${product.id}`, product)
     if (response.status === 200) {
       const updatedProduct = response.data
       console.log('updated product', updatedProduct)
-
+      // dispatch(setOneProduct(updatedProduct))
       dispatch(amendProduct(updatedProduct))
     } else {
       throw new Error('Failed to update product')
@@ -70,8 +70,14 @@ export default function(state = defaultProducts, action) {
       return [...state, action.product]
     case REMOVE_PRODUCT:
       return state
-    case AMEND_PRODUCT:
-      return state
+    case AMEND_PRODUCT: {
+      // const newState = state.map(prod => {
+      //   if (prod.id !== action.id) {
+      //     return prod
+      //   } else return action.prodiuct
+      // })
+      return [...state, action.product]
+    }
     default:
       return state
   }

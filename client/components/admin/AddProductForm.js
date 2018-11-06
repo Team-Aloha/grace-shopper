@@ -21,29 +21,11 @@ class AddProductForm extends React.Component {
   componentDidMount() {
     this.props.getCategories()
   }
-  componentDidUpdate(prevProps, prevState) {
-    // if (this.state.categoryOptions.length === 0) {
-    //   const tempArray = []
-    //   console.log('attempting to add category vals')
-    //   this.props.categories.map(category => {
-    //     tempArray.push({
-    //       value: category.id,
-    //       label: category.name
-    //     })
-    //   })
-    //   console.log('our data', tempArray)
-    //   console.log(this.state)
-    //   this.setState({categoryOptions: [...tempArray]})
-    //   console.log(this.state)
-    //   console.log('i need categories')
-    //   console.log(this.state.categoryOptions)
-    // }
-  }
+
   handleChange(evt) {
     //for React Select components, there is no evt.target
     //so normal components are inside the if statement
     //categories handled in else
-    //TODO: look into a more elegant way to do this in the future
 
     if (evt.target) {
       this.setState({[evt.target.name]: evt.target.value})
@@ -160,7 +142,11 @@ class AddProductForm extends React.Component {
                         onChange={this.handleChange}
                         value={this.state.categories}
                         options={this.props.categories.map(category => {
-                          return {value: category.id, label: category.name}
+                          return {
+                            key: category.id,
+                            value: category.id,
+                            label: category.name
+                          }
                         })}
                       />
                     </div>
