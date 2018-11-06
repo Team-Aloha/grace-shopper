@@ -11,6 +11,7 @@ const AuthForm = props => {
   const {name, displayName, handleSubmit, error} = props
 
   return (
+    <div className="shirts">
     <div className="container">
       <div className="row center" />
       <div className="card">
@@ -44,6 +45,7 @@ const AuthForm = props => {
           </div>
         </div>
       </div>
+    </div>
     </div>
   )
 }
