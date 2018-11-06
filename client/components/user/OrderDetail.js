@@ -82,6 +82,14 @@ class OrderDetail extends React.Component {
     return ''
   }
 
+  getProductImage = id => {
+    const productInfo = this.props.products.filter(product => id === product.id)
+    if (productInfo[0]) {
+      return productInfo[0].imageUrl
+    }
+    return ''
+  }
+
   render() {
     console.log(this.props, 'propsorderdetail')
     if (Object.keys(this.props.user).length < 1) {
@@ -104,7 +112,7 @@ class OrderDetail extends React.Component {
                     <Link to={`/products/${product.id}`}>
                       <img
                         className="order-image left"
-                        src="/defaultShirt.png"
+                        src={`/${this.getProductImage(product.id)}`}
                         alt=""
                       />
                     </Link>
@@ -116,19 +124,21 @@ class OrderDetail extends React.Component {
                     </p>
                     <a href="#!" className="secondary-content">
                       <p>
-                        Price: {numeral(+product.price / 100).format('$0,0.00')}{' '}
+                        <h6 className="item-title">
+                          {this.getProductName(product.id)}
+                        </h6>{' '}
                         <br />
-                        Quantity: {product.quantity}
                       </p>
                     </a>
                   </li>
                 ))}
+                {/* <h3 className="center-align">Shipped To {order.address} {order.city} {order.state}</h3> */}
               </ul>
             </div>
+            <h3 className="center-align">
+              Shipped To {order.address} {order.city} {order.state}
+            </h3>
           </div>
-          <h3 className="center-align">
-            Shipped To {order.address} {order.city} {order.state}
-          </h3>
         </div>
       )
     } else {
