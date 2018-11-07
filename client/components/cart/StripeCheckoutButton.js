@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {getCart, sendOrder} from '../../store'
 import StripeCheckout from 'react-stripe-checkout'
+import {withRouter} from 'react-router-dom'
 if (process.env.NODE_ENV !== 'production') require('../../../secrets')
 //   import { handleToken } from '...store_path'
 
@@ -18,6 +19,7 @@ class StripeCheckoutButton extends Component {
     console.log(userInfo)
     // if (!this.props.user.id) localStorage.setItem('cart', JSON.stringify([]))
     this.props.sendOrder(products, id, token, userInfo)
+    this.props.history.push('/products')
   }
   componentDidMount() {
     this.props.getCart()
@@ -86,6 +88,6 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(
-  StripeCheckoutButton
+export default withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(StripeCheckoutButton)
 )
