@@ -154,8 +154,6 @@ class ProductDetail extends React.Component {
                   <div className="sand2">
                     <EditProductForm />
                   </div>
-
-                  {button}
                 </div>
               </div>
             </div>
@@ -169,7 +167,7 @@ class ProductDetail extends React.Component {
             <div className="container">
               <div className="row">
                 <div className="col xl6">
-                  <img className="responsive-img" src="/defaultShirt.png" />
+                  <img className="responsive-img" src={product.imageUrl} />
                 </div>
 
                 <div className="col xl6 white">
