@@ -8,8 +8,11 @@ const Navbar = ({handleClick, isLoggedIn, cartItemCount}) => (
   <div className="navbar-fixed">
     <nav>
       <div className="container nav-wrapper">
-        <Link className="brand-logo black-text font-effect-fire-animation titleHome" to="/">
-         <i className="material-icons left">spa</i> Palm Tees
+        <Link
+          className="brand-logo black-text font-effect-fire-animation titleHome"
+          to="/"
+        >
+          <i className="material-icons left">spa</i> Palm Tees
         </Link>
 
         <ul id="nav-mobile" className="right hide-on-med-and-down">
@@ -74,9 +77,6 @@ const Navbar = ({handleClick, isLoggedIn, cartItemCount}) => (
               </li>
               <li>
                 <Link to="/products">Products</Link>
-              </li>
-              <li>
-                <Link to="/categories">Categories</Link>
               </li>
             </React.Fragment>
           )}
