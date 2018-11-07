@@ -167,7 +167,10 @@ class ProductDetail extends React.Component {
             <div className="container">
               <div className="row">
                 <div className="col xl6">
-                  <img className="responsive-img" src={product.imageUrl} />
+                  <img
+                    className="responsive-img"
+                    src={`/${product.imageUrl}`}
+                  />
                 </div>
 
                 <div className="col xl6 white">
