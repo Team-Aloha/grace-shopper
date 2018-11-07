@@ -12,8 +12,8 @@ class Home extends React.Component {
     </div>
     <div className="section yellow lighten-5 wood">
       <div className="row container">
-        <h2 className="header white-text">Welcome To Palm Tees!</h2>
-        <h5 className="white-text">Find the finest threads for the beach life, work life or for lounging at work.</h5>
+        <h2 className="header black-text font-effect-fire-animation titleHome" >Welcome To Palm Tees!</h2>
+        <h5 className="black-text font-effect-fire-animation titleHome">Find the finest threads for the beach life, work life or for lounging at work.</h5>
       </div>
     </div>
     <div className="parallax-container">

@@ -21,108 +21,108 @@ async function seed() {
 
   const products = await Promise.all([
     Product.create({
-      title: 'Blue Shirt',
-      description: 'This is a blue shirt',
+      title: 'Kitty Kat Taco V1',
+      description: 'This is version 1 of our Kitty Kat Taco Tiki Shirt',
       price: 1000,
       quantity: 20,
       categories: [2, 1]
     }),
     Product.create({
-      title: 'Red Shirt',
-      description: 'This is a red shirt',
+      title: 'Kitty Kat Taco V1',
+      description: 'This looks the same as version 1 but it is deffinatly different',
       price: 2000,
       quantity: 10,
       categories: [2, 4]
     }),
     Product.create({
-      title: 'Green Shirt',
-      description: 'This is a green shirt',
+      title: 'Kitty Kat Taco V2',
+      description: 'You may be wondering is this the same but it is deffinatly different',
       price: 1500,
       quantity: 15,
       categories: [2, 3]
     }),
     Product.create({
-      title: 'Black Floral',
-      description: 'Insert Description',
+      title: 'Midnight Magic',
+      description: 'A perfect shirt for an exotic night on the town',
       price: 1500,
       quantity: 15,
       categories: [2],
       imageUrl: 'shirt1.jpg'
     }),
     Product.create({
-      title: 'Shirt',
-      description: 'Insert Desc',
+      title: 'Classic Tiki',
+      description: 'A classic design for the classic person',
       price: 1500,
       quantity: 15,
       categories: [2],
       imageUrl: 'shirt2.jpg'
     }),
     Product.create({
-      title: 'Shirt',
-      description: 'Insert Desc',
+      title: 'Brown Reserve',
+      description: 'Straight out of your Grandpas closset. This one is sure to turn heads at cocktail hour',
       price: 1500,
       quantity: 15,
       categories: [2],
       imageUrl: 'shirt3.jpg'
     }),
     Product.create({
-      title: 'Shirt',
-      description: 'Insert Desc',
+      title: 'Red Macaroni',
+      description: 'This one looks like it has macaroni on it',
       price: 1500,
       quantity: 15,
       categories: [2],
       imageUrl: 'shirt4.jpg'
     }),
     Product.create({
-      title: 'Shirt',
-      description: 'Insert Desc',
+      title: 'Game Show Host',
+      description: 'If you want to look like Pat Sejak, this one os for you',
       price: 1500,
       quantity: 15,
       categories: [2],
       imageUrl: 'shirt25.jpg'
     }),
     Product.create({
-      title: 'Shirt',
-      description: 'Insert Desc',
+      title: 'Bikini Bottom Print',
+      description: 'We were inspired by Spongebobs wallpaper to make this design',
       price: 1500,
       quantity: 15,
       categories: [2],
       imageUrl: 'shirt6.jpg'
     }),
     Product.create({
-      title: 'Shirt',
-      description: 'Insert Desc',
+      title: 'Ocean Breeze',
+      description: 'An okay shirt',
       price: 1500,
       quantity: 15,
       categories: [2],
       imageUrl: 'shirt7.jpg'
     }),
     Product.create({
-      title: 'Shirt',
-      description: 'Insert Desc',
+      title: 'Purple Rain',
+      description: 'Do you like Mai Tais? because this shirt says you do',
       price: 1500,
       quantity: 15,
       categories: [2],
       imageUrl: 'shirt8.jpg'
     }),
     Product.create({
-      title: 'Shirt',
-      description: 'Insert Desc',
+      title: 'Orchid Delight',
+      description: 'I thought this was Hawaii not Minniesota',
       price: 1500,
       quantity: 15,
       categories: [2],
       imageUrl: 'shirt9.jpg'
     }),
     Product.create({
-      title: 'Shirt',
-      description: 'Insert Desc',
+      title: 'Groovy Vibes',
+      description: 'Do you frost your tips? then this is your shirt',
       price: 1500,
       quantity: 15,
       categories: [2],
       imageUrl: 'shirt10.jpg'
     }),
     Product.create({
-      title: 'Shirt',
+      title: 'Sandy Delight',
       description: 'Insert Desc',
       price: 1500,
       quantity: 15,
@@ -130,7 +130,7 @@ async function seed() {
       imageUrl: 'shirt11.jpg'
     }),
     Product.create({
-      title: 'Shirt',
+      title: '80s Miami',
       description: 'Insert Desc',
       price: 1500,
       quantity: 15,
@@ -138,7 +138,7 @@ async function seed() {
       imageUrl: 'shirt12.jpg'
     }),
     Product.create({
-      title: 'Shirt',
+      title: 'Beach Diamond',
       description: 'Insert Desc',
       price: 1500,
       quantity: 15,
@@ -146,7 +146,7 @@ async function seed() {
       imageUrl: 'shirt13.jpg'
     }),
     Product.create({
-      title: 'Shirt',
+      title: 'Draped Velvet',
       description: 'Insert Desc',
       price: 1500,
       quantity: 15,
@@ -154,7 +154,7 @@ async function seed() {
       imageUrl: 'shirt14.jpg'
     }),
     Product.create({
-      title: 'Shirt',
+      title: 'Tucan Sam',
       description: 'Insert Desc',
       price: 1500,
       quantity: 15,
@@ -162,7 +162,7 @@ async function seed() {
       imageUrl: 'shirt15.jpg'
     }),
     Product.create({
-      title: 'Shirt',
+      title: 'Old Vintage',
       description: 'Insert Desc',
       price: 1500,
       quantity: 15,
@@ -170,7 +170,7 @@ async function seed() {
       imageUrl: 'shirt16.jpg'
     }),
     Product.create({
-      title: 'Shirt',
+      title: 'Pineapple Pizaz',
       description: 'Insert Desc',
       price: 1500,
       quantity: 15,
@@ -178,7 +178,7 @@ async function seed() {
       imageUrl: 'shirt17.jpg'
     }),
     Product.create({
-      title: 'Shirt',
+      title: 'Synth Wave',
       description: 'Insert Desc',
       price: 1500,
       quantity: 15,
@@ -186,7 +186,7 @@ async function seed() {
       imageUrl: 'shirt18.jpg'
     }),
     Product.create({
-      title: 'Shirt',
+      title: 'Classic Red',
       description: 'Insert Desc',
       price: 1500,
       quantity: 15,
@@ -194,7 +194,7 @@ async function seed() {
       imageUrl: 'shirt19.jpg'
     }),
     Product.create({
-      title: 'Shirt',
+      title: 'Vapor Wave',
       description: 'Insert Desc',
       price: 1500,
       quantity: 15,
@@ -202,7 +202,7 @@ async function seed() {
       imageUrl: 'shirt20.jpg'
     }),
     Product.create({
-      title: 'Shirt',
+      title: 'Fractal Tiki',
       description: 'Insert Desc',
       price: 1500,
       quantity: 15,
@@ -210,7 +210,7 @@ async function seed() {
       imageUrl: 'shirt21.jpg'
     }),
     Product.create({
-      title: 'Shirt',
+      title: 'Beach Diamond',
       description: 'Insert Desc',
       price: 1500,
       quantity: 15,
@@ -218,7 +218,7 @@ async function seed() {
       imageUrl: 'shirt22.jpg'
     }),
     Product.create({
-      title: 'Shirt',
+      title: 'Coconut Green',
       description: 'Insert Desc',
       price: 1500,
       quantity: 15,
@@ -226,7 +226,7 @@ async function seed() {
       imageUrl: 'shirt23.jpg'
     }),
     Product.create({
-      title: 'Shirt',
+      title: 'Mild Flowers',
       description: 'Insert Desc',
       price: 1500,
       quantity: 15,
@@ -234,7 +234,7 @@ async function seed() {
       imageUrl: 'shirt24.jpg'
     }),
     Product.create({
-      title: 'Shirt',
+      title: 'Game Show Host',
       description: 'Insert Desc',
       price: 1500,
       quantity: 15,
@@ -242,7 +242,7 @@ async function seed() {
       imageUrl: 'shirt25.jpg'
     }),
     Product.create({
-      title: 'Shirt',
+      title: 'X-Ray Black',
       description: 'Insert Desc',
       price: 1500,
       quantity: 15,
