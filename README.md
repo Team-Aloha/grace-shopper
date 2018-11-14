@@ -1,6 +1,7 @@
 # Team Aloha's Shop
 Stuff goes here
 Paul foo
+Paul kanban test
 # Boilermaker
 
 _Good things come in pairs_
